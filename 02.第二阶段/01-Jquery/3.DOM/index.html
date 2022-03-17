@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="http://libs.baidu.com/jquery/1.9.0/jquery.js"
+      type="text/javascript"
+    ></script>
+  </head>
+  <body>
+    <!--1.获取设定内容 text(), html() and val() -->
+    <!-- <input type="text">
+    <div>nihao</div>
+    <button>click</button> -->
+
+    <!--2.获取设定属性 attr(),  removeAttr() -->
+    <!-- <div data-id="something">HEllo world</div> -->
+    <!-- <div>iinnn</div> -->
+
+    <!-- 3.获取设定 CSS Class [addClass(), removeClass(), hasClass(), toggleClass] -->
+
+    <!-- 4.获取设定 CSS style [css()] -->
+
+    <!-- <div> world</div> -->
+
+    <!--   5.区别：   append() and prepend() methods
+
+                  appendTo() and prependTo() methods
+
+                  before() and after() methods
+
+                  insertBefore() and insertAfter() methods
+     -->
+     <!-- <div class="a">
+         <div class="b">b</div>
+     </div>
+
+    <button>CLick</button>
+    <div class="c">c</div> -->
+
+    <!-- 6.remove(), empty() and .detach() methods -->
+    <!-- 7.unwrap(), wrapInner(), wrap(), wrapAll() -->
+    <!-- <input type="text">
+    <div>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </div>
+    <button>CLick</button> -->
+    
+    <!-- 8.target.replaceWith() and replaceAll(target) -->
+     <!--     
+    <div>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </div>
+    <button>CLick</button> -->
+
+     <!--9.clone() and Cloning Event Handlers and Data -->
+     <div class="hello">hello</div>
+     <div class="world">world</div>
+     <button>CLick</button>
+
+
+    <script>
+      $(document).ready(function () {
+        $("button").on("click", function () {
+          //1, 获取设定内容text(), html() and val()
+          // alert($('div').text());
+          // alert($('div').html());
+          // alert($('input').val());
+          // $('input').val('nfi');
+          // $('div').html('<p>hello<p><p>world<p>');
+          //$('div').html(function(index,html) {
+          // alert(''+index+':'+html);
+          // })
+
+          //2.获取设定属性 attr(),  removeAttr()
+          // $('div').removeAttr('data-id'); //移除属性
+          //$('div').attr('data-id','something'); //添加属性
+          // $('div').attr ({
+          //     'data-id':'something',
+          //     class :'red'
+
+          //  })
+
+          // 3.获取设定 CSS Class [addClass(), removeClass(), hasClass(), toggleClass]
+          //$('div').addClass('red'); //添加class
+          // $('div').removeClass('red'); //移除class
+          //$('div').toggleClass('red');//有就移除，没有就添加
+          //alert($('div').hasClass('red')); //判断是否有该属性
+
+          //4.获取设定 CSS style [css()]
+          //get
+          //alert($('div').css('color'));  弹出颜色的rgb
+          // alert(JSON.stringify($('div').css([ 'color','background-color']))) //将对象转成JOSN字符串
+          //set 可以多个值同时设置
+          // $('div').css('font-size','30px');
+          // $('div').css({
+          //     'background':'red',
+          //     color:'blue'
+          // })
+
+          //可以传参数 旧值 新值
+        //   $("div").css("font-size", function (index, oldValue) {
+        //     alert(oldValue);
+        //     return "100px";
+        //   });
+
+        /* 
+         5.区别： append() and prepend() methods
+
+               appendTo() and prependTo() methods
+
+               before() and after() methods
+
+              insertBefore() and insertAfter() methods */
+             // $('.a').append($('.c'));  //c在b后
+             // $('.a').prepend($('.c'));//c在b前
+
+            //  $('.c').appendTo($('.a')); //c在b后
+            //  $('.c').prependTo($('.a'));//c在b前
+
+            //$('.a').after($('.c')); //a在c之前
+           // $('.a').before($('.c'));// a在c后
+
+           //$('.c').insertAfter($('.a'));  //a在c前
+           // $('.c').insertBefore($('.a'));  //a在c 后
+          
+         //6.remove(), empty() and .detach() methods
+        //  var a = $('div').remove(); //移除
+        // //  var a = $('div').empty(); //清空
+        //  a.insertAfter($('button')); //两者有区别
+
+        //7.unwrap(), wrapInner(), wrap(), wrapAll()
+          //直接除去div   给li里面的内容加  给每一个li 添加 给整体Li添加
+          // $('li').wrapAll('<ul></ul>');
+
+         //8.target.replaceWith() and replaceAll(target)
+        // $('div').replaceWith('<p>hello world </p>');
+        // $('<p>hello world</p>').replaceAll('div');
+
+        //9.clone() and Cloning Event Handlers and Data 克隆复制
+        //$('.hello').before($('.world').clone());
+         
+
+
+
+
+
+
+
+
+
+        });
+      });
+    </script>
+  </body>
+</html>

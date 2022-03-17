@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>第三方 CSS 动画库Animate.css</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      {{links}}
+    </div>
+    <script>
+      let vm = new Vue({
+        el: "#app",
+        data() {
+          return {
+            flag: false,
+            links:'lili'
+          };
+        },
+        // 如果有template出现，不会执行html中的代码，而是执行template
+        //这个是vue的生命周期内容
+        //template里面的内容由render函数渲染
+        template: "<h3> hello my world </h3>",
+        methods: {},
+      });
+    </script>
+  </body>
+</html>

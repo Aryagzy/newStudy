@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div1 {
+            width: 100px;
+            height: 100px;
+            background-color: coral;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+
+    <script>
+        document.onkeydown = function(ev) {  //ev别忘记写昂
+            var oEvent = ev || event;
+            var oDiv = document.getElementById('div1');
+
+            if(oEvent.keyCode==37){
+                oDiv.style.left = oDiv.offsetLeft-10+'px';
+            } else if(oEvent.keyCode==39) {
+                oDiv.style.left=oDiv.offsetLeft+10+'px';
+            }
+        }
+    </script>
+</body>
+</html>

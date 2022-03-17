@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var obj = {
+            a:1,
+            b:{
+                c:2
+            }
+        }
+
+        // 浅拷贝，只拷贝第一层
+        // Object 浅拷贝 ：for循环  +  Object.assign({}.obj) + 扩展运算符：var {...obj4} = obj
+        var obj1 = obj;//不是浅拷贝，只是赋值指针相同
+        
+        function deep(obj){
+            var mm = {};
+            for(var key in obj) {
+                mm[key] = obj[key];
+            }
+            return mm;
+        }
+        var obj2 = deep(obj);
+        var obj3 = Object.assign({},obj);
+        var {...obj4} = obj;//扩展运算符 ES6
+        obj.a = 2;
+        obj.b.c = 3;
+        // console.log(obj1);
+        // console.log(obj2);
+        // console.log(obj3);
+        // console.log(obj4);
+        // array
+        // 1.for循环
+        // 2.slice
+        var arr01 = [1, 2, 4];
+        arr02 = arr01.slice(0)
+        
+        // 3.concat
+        // 4.扩展运算符
+        var [...arr03] = arr01
+        // 5.Array.from(arr01)
+        var arr04 = Array.from(arr01)
+
+
+
+        // 1.深拷贝
+        // 要赋值的function会丢失，只能用单纯是数据的对象
+        var onk = {
+            name: 'lany',
+            aa: {
+                mm: '222'
+            },
+            hello() {
+                console.log('hello')
+            }
+        }
+        var onk2 = JSON.parse(JSON.stringify(onk))
+        console.log(onk2)
+
+        // 2.递归调用--深拷贝
+        var obj = {
+            name: '果果',
+            age: '19',
+            gender: 'man',
+
+            friends: {
+                1: 'a',
+                2: 'b',
+                3: 'c',
+                4: {
+                    m: 'opop'
+                }
+            },
+            hobby: ['吃饭','睡觉'],
+            sayHello: function() {
+                console.log('hello')
+            }
+
+        }
+        //定义一个新的对象接受copy过来的值
+        //传递源对象得到一个新的对象
+        // source 数据 对象 字符串
+        function extendDeep(source) {
+            var target;
+            if(typeof source!= 'object') {
+                target = source;
+                return target;
+            }
+            target = Array.isArray(source)?[]:{};
+            for(var key in source) {
+                if(typeof source[key]!= 'object') {
+                    target[key] = source[key];
+                }else {
+                    target[key] = extendDeep(source[key])
+                }
+            }
+            return target
+        }
+        var newObj2 = extendDeep(obj);
+        console.log(newObj2)
+
+
+
+    </script>
+</body>
+</html>

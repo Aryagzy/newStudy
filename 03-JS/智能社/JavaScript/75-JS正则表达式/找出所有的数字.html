@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var str = '12 ff 57 er333 343 -=-=-=gfa80';
+        var tmp = '';
+        var arr =[];
+
+        for(var i=0;i<str.length;i++) {
+            //循环整个字符串，要是在0-9之间，添加到tmp中
+            if(str.charAt(i)>='0' && str.charAt(i) <='9'){
+                tmp +=str.charAt(i);
+            } else {
+                if(tmp) {
+                    arr.push(tmp);
+                    tmp = '';
+                }
+
+            }
+            
+        }
+        if(tmp) {
+                    arr.push(tmp);
+                    tmp = '';
+        }
+
+         alert(arr);
+        //  alert(tmp);
+    </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 1.函数体外抛出异常，在generator函数内部去获取
+    // 2.throw函数接收的参数，通过catch去获取
+    // let g = function*() {
+    //   try{
+    //     yield
+    //   }catch(error) {
+    //     console.log(error);
+    //   }
+
+    // }
+    // let res = g()
+    // res.next()
+    // res.throw('错误')
+
+    // 3.generator函数体内抛出异常 也可以在函数体外的catch获取
+    // let g = function*(){
+    //   yield
+    // }
+    // let res = g()
+    // res.next()
+    // try {
+    //   res.throw('错误')
+    // } catch(error) {
+    //   console.log(error);
+    // }
+    
+    // 4.如果内部和外部都没有捕获异常程序就会终止
+    // let g = function*(){
+    //   yield
+    // }
+    // let res = g()
+    // res.next()
+    // res.throw('错误')
+
+    // 5.如果内部想要获取错误，就必须通过next去触发
+    // 要通过catch来捕获错误信息，就必须用next去触发
+    // let g = function*(){
+    //   try{
+    //     yield
+    //   }catch(error) {
+    //     console.log(error);
+    //   }
+    // }
+    // let res = g()
+    // res.next()
+    // res.throw('错误信息')
+    
+  </script>
+</body>
+</html>

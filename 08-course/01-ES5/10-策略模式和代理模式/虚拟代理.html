@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body style="height: 3000px;">
+  <!-- scroll resize keyup 等事件频繁触发会引起卡顿 -->
+  <script>
+    //主体
+    function scrollHeader(name, age) {
+      console.log('郭郭郭');
+    }
+    //代理
+    //1. var timer;// 全局变量造成污染---使用闭包
+    // function testScroll() {
+    //   clearTimeout(timer);// 清除定时器
+    //   timer = setTimeout(function() {
+    //     scrollHeader(); // 业务逻辑代码
+    //   }, 4000);
+    // }
+
+    //2.闭包
+    function debounce(fn,delay) {
+      var timer;
+      delay = delay || 1000
+      return function() {
+        clearTimeout(timer);
+        var arg = arguments;
+        timer = setTimeout(function() {
+            fn.apply(this,arg);
+          // scrollHeader();// 业务逻辑代码
+        },delay);
+      }
+    }
+    var proxyFun = debounce(scrollHeader);
+    //执行
+    window.onscroll = function() {
+      proxyFun('lili','13');
+    }
+
+
+    //3.函数的静态属性
+    function debounce2(fn, delay) {
+      delay = delay || 1000;
+      if(fn.timer) {
+        clearTimeout(fn.timer);
+      }
+      fn.timer = setTimeout(function() {
+        fn()
+      },delay)
+
+    }
+    window.onscroll = function() {
+      debounce2(scrollHeader.bind(this,'lany','11'),500)
+    }
+
+  </script>
+  
+</body>
+</html>

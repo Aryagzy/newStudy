@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //案例4∶用户输入年份，输出当前年份2月份的天数
+        //判断闰年还是平年，然后平年28 闰年29天
+        function isRunYear(year) {
+            var day;
+            if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
+                day = 29;
+
+            } else {
+                day = 28;
+            }
+            return day;
+
+        }
+        var year = prompt(' please input the year randomly');
+        year = parseInt(year);
+        console.log(isRunYear(year));
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 1.箭头函数 有参数
+    // const f = v => v
+    // //相当于
+    // const f = function(v) {
+    //   return v
+    // }
+    // console.log(f(1));
+
+    // 2.没有参数，多个参数，需要用()包裹起来
+    // const fn = () => 5
+    // console.log(fn());//5
+    // const fnG = (num1,num2) => num1 + num2
+    // console.log(fnG(1,2));//3
+
+    // 3.函数块的语句，多于一条语句 需要使用{}包裹起来 ，并且用return返回
+    // const fg = (a,b) => {
+    //   let c = a+b; //8
+    //   let d = c+9; //17
+    //   return d
+    // }
+    // console.log(fg(1,7));
+
+    // 4.注意：返回的是一个对象{}，此时应该怎么处理 ，必须要在对象的外面加括号
+    // let getObj = () => ({name:'bubu',age:40})
+    // console.log(getObj());
+    // let getObj = () => {
+    //   return {
+    //     name:'nunu',
+    //     age:90
+    //   }
+    // }
+    // console.log(getObj());
+  
+    // 5.箭头函数使用注意点
+    // /* 
+    //    1.this 也是箭头函数作用最大的地方 this不再是动态的了，定义的时候所在的对象而不是使用的时候所在的对象
+    //    2.箭头函数不能当作构造函数---不能new
+    //    3.箭头函数内部不能使用arguments
+    //    4.不能当作generator函数，不能加yield命令
+    //  */
+    // var name = 'hihi'
+    // var age = 77
+    // function Person() { //构造函数
+    //   this.name = 'gogo'
+    //   this.age = 34
+    // }
+    // // Person.prototype.say = function() {
+    // //   console.log(`我是最可爱的人叫${this.name}，今年${this.age}岁了`)
+    // // }
+    // Person.prototype.say = () => {
+    //   console.log(`我是最可爱的人叫${this.name}，今年${this.age}岁了`) //这里面的this指向的是window
+    // }
+    // let person1 = new Person()
+    // person1.say();//say里面的this指向的是person1
+
+    // const hander = {
+    //   id:12,
+    //   doSome() {
+    //     console.log(`初始化的id是${this.id}`);
+    //   },
+    //   init() {
+    //     setTimeout(function(){
+    //       console.log(this); //setTimeout里面的this指向的是window
+    //       this.doSome()
+    //     },1000)
+    //   }
+
+    // }
+    // hander.init();
+    // const hander = {
+    //   id:12,
+    //   doSome() {
+    //     console.log(`初始化的id是${this.id}`);
+    //   },
+    //   init() {
+    //     setTimeout(() =>{
+    //       console.log(this); //setTimeout里面的this指向的是hander，箭头函数的this在哪里定义就指向谁
+    //       this.doSome()
+    //     },1000)
+    //   }
+
+    // }
+    // hander.init();
+
+    // function Person() {
+    //   this.name = 'gygy'
+    //   // this.say = () => {
+    //   //   console.log('this is my name' + this.name);
+    //   // }
+    //   this.say = function () {
+    //     console.log('thhis is my name' + this.name);
+    //   }
+    //   this.say = this.say.bind(this) //改变say中this的指向
+    // }
+    // let person = new Person()
+    // let res = person.say
+    // res();
+
+    // 6.箭头函数的使用时机
+    // /* 
+    //    1.如果说有一个简短的语句，返回的是一个简单的表达式 return num+num2 函数内部没有this的引用，也没有自身的引用
+    //    2.内部需要 调用var self = this 调用bind也适用于箭头函数
+    //    3.只要是回调函数，99%用箭头函数就没错
+    //  */
+
+
+  
+
+
+
+
+
+
+  </script>
+</body>
+</html>

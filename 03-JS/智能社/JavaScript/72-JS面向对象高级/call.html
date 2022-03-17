@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // function show() {
+        //     alert(this);
+        // }
+        // //  show();
+        //  show.call(12);
+
+        function show(a,b) {
+            alert('this:'+this +'\na:'+a+'\nb:'+b);
+        }
+        show.call('abd',12,5); //this----abd
+
+
+    </script>
+</body>
+</html>

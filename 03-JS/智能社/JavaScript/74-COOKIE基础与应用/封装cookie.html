@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //设置cookie
+        function setCookie(name,value,iDay) {
+            var oDate = new Date();
+            oDate.setDate(oDate.getDate()+iDay);
+
+            document.cookie = name+'='+value+';expires='+oDate;
+
+        }
+        //获取cookie
+        function getCookie(name) {
+            var arr = document.cookie.split(';');//把cookie用分号分开
+
+            for(var i=0;i<arr.length;i++) {
+                var arr2 = arr[i].split('=');//把名字和值用=分开
+
+                if(arr2[0]==name) {
+                    return arr2[1];
+                }
+
+            }
+            return '';
+        }
+
+        function removeCookie(name) {
+            setCookie(name,1,-1);
+        }
+
+
+        setCookie('username','果真',65);//名字=值+过期的天数
+        setCookie('password','234253',67)
+        alert(document.cookie);
+        alert(getCookie('sex'));
+
+        removeCookie('username');
+        alert(document.cookie);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            width: 150px;
+            height: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="hmh">侯明昊</button>
+    <button id="cy">陈瑶</button>
+    <img src="images/cy.jpg" alt="" title="侯明昊我喜欢你">
+    <script>
+        //现在要进行的操作是，点击侯明昊的按钮，图片换为侯明昊的
+        //点击陈瑶的按钮，图片换为陈瑶的
+        //1.获取元素 点击按钮button 改变图片 img 
+        var hmh = document.getElementById('hmh');
+        var cy = document.getElementById('cy');
+        var img = document.querySelector('img');//给img 加id太麻烦了 如果用 TagName操作起来不方便 querySelector可能对于单个标签操作会更方便
+        //2注册事件 处理程序
+        hmh.onclick = function () {
+            img.src = 'images/hmh.jpg';//文件名写错了
+            img.title = '侯明昊喜欢陈瑶';
+        }
+        cy.onclick = function () {//操作对象写错了
+            img.src = 'images/cy.jpg';
+            img.title = '侯明昊我喜欢你';
+        }
+    </script>
+</body>
+
+</html>

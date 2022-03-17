@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 1.外部return
+    // function* gen() {
+    //   yield 1
+    //   yield 2
+    //   yield 3
+    //   yield 4
+    // }
+    // let g = gen()
+    // // console.log(g.next());//1 false
+    // // console.log(g.return('hi')); //hi ture
+    // // console.log(g.next());//undefined true
+    // //2.return不传参数就是undefined
+    // console.log(g.next());//1 false
+    // console.log(g.return()); //undefined ture
+    // console.log(g.next());//undefined true
+
+    // 3.try...finally
+    // function* gen() {
+    //   yield 1
+    //   try {
+    //     yield 2
+    //     yield 3
+    //   } finally { //这里面的代码一定会执行
+    //     yield 4
+    //     yield 5
+    //   }
+    // }
+    // let g = gen()
+    // console.log(g.next());
+    // console.log(g.next());
+    // console.log(g.return(5));
+    // console.log(g.next());
+    // console.log(g.next());
+    // console.log(g.next());
+  </script>
+</body>
+</html>

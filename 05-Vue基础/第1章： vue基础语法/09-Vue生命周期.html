@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>09_Vue实例_生命周期</title>
+  </head>
+  <body>
+    <!--1.vue对象的生命周期 ------后面学习源码分析时候可能会用到
+          1).初始化显示
+            *beforeCreated()
+            *created()
+            *beforeMount()
+            *mounted()
+          2).更新显示:this.xxx=value
+             *beforeUpdate()
+             *updated()
+          3).销毁Vue实例:vm.$destroy()
+             *beforeDestroy()
+             *destroyed()
+        2.常用的生命周期方法
+          created()/mounted():发送ajax请求，启动定时器等异步任务
+          beforeDestroyed():做收尾工作，如：清除定时器
+        
+     -->
+
+    <div id="test">
+      <button @click="destroyVM">destroy vm</button>
+      <p v-show="isShow">I LOVE YOU</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      new Vue({
+        el: "#test",
+        data: {
+          isShow: true,
+        },
+        //1.初始阶段(1次)
+        beforeCreate(){
+           console.log('beforeCreate()')
+        },
+        created(){
+            console.log('created()')
+        },
+
+        beforeMounted(){
+           console.log('beforeMounted')
+        },
+        mounted() {//初始化显示之后立即调用(1次)
+            console.log('mounted()')
+          this.intervalid = setInterval(() => {
+            //定时器
+            console.log("------");
+            this.isShow = !this.isShow;
+          }, 2000);
+        },
+
+        //2.更新阶段(n次)
+        beforeUpdate(){
+            console.log('beforeUpdate()')
+        },
+        updated(){
+            console.log('updated()')
+        },
+
+        //死亡阶段(1次)
+        beforeDestroy() {//死亡之前调用(1次)
+            console.log('beforeDestroy()')
+          //清除定时器
+          clearInterval(this.intervalid);
+        },
+        destroyed(){
+            console.log('destroyed()')
+        },
+
+        methods: {
+          destroyVM() {
+            //干掉VM
+            this.$destroy();
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

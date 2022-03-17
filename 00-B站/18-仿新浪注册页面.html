@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 600px;
+            margin: 100px auto;
+        }
+        .message{
+            display: inline-block;
+            font-style: 12px;
+            color: aqua;
+            background: url(images/right.jpg) no-repeat left center;
+            padding-left: 20px;
+
+        }
+        .wrong{
+            color: crimson;
+            background-image: url(images/wrong.jpg);
+        }
+        .right{
+            color: cyan;
+            background-image: url(images/right.jpg);
+        }
+    </style>
+</head>
+<body>
+    <div class="register">
+        <input type="password" value="" name="" class="ipt">
+        <p class="message">请输入6-16位密码</p>
+    </div>
+    <script>
+        //案例：密码框提示错误信息
+        //用户如果离开密码框，里面输入的个数不是6-16，则提示错误信息，否则提示输入正确信息
+        //案例分析
+        //(1)首先判断的事件是表单失去焦点onblur(表单获得焦点，提示信息为让你输入正确的密码)
+        //(2)如果输入正确则提示正确的信息，颜色为绿色小图标变化
+        //(3)如果输入的不是6-16位则提示错误信息，颜色为红色小图标变化
+        //(4)因为里面的变化样式较多，我们采用className修改样式
+        //获取元素
+        var 
+
+
+    </script>
+</body>
+</html>

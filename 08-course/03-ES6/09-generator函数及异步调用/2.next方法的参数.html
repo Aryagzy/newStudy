@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+    //   1.yield表达式本身是没有返回值的，返回的就是undefined
+    //   next方法可以带一个参数，这个参数会被当做上一个yield表达式的返回值
+    //   function* helloGenerator() {
+    //     let y1 = yield "hello";
+    //     console.log(y1); //undefined
+    //     yield "world";
+    //     return 123;
+    //   }
+    //   let res = helloGenerator(); //返回的是一个遍历器对象，里面可以调用next()方法
+    //   //console.log(res);
+    //   console.log(res.next());
+    //   console.log(res.next(123));// 从外部传入数据到内部
+    //   console.log(res.next()); //done变为true
+    //   console.log(res.next());
+    //   console.log(res.next());
+    //   console.log(res.next());
+
+    // 2.如果想在第一个next传入值也输出，应该怎么写？
+    // 传入generator函数，返回一个函数，可以执行Next
+    // function second(gen) {
+    //   return function() {
+    //     let res = gen()
+    //     res.next()
+    //     return res
+    //   }
+    // }
+    // let first = second(function*() {
+    //   console.log(`这是第一次的yield${yield}`);
+    // })
+    // first().next('第一次')
+
+    // 3.return后面的通过for..of不会输出，因为是done变为了true,for..of循环就会终止
+    // function* gen() {
+    //   yield 1
+    //   yield 2
+    //   yield 3
+    //   yield 4
+    //   yield 5
+    //   yield 6
+    //   return 7 //这个不会输出
+    // }
+    // for(let key of gen()) {
+    //   console.log(key);
+    // }
+
+
+    </script>
+  </body>
+</html>

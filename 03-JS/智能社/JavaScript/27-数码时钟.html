@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      function toStr(n) {
+        //将传进来的数字转化成字符串，然后一位数的填0
+        if (n < 10) {
+          return "0" + n;
+        } else {
+          return "" + n;
+        }
+      }
+      window.onload = function () {
+        var aImg = document.getElementsByTagName("img");
+        //var str='133455';//假设当前时间
+        function tick() {
+          var oDate = new Date();
+          var str =
+            toStr(oDate.getHours()) +
+            toStr(oDate.getMinutes()) +
+            toStr(oDate.getSeconds()); //获得是数字，不是字符串
+          //alert(str)
+
+          //改变img里面的src属性
+          for (var i = 0; i < aImg.length; i++) {
+            aImg[i].src = "images" + "\\" + str.charAt(i) + ".png";//str[i] 考略到兼容性问题用str.charAt(i)
+          }
+        }
+        setInterval(tick,1000);//1秒执行一次，但是在最开始的时候，会有1秒的停留
+        tick();//解决一秒停留问题
+      };
+    </script>
+  </head>
+  <body style="background-color: black; color: aliceblue; font-size: 50px">
+    <img src="images\0.png" />
+    <img src="images\0.png" />
+    :
+    <img src="images\0.png" />
+    <img src="images\0.png" />
+    :
+    <img src="images\0.png" />
+    <img src="images\0.png" />
+  </body>
+</html>

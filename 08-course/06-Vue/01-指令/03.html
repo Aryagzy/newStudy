@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> v-for</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- {{}}双大括号称为模板，用来进行数据的绑定显示在页面中 -->
+    <ul>
+      <!--1.普通循环 -->
+      <li v-for="value in arr">{{value}}</li>
+      <hr>
+      <li v-for="value in user">{{value}}</li>
+      <hr>
+      <!-- 2.键值循环 -->
+      <!-- key值唯一性 -->
+      <li v-for="(item,index) in users" :key="index">{{index}}--{{item.id}}---{{item.name}}---{{item.age}}</li>
+    </ul>
+  </div>
+  <script>
+    // 配置是否允许vue-devtools检查代码，方便调试，生产环境中设置为false
+    Vue.config.devtool = true;
+    Vue.config.productionTip = false;//阻止vue启动时生成生产消息
+    
+    var vm = new Vue({
+      el:'#app', // 指定关联的元素
+      data:{ // 存储数据
+        msg:'hello vue js',
+        arr:[12,4,5,34,2,11],
+        user:{id:234,name:'郭郭',age:34},
+        arr2:[12,2,3,11,12],
+        users:[
+          {id:123,name:'琳琳',age:23},
+          {id:234,name:'球球',age:33},
+          {id:345,name:'花花',age:22}
+        ]
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="txt1"/>
+    <input type="button" value="创建li" id="btn1"/>
+    <ul id="ull">
+    </ul>
+
+</body>
+<script>
+    //需求：当点击btn，在ul中创建li
+    //需求：在文本框中输入内容，点击btn,内容显示在li中
+    var oBtn=document.getElementById('btn1');
+    var oUl=document.getElementById('ull');
+     var oTxt=document.getElementById('txt1');
+     var aLi=oUl.getElementsByTagName('li');
+
+    oBtn.onclick=function(){
+        //创建li ,但是没有说明要把li放到哪里，只是创建了li
+        var oLi=document.createElement('li');
+        oLi.innerHTML=oTxt.value;  //将文本框里面的内容放入到li中
+        //将创建的li 加入到它的父节点哪里-----父级.appendChild(子节点);
+        // oUl.appendChild(oLi);  //顺序增加结点
+
+        //倒序增加结点
+        //oUl.insertBefore(oLi,aLi[0]);//insertBefore(增加的，在谁之前增加)
+        
+        //兼容性问题
+        if(aLi.length>0){
+            oUl.insertBefore(oLi,aLi[0]);
+        }else{
+            oUl.appendChild(oLi);   // IE
+        }
+    }
+</script>
+</html>

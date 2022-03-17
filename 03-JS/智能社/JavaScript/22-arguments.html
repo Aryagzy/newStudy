@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //arguments	可变参	不定参  arguments是数组
+         function sum(){
+            //  alert(arguments.length);
+            //  alert(arguments[0]);
+             //arguments是数组
+             var result=0;
+             for(var i=0;i<arguments.length;i++){
+                 result += arguments[i];
+             }
+             return result;
+
+         }
+        alert( sum(12,3,6,5,6,7,));
+          
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

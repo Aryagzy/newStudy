@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        1.Function.prototype.bind(obj)
+          *作用：将函数内部的this绑定为obj,并将函数返回
+        2.面试题：区别bind() call()  apply()?
+           *都能指定函数中的this
+           *call() apply() 是立即调用函数
+           *bind()是将函数返回，不立即调用函数
+     -->
+     <script>
+         var obj = {
+             username:'lili'
+         }
+         function foo(data) {
+             console.log(this,data);
+         }
+         //传入参数形式
+         //改变foo函数中this指向，this指向到obj
+         foo.call(obj,34);//直接从第二个参数开始，依次传入
+         foo.apply(obj,[39]);//第二个参数必须是数组，传入放在数组里
+        //bind的特点: 绑定完this不会立即调用当前的函数，而是将函数返回，返回以后要手动调用函数
+        //bind传参数的方式同call一样
+         var bar = foo.bind(obj);
+         console.log(bar);
+        bar();
+         foo.bind(obj,44)();//自动调用
+
+        //利用bind 不会立即调用函数特点，用于定时器
+        setTimeout(function () {
+            console.log(this);
+        }.bind(obj),3000)
+
+     </script>
+</body>
+</html>

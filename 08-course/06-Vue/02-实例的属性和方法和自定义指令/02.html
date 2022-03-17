@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>添加和删除属性  $set $delete</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="doUpdate">Update</button>
+      <button @click="doAdd">Add</button>
+      <button @click="doDelete">Delete</button>
+      <hr />
+      {{user}}
+      <h3>{{user.name}}</h3>
+      <h3>{{user.age}}</h3>
+    </div>
+    <script>
+      let vm = new Vue({
+        el: "#app",
+        //组件中data建议这样写
+        // data(){
+        //   return{
+        //     name:'hahah'
+        //   }
+        // }
+        data: {
+          user: {
+            id: 1,
+            name: "tiny",
+          },
+        },
+        methods: {
+          doUpdate() {
+            this.user.name = "tangmu";//数据更新是没有问题的
+          },
+          doAdd() {
+            //通过普通方式为对象添加属性时，vue无法实时监视
+            // this.user.age='34' 这样添加属性是不行的
+
+            //通过vue实例的$set方法为对象添加属性时，可以实时监视
+            //this.$set(this.user,'age',34);
+            if (this.user.age) {
+              this.user.age++;
+            } else {
+              Vue.set(this.user, "age", 23);
+            }
+          },
+          doDelete() {
+            if(this.user.age){
+              //已经删除了，但是vue没有监视到
+              //delete this.user.age;//无效的，不能实时渲染
+              //this.$delete(this.user,'age'); 实例方法
+              Vue.delete(this.user,'age') //vue全局的方法
+            }
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

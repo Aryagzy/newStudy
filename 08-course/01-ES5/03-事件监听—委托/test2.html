@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      ul li {
+        list-style-type: none;
+      }
+      .box-list {
+        height: auto;
+        overflow: auto;
+        margin-bottom: 20px;
+      }
+      .box-list li {
+        width: 80px;
+        height: 80px;
+        background-color: blueviolet;
+        margin: 30px;
+        float: left;
+        text-align: center;
+        line-height: 80px;
+      }
+
+      .btn-group {
+        clear: both;
+        text-align: center;
+      }
+      .btn-group button {
+        padding: 10px 15px;
+        margin-right: 20px;
+        cursor: pointer;
+      }
+
+      .box-list.active li {
+          border-radius: 50%;
+          background: red;
+      }
+      .box-list.active.second li {
+          border-radius: 50%;
+          background: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 需求：需要点击一个按钮，可以让所有的正方形变成圆形，以及背景颜色和字体发生变化 -->
+    <ul class="box-list">
+      <li>嘻嘻</li>
+      <li>嘻嘻</li>
+      <li>嘻嘻</li>
+      <li>嘻嘻</li>
+    </ul>
+
+    <div class="btn-group">
+      <button class="btn-begin" type="button">开始变化</button>
+      <button class="btn-stop" type="button">恢复状态</button>
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+      $(function () {
+        //1.面向过程 jQuery
+        // var timer = null;
+        // var $allLi = $(".box-list li");
+        // $(".btn-begin").on("click", function () {
+        //   $allLi.css({background: "red","border-radius": "50%",color: "#FFF",
+        //   });
+        //  timer = setTimeout(function () {
+        //     $allLi.css({background: "orange","border-radius": "50%",color: "#fff", });
+        //   }, 5000);//延时提醒：过了5秒再执行
+        // });
+
+        // $('.btn-stop').on('click',function() {
+        //     $allLi.removeAttr('style');
+        //     clearTimeout(timer);
+        // })
+
+        //2.面向对象
+        // 面向对象的目的 ： 封装和继承
+        // 原则：功能要单一 ，开放封闭原则
+        // 1.字面量对象  字面量对象封装
+        var funObj = {
+          beginAction(obj) {
+            //默认属性
+            var objInit = {
+              //默认的，传不传obj,都可以正常工作，允许在外部进行修改
+              el: ".box-list li", //类选择器有'"."
+              bg: "red",
+              radius: "50%",
+              color: "#FFF",
+              tobg: "blue",
+            };
+
+            //合并对象,传进来的obj覆盖objInit一些样式
+            //var endObj绑定到对象上 在其他的函数中引用不到的变量，
+            //this.endObj给他绑定到该对象的上，其他的函数就可以引用到
+            //如果只传两个参数会影响objInit
+            this.endObj = Object.assign( {},objInit, obj);
+
+            $(this.endObj.el).css({
+              background: this.endObj.bg,
+              'border-radius': this.endObj.radius,
+              color: this.endObj.color,
+            });
+
+
+            //定时器 this是指向window的,改变this指向的三种方式
+            //1.that变量存储this
+            // var that = this;
+            // this.timer = setTimeout(function () {
+            //   that.setTimeout();
+            // }, 5000);
+
+            //2.bind(this改变this指向)
+            this.timer = setTimeout(function() {
+                this.setTimeout();
+            }.bind(this),3000);
+
+            //3.箭头函数改变this指向
+            // this.timer = setTimeout(() => {
+            //     this.setTimeout();
+            // },3000);
+          },
+
+          setTimeout() {
+            $(this.endObj.el).css({
+              background: this.endObj.tobg,
+              "border-radius": this.endObj.radius,
+              color: this.endObj.color,
+            },3000);
+          },
+
+          
+          
+          endAction() {
+            //清除定时器
+            if (!this.timer) {
+              //this.timer已经绑定到对象上面去了，所以可以直接获取到
+              return;
+            }
+            clearTimeout(this.timer);
+
+            //清除样式
+            $(this.endObj.el).removeAttr("style");
+          },
+        };
+
+        $(".btn-begin").on("click", function () {
+          funObj.beginAction({  //参数可以传，也可以不传
+            tobg: "#000",
+          });
+        });
+
+        $(".btn-stop").on("click", function () {
+          funObj.endAction();
+        });
+
+        //2.构造函数 首字母大写
+        // function TestFun(obj) {
+        //     this.timer = null;//定时器变量
+        //     var initObj = {
+        //         el:'.box-list',
+        //         sClass:'active',
+        //         cClass:'second'
+        //     }
+        //     this.endObj = Object.assign({},initObj,obj);
+        // }
+        // //原型上添加方法，每次实例化，只实例化属性，不会实例化方法
+        // TestFun.prototype = {
+        //     beginAction: function() {
+        //         //添加样式
+        //         $(this.endObj.el).addClass('active');
+        //         //2秒以后添加样式
+        //         this.timer = setTimeout(function() {
+        //              $(this.endObj.el).addClass('second');
+        //         }.bind(this),2000);  //改变this指向 改变作用域
+
+        //     },
+        //     endAction: function() {
+        //      //清除定时器
+        //         if(!this.timer){
+        //             return;
+        //         }
+        //         clearTimeout(this.timer);
+        //     //清除样式
+        //      $(this.endObj.el).removeClass('active second');
+
+        //     }
+        // }
+
+        // //构造函数实例化对象
+        // var example = new TestFun();
+
+        // $('.btn-begin').on('click',function() {
+        //     example.beginAction();
+        // })
+        // $('.btn-stop').on('click',function() {
+        //     example.endAction();
+        // });
+        
+
+           
+      });
+    </script>
+  </body>
+</html>

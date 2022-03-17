@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- <my-hello>这里的内容也需要显示</my-hello> -->
+      <my-hello>
+        <ul slot="s2">
+          <li>1</li>
+          <li>2</li>
+          <li>3</li>
+        </ul>
+        这里是需要额外显示的内容
+        <ul slot="s1">
+          <li>a</li>
+          <li>b</li>
+          <li>c</li>
+        </ul>
+      </my-hello>
+    </div>
+
+    <template id="hello">
+      <!-- 外面的内容显示到组件里面插槽的位置 -->
+      <div>
+        <slot name="s1"></slot>
+        <h3>hello App</h3>
+        <slot>如果外面不传入内容，这里有默认内容</slot>
+        <slot name="s2"></slot>
+      </div>
+    </template>
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        components: {
+          "my-hello": {
+            template: "#hello",
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

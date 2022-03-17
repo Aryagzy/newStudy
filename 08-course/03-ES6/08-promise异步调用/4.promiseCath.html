@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1.promise-catch 捕获异常
+      // const promise = new Promise(function(resolve,reject) {
+      //   throw new Error('test-error')
+      //   //第二种
+      //   try {
+      //     throw new Error('test-error')
+      //   }catch(e) {
+      //     reject(e)
+      //   }
+      // })
+      // 第一种捕获异常
+      // promise.catch(function(error) {
+      //   console.log(error);
+      // })
+
+      // 2.promise已经变成了resolve,再抛出异常错误是无效的
+      // const promise = new Promise(function (resolve, reject) {
+      //   resolve("成功");
+      //   throw new Error("test-error");
+      // });
+      // promise
+      //   .then((res) => {
+      //     console.log(res);
+      //   })
+      //   .catch(function (error) {
+      //     console.log(error);
+      //   });
+    
+      // 3.错误会一直向下冒
+      // const promise = new Promise(function (resolve, reject) {
+      //   reject("失白");
+      // });
+      // promise
+      //   .then((res) => {
+      //     console.log(res);
+      //   })
+      //   .catch(function (error) {
+      //     console.log(error);
+      //   });
+
+      // 4.promise会吃掉错误-promise报错，后面的代码会继续执行
+      // 5.建议用到promise的时候，后面一般加上catch捕捉
+      // const say = function() {
+      //   return new Promise(function(resolve,reject) {
+      //     resolve(v+2)
+      //   })
+      // }
+      // say().then(() => {
+      //   console.log('成功了');
+      // }).catch((error) => { //返回的是promise对象可以继续调用.then方法
+      //   console.log(error);
+      //   return '1234'
+      // }).then((res) => {
+      //   console.log(res); //1234
+      // })
+      // //上面报错，下面继续执行
+      // setTimeout(() => {
+      //   console.log(123);
+      // },1000)
+
+      // 6.Promise.all(p1,p2)
+      // let promise1 = new Promise(function(resolve,reject) {
+      //   reject('promise11')
+      // })
+      // let promise2 = new Promise(function(resolve,reject) {
+      //   reject('promsie22')
+      // })
+      // Promise.all([promise1,promise2]).then((res) => { //都是resolve才会返回一个数组
+      //   console.log(res);
+      // }).catch((error) => {
+      //   console.log(error);
+      // })
+
+    </script>
+  </body>
+</html>

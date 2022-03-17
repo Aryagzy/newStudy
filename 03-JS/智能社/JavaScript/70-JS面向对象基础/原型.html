@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var arr1 = new Array(12,23,45,67,87,98);
+        var arr2 = new Array(23,45,66,77,88,84);
+        Array.prototype.sum = function(){  //class--很多人都可以使用
+        // arr1.sum = function() {         //行间----只有他自己可以使用
+            var result=0;
+            for(var i=0;i<this.length;i++){
+                result += this[i];
+            }
+            return result;
+        }
+        alert(arr1.sum());
+         alert(arr2.sum());
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 400px;
+        }
+        #div1 {
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+    </style>
+    <script>
+        function getStyle(obj,name){
+            if(obj.currentStyle){
+                //IE
+                  return obj.currentStyle[name];
+            }else{
+                //Chrome FF
+                return getComputedStyle(obj,null)[name];
+            }
+        }
+        window.onload=function (){
+            var oDiv =document.getElementById('div1');
+            //IE
+            // alert(oDiv.currentStyle.width);
+
+            //Chrome FF
+            //alert(getComputedStyle(oDiv,null).width);
+
+            // console.log(oDiv.style);
+            // console.log(oDiv);
+            // 
+            alert(getStyle(oDiv,'width'));//这里不能是复合属性，比如background 
+
+        }
+    </script>
+</head>
+<body>
+    <div id="div1"></div>
+</body>
+</html>

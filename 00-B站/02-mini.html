@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var classNumber = prompt('please input the total class size');// ??????????
+        var sum = 0; //???????
+        var average = 0; //????????
+        // ?????????
+        for (var i = 1; i <= classNumber; i++) {
+            var score = prompt(' input ' + i + 'grade');
+            // The all scores of the class
+            sum = sum + parseFloat(score);//???prompt???????????????????
+        }
+        average = sum / classNumber; //    The average  scores of student
+        alert("The all scores of the class is" + sum);
+        alert('The average scores of students is' + average);
+
+
+
+
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button>显示当前系统时间</button>
+    <div>某个时间</div>
+    <script>
+        //当我们点击按钮，div里面的文字发生了变化
+        //1.获取元素
+        var btn = document.querySelector('button');
+        var div = document.querySelector('div');
+        //2注册事件
+        btn.onclick = function () {
+            //div.innerText='2020-10-25';
+            div.innerText = getData();
+        }
+
+        function getData() {
+            var data = new Data();
+            var year = data.getFullYear();
+            var month = data.getMonth();
+            var datas = data.getData();
+            var arr = ['Sun', 'Mon', 'Tue', 'Wen', 'Tur', 'Fri', 'Sat'];
+            var day = data.getDay();
+            return year + month + datas + arr[day];
+        }
+    </script>
+</body>
+
+</html>

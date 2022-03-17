@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #div1 {
+        width: 200px;
+        height: 200px;
+        background-color: aquamarine;
+        position: absolute;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="div1"></div>
+
+    <script>
+      var oDiv = document.getElementById("div1");
+      var disX = 0;
+      var disY = 0;
+      //鼠标按下，计算距离
+      //距离------鼠标距离div上边距和下边距
+      oDiv.onmousedown = function (ev) {
+        var oEvent = ev || event;
+        disX = oEvent.clientX - oDiv.offsetLeft;
+        disY = oEvent.clientY - oDiv.offsetTop;
+
+        //鼠标按下以后，再开始移动
+        //鼠标移动，根据距离计算div的位置
+        document.onmousemove = function (ev) {
+          var oEvent = ev || event;
+          var l = oEvent.clientX - disX;
+          var t = oEvent.clientY - disY;
+          //不让div 出左右边界
+          if (l < 0) {
+            l = 0;
+          } else if (l >document.documentElement.clientWidth - oDiv.offsetWidth) {
+            l = document.documentElement.clientWidth - oDiv.offsetWidth;
+          }
+         //不让div出上下边界
+          if (t < 0) {
+            t = 0;
+          } else if (t >document.documentElement.clientHeight - oDiv.offsetHeight ) {
+            t = document.documentElement.clientHeight - oDiv.offsetHeight;
+          }
+
+          oDiv.style.left = l + "px";
+          oDiv.style.top = t + "px";
+        };
+
+        document.onmouseup = function () {
+          document.onmousemove = null;
+          document.onmouseup = null;
+        };
+        return false; //阻止默认事件 比如Firfox
+      };
+    </script>
+  </body>
+</html>

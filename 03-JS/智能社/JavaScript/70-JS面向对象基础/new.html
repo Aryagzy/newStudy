@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function createPerson(name,qq) { //构造函数
+          //原料 系统偷偷替咱们做了
+          //   var this = new Object();
+        
+          //加工
+          this.name = name;
+          this.qq = qq;
+  
+          this.showName = function () {
+            alert("我的名字叫：" + this.name);
+          };
+          this.showQQ = function () {
+            alert("我的QQ号" + this.qq);
+          };
+        //出厂  也会偷偷做一些
+        //  return this;
+
+        }
+         var obj = new createPerson('blue','238905724');
+         var obj2 = new createPerson('gtreat','65834275893');
+        //  alert(obj.showName==obj2.showName)//不相等
+        obj.showName();
+        obj.showQQ();
+         
+      </script>
+</body>
+</html>

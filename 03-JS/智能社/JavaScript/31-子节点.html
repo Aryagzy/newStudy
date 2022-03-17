@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="ull">
+        <li></li>
+        <li></li>
+    </ul>
+</body>
+<script>
+    var oUl=document.getElementById('ull');
+    
+    //   childNodes用法
+    //IE6-8能正常显示2  其他浏览器将‘文本节点’也算进去
+    //alert(oUl.childNodes.length);
+
+    // for(var i=0;oUl.childNodes.length;i++){//oUl下面的子节点的长度 childNodes是数组
+    //     //nodeType==3   文本节点
+    //     //nodeType==1   元素节点
+    //     //alert(oUl.childNodes[i].nodeType);
+
+    //     if(oUl.childNodes[i].nodeType==1){
+    //         oUl.childNodes[i].style.background='red';  //将元素节点背景颜色设置为red
+    //     }
+
+    // }
+     
+    //children 用法 和childNodes用法类似  不过他可以直接获取的是元素节点
+    for(var i=0;i<oUl.children.length;i++){
+        oUl.children[i].style.background='yellow';
+    }
+
+
+</script>
+</html>

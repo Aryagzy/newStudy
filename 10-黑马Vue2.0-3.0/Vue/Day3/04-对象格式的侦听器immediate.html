@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" v-model="username" />
+    </div>
+
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"
+    ></script>
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          username: "adim",
+        },
+        //所有的侦听器都应该被定义到watch结点下
+
+        watch: {
+          //侦听器本质上就是一个函数，要监听那个数据的变化，就把数据名作为方法名字即可
+          //   username(newVal, oldVal) {
+          //     //可以传参数，新的值在前，旧的值在后
+          //     //
+          //     //调用jQuery中的Ajax发起请求，判断newVal是否被占用！
+          //     $.get("http://www.escook.cn/api/finduser"+ newVal,function(result) {
+          //         console.log(result);
+          //     })
+          //   },
+
+
+          //比如有默认值，-immediate立即调用
+          username: {
+              //侦听器的处理函数
+              handler(newVal,oldVal) {
+                  console.log(newVal,oldVal)
+              },
+              //immediate选型的默认值是false
+              //immediate的作用是：控制侦听器是否自动触发1次
+              immediate: true
+          }
+        },
+      });
+    </script>
+  </body>
+</html>

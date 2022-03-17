@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>非父子组件之间的通信</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 兄弟组件之间的通信 -->
+      <!-- A组件和B组件向C组件中发送数据，C组件负责订阅和监听事件，AB组件负责发送$emit() -->
+      <my-a></my-a>
+      <hr />
+      <my-b></my-b>
+      <hr />
+      <my-c></my-c>
+    </div>
+
+    <template id="a">
+      <div>
+        <h3>A组件中的数据{{name}}</h3>
+        <button @click="send">将A组件中的数据发送给C组件</button>
+      </div>
+    </template>
+    <template id="b">
+      <div>
+        <h3>B组件中的数据{{age}}</h3>
+        <button @click="send">将B组件中的数据发送给C组件</button>
+      </div>
+    </template>
+    <template id="c">
+      <div>{{name1}}---{{age1}}</div>
+    </template>
+    <script>
+      //总线
+       var Event = new Vue();
+      var A = {
+        template: "#a",
+        data() {
+          return {
+            name: "kito",
+          };
+        },
+        methods: {
+          send() {
+            //发布
+            Event.$emit("data-a", this.name);
+          },
+        },
+      };
+      var B = {
+        template: "#b",
+        data() {
+          return {
+            age: 12,
+          };
+        },
+        methods: {
+          send() {
+            Event.$emit("data-b", this.age);
+          },
+        },
+      };
+      var C = {
+        template: "#c",
+        data() {
+          return {
+            //用来接受从AB组件传过来的数据
+            name1: "",
+            age1: "",
+          };
+        },
+        //在模板编译完成后，再去执行订阅和监听
+        mounted() {
+          // this.$nextTick(() => {
+          //   console.log(vm);
+          //   vm.$on("data-a", (name) => {
+          //     this.name1 = name;
+          //   });
+          //   vm.$on("data-b", (age) => {
+          //     this.age1 = age;
+          //   });
+          // });
+          Event.$on("data-a", (name) => {
+              this.name1 = name;
+            });
+          Event.$on("data-b", (age) => {
+              this.age1 = age;
+            });
+        },
+      };
+      var vm = new Vue({
+        el: "#app",
+        components: {
+          "my-a": A,
+          "my-b": B,
+          "my-c": C,
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // foreach数组的迭代器。按照这个形式，自己封装一个迭代器
+    [1,2,3,4].forEach(function(item,index,arr) {
+
+    })
+
+    // 自己封装迭代器
+    function each(obj,fn) {
+      if(Array.isArray(obj)) {
+        for(var i =0;i<obj.length;i++) {
+          fn.call([],obj[i],i,obj)
+          // fn(obj[i],i,obj)
+          // fn.apply(this,[obj[i],i,obj])
+        }
+      } else {
+        for(var i in obj) {
+          fn.call([],obj[i],i,obj);
+        }
+      }
+
+    }
+    each([1,2,3,4],function(item,index,arr) {  
+
+    })
+    each({
+      a:1,
+      b:2,
+      c:3
+    },function(item,index,arr){
+
+    })
+  </script>
+</body>
+</html>

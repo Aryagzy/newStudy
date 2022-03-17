@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //this:当前发生事件的对象 || 当前的方法属于谁
+        var arr=[2,3,45];
+        arr.v=56;
+        arr.show = function() {
+            alert(this.v); //this指的是arr
+        }
+         arr.show();
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 1.const声明的常量不能改变（一般的数据类型是不能改变的）
+    // const a = 123;
+    // a = '123'; //Assignment to constant variable.
+    // const b = true;
+    // b = false;
+
+    // 2.引用数据类型可以改变堆里面的内容，不变的是地址
+    // const obj = {
+    //   name: 'lili',
+    //   age: 34
+    // }
+    // obj.name = 'pop'
+    // console.log(obj);
+    // obj = {name:'nini',age:55}
+
+    // 3.冻结对象
+    // const foo = Object.freeze({})
+    // foo.name = '大白菜';//不会被成功添加进去
+    // console.log(foo);
+
+    // 'use strict'
+    // const foo = Object.freeze({})
+    // foo.name = '大白菜';//不会被成功添加进去
+    // console.log(foo); //Cannot add property name, object is not extensible
+
+    // 'use strict'
+    // const obj = {name:'lili'}
+    // const foo = Object.freeze(obj)
+    // foo.name = '猪头' ;//Cannot assign to read only property 'name' of object '#<Object>
+    
+
+  </script>
+</body>
+</html>

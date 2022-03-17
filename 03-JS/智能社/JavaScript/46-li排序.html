@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #ul1 {
+            background:rgb(125, 201, 125);
+        }
+        #ul2{
+            background: rgb(175, 124, 124);
+        }
+    </style>
+</head>
+<body>
+    <ul id="ul1">
+        <li>16</li>
+        <li>23</li>
+        <li>13</li>
+        <li>24</li>
+    </ul>
+    <input type="button" value="排序" id="btn">
+    <!-- <ul id="ul2"></ul> -->
+
+    <script>
+        //需求：点击移动按钮，ul1里面的Li移动到ul2里面
+        var oUl1=document.getElementById('ul1');
+        // var oUl2=document.getElementById('ul2');
+        var oBtn=document.getElementById('btn');
+
+        oBtn.onclick=function(){
+            // var oLi=oUl1.children[0];
+
+            // //将li从oUl1中移除，再添加到oUl2中
+            // //oUl1.removeChild(oLi);
+            // //appendChild:1.先把元素从原有父级上删掉  2.添加到新的父级上
+            // oUl1.appendChild(oLi); 
+
+            var aLi=oUl1.getElementsByTagName('li');//元素集合和数组
+
+            //aLi.sort(); aLi是元素集合
+            var arr=[];
+            for(var i=0;i<aLi.length;i++){
+                arr[i]=aLi[i];  //把aLi里面的元素装到数组里面
+            }
+
+            arr.sort(function(li1,li2){ //数组排序
+                var n1=parseInt(li1.innerHTML);
+                var n2=parseInt(li2.innerHTML);
+                return n1-n2;
+            });
+             //arr里面的元素已经排好了
+            //alert(arr[1].innerHTML);
+            for(var i=0;i<arr.length;i++){
+                alert(arr[i].innerHTML);
+                oUl1.appendChild(arr[i]);
+            }
+
+
+        }
+
+    </script>
+</body>
+</html>

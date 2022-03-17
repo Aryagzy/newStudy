@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="txt1">
+
+    <script>
+        var oTxt = document.getElementById('txt1');
+        oTxt.onkeydown = function(ev) {
+            // return false;//英文字符不能输入，但是中文可以输入
+            var oEvent = ev || event;
+            // alert(oEvent.keyCode);
+            //0-48 9-57
+            //如果用户按得不是退格 也不是数字 阻止
+            if(oEvent.keyCode != 8 && (oEvent.keyCode < 48 || oEvent.keyCode > 57)){
+                return false;//阻止
+            }
+
+
+        }
+    </script>
+</body>
+</html>

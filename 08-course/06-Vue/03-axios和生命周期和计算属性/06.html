@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- 1.基本用法 -->
+    <h3>msg:{{msg}}</h3>
+    <h3>msg2:{{msg2}}</h3>
+    <hr>
+    <!-- 对数据处理再显示 -->
+    <h3>{{msg.split(' ').reverse().join(' ')}}</h3>
+    <h3>{{reverseMsg}}</h3>
+     <hr>
+    <!-- 2.计算属性vs方法 -->
+    <!-- 需求：num1的值比num2的值大 -->
+    <button @click="change">修改值</button>
+   <h3>{{num1}}</h3>
+   <h3>计算属性---{{num2}}</h3>
+  <h3>getNum2函数-----{{getNum2()}}</h3>
+
+    
+
+  </div>
+  <script>
+    let vm = new Vue({
+      el:'#app',
+      data:{//普通属性
+        msg:'welcome to my home',
+        num1:8
+      },
+      computed:{//计算属性
+        //里面的属性都是函数形式
+        msg2:function(){
+          //该函数必须有返回值，用来获取属性，称为gei函数
+          return 'hello'
+        },
+        reverseMsg(){
+          return this.msg.split(' ').reverse().join(' ')
+        },
+        num2:{
+          get() { //获取num2的值的时候，调用get方法
+            console.log(new Date());
+            return this.num1 - 1;
+          },
+          set(val){
+            console.log('将要修改num2的值');
+            this.num1 = val
+          }
+
+        }
+
+      },
+      methods: {
+        change(){
+          this.num2 = 45;
+        },
+        getNum2(){
+          console.log(new Date());
+           return this.num1 - 1;
+        }
+      },
+      mounted() {
+        //多次调用计算属性，可以从缓存中获取，提高性能
+        setInterval(function() {
+          console.log(vm.num2);//从缓存中获取，而不用每次都执行一次
+          //console.log(vm.getNum2()) //每次都要执行一次
+        },1000)
+        
+      },
+    })
+
+  </script>
+</body>
+</html>

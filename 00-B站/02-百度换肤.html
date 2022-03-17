@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: url(images/1.jpg) no-repeat center top;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .baidu {
+            overflow: hidden;
+            margin: 100px auto;
+            background-color: #fff;
+            width: 410px;
+            padding-top: 3px;
+        }
+
+        .baidu li {
+            float: left;
+            margin: 0 1px;
+            cursor: pointer;
+        }
+
+        .baidu img {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="baidu">
+        <li><img src="images/1.jpg"></li>
+        <li> <img src="images/2.jpg"></li>
+        <li><img src="images/3.jpg"></li>
+        <li><img src="images/4.jpg"></li>
+    </ul>
+    <script>
+        //要求：点击图片后，背景图片变为该图片
+        //(1)这个案例练习的是给一组元素注册事件
+        //(2)给4个小图片，利用循环注册点击事件
+        //(3)当我们点击这个图片，页面背景改为当前的图片
+        //(4)核心算法：把当前的图片src路径取过来，给body作为背景即可
+        //1.获取元素数组(点击图片，更换背景)
+        //var imgs = document.querySelectorAll('img');
+        var imgs = document.querySelector('.baidu').querySelectorAll('img');
+        var body = document.body;//获取特殊元素的方式body html
+        //注册事件 处理程序
+        for (var i = 0; i < imgs.length; i++) {
+            imgs[i].onclick = function () {
+                // this.src是当前的路径
+                body.style.backgroundImage = 'url( ' + this.src + ')';//路径,有问题
+            }
+        }
+    </script>
+
+</body>
+
+</html>

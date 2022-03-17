@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 1.new Array window.变量
+    console.log(window.Array);
+    var Array = 'this is a Array'
+    console.log(window.Array);
+    var a = '123';
+    console.log(window.a); //123
+
+    //2.let提出后，全局变量和window属性脱钩
+    let b = '全局'
+    console.log(window.b);//undefiend
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 500px;
+            height: 500px;
+            background-color: #5ba497;
+            color: #b0cec8;
+            font-size: 10px;
+        }
+
+        .change {
+            width: 500px;
+            height: 500px;
+            background-color: #ff0000;
+            color: dodgerblue;
+            font-size: 10px;
+            margin: 100px auto;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div>className的用法</div>
+    <script>
+        var test = document.querySelector('div');
+        test.onclick = function () {
+            //1.使用element.style 获得修改元素样式 ，如果样式比较少或者功能简单情况下使用
+            //this.style.fontSize = '30px';
+
+            //2我们可以通过className更改元素样式 适合于样式较多或者功能复杂的情况
+            this.className = 'change';
+            //3如果我们想要保留原先的类名，我们可以这样做
+            //this.className='change';
+        }
+    </script>
+</body>
+
+</html>

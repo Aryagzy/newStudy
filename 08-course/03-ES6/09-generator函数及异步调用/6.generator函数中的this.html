@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 1.generator函数中也有prototype对象
+    // function* g(){}
+    // g.prototype.hello = function(){
+    //   console.log('hi');
+    // }
+    // let res = g()
+    // res.hello()
+    // console.log(res instanceof g);//true
+    
+    // 2.this指向问题
+    // function* g(){
+    //   this.a = 234
+    // }
+    // let res = g()
+    // res.next()
+    // console.log(res.a);//undefined
+
+    // 3.如何改变this指向--call bind
+    // function* f(){
+    //   this.a = 123
+    //   yield this.b = 345
+    //   yield this.c = 566
+    // }
+    // let obj = {}
+    // let res = f.call(obj)
+    // console.log(res.next());
+    // console.log(res.next());
+    // console.log(obj.a);
+    // console.log(obj.b);
+    // console.log(obj.c);
+
+    // 4.再次改写
+    // function* f(){
+    //   this.a = 123
+    //   yield this.b = 345
+    //   yield this.c = 566
+    // }
+    // let res = f.call(f.prototype) //generator函数的原型对象
+    // console.log(res.next());
+    // console.log(res.next());
+    // console.log(res.a);
+    // console.log(res.b);
+    // console.log(res.c);
+
+    // 5.不支持new ,想要支持new 
+    // function* f(){
+    //   this.a = 123
+    //   yield this.b = 345
+    //   yield this.c = 566
+    // }
+    // function F(){
+    //   return f.call(f.prototype)
+    // }
+    // let res = new F()
+    // console.log(res.next());
+    // console.log(res.next());
+    // console.log(res.a);
+    // console.log(res.b);
+    // console.log(res.c);
+    
+
+  </script>
+</body>
+</html>

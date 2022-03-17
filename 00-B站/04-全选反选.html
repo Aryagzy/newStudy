@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            height: 30px;
+            width: 500px;
+            margin: 100px auto;
+        }
+
+        thead tr {
+
+
+            background-color: rgb(122, 158, 223);
+            color: cornsilk;
+
+        }
+
+        thead th {
+            border: 1px solid #b4b4b4;
+            padding: 20px;
+            text-align: center;
+            font-size: 20px;
+        }
+
+
+        tbody td {
+            border: 1px solid #b4b4b4;
+            padding: 20px;
+            text-align: center;
+            font-size: 15px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th><input type="checkbox" id="checkboxAll"></th>
+                    <th>商品</th>
+                    <th>价钱</th>
+                </tr>
+
+            </thead>
+            <tbody id="checkboxTd">
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>Apple Watch</td>
+                    <td>4000</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>iPhone8</td>
+                    <td>8000</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>iPad Pro</td>
+                    <td>5000</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>iPad Air</td>
+                    <td>2000</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+    <script>
+        //新的知识点：：checked 的值为true 或者 false
+        //要求：当全选按钮被选中时候，下面的按钮全部为选中状态;当下面的按钮为全选中时，全选按钮自动被选中，下面有一个按钮没有被选中，全选按钮都不能被选中
+        //1全选和取消全选的做法： 让下面的所有复选框的checked属性（选中状态）
+        //全选按钮控制下面的小按钮
+        var checkboxAll = document.querySelector('thead').querySelector('input');
+        var checkboxTds = document.querySelector('tbody').querySelectorAll('input');
+        //console.log(checkboxAll);
+        checkboxAll.onclick = function () {
+            // var flag = 1;
+            // if (flag == 1) {
+            //     this.checked = 'checked';
+            //     flag = 0;
+
+            // } else {
+            //     this.checked = '';
+            //     flag = 1;
+
+            // }
+            for (var i = 0; i < checkboxTds.length; i++) {
+
+                checkboxTds[i].checked = this.checked;
+            }
+        }
+        //2下面复选框需要全部选中，上面的全选才能选中的做法
+        //给下面的所有复选框绑定点击事件，每次点击，都要循环检查下面的复选框是否有没有选中的
+        //可以设置一个变量，来控制全选是否选中
+        for (var i = 0; i < checkboxTds.length; i++) {
+            checkboxTds[i].onclick = function () {
+                var flag = true;//控制全选按钮是否选中
+                for (var i = 0; i < checkboxTds.length; i++) {
+                    //if(checkboxTds[i].checked=='checked')
+                    // if (checkboxTds[i].checked) {
+                    //     checkboxAll.checked = true;
+                    // } else {
+                    //     checkboxAll.checked = false;
+                    //     break;
+                    //      }
+                    if (!checkboxTds[i].checked) {
+                        flag = false;
+                        break;
+                    }
+                }
+                checkboxAll.checked = flag;
+
+            }
+        }
+    </script>
+</body>
+
+</html>

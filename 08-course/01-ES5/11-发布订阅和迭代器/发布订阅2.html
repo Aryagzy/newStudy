@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="js/main.js"></script>
+    <script>
+      //订阅鞋子
+      shoeObj = Object.create(eventObj); // 继承 Object.create()
+      // 开始订阅
+      var fn1 = function (size) {
+        console.log("小红");
+        console.log(size);
+      };
+      shoeObj.listen("red", fn1);
+      shoeObj.listen("blue", function (size) {
+        console.log("小明");
+        console.log(size);
+      });
+      shoeObj.listen("blue", function (size) {
+        console.log("小花");
+        console.log(size);
+      });
+      shoeObj.listen("red", function (size) {
+        console.log("小郭");
+        console.log(size);
+      });
+      shoeObj.listen("pink", function (size) {
+        console.log("小粉");
+        console.log(size);
+      });
+
+      //鞋店发布信息
+      shoeObj.trigger("blue", 20);
+
+      // 取消订阅信息
+      shoeObj.removeListen("red", fn1);
+
+      //订阅衣服
+      var clothesObj = Object.create(eventObj);
+      clothesObj.listen("orange", function (size) {
+        console.log("Huahua");
+        console.log("尺码" + size);
+      });
+      clothesObj.listen("green", function (size) {
+        console.log("Songsong");
+        console.log("尺码" + size);
+      });
+      clothesObj.trigger("orange", "XL");
+
+      //订阅Ajax请求---模拟AJax请求-用定时器
+      var ajaxObj = Object.create(eventObj);
+      ajaxObj.listen("success", function (data) {
+        console.log(data);
+      });
+      function getData() {
+        setTimeout(function () {// 用setTimeout模拟一下真的数据请求 ajax
+          ajaxObj.trigger("success", {
+            name: "lala",
+            age: 11,
+          }, 5000);
+        });
+      }
+      getData();
+    </script>
+  </body>
+</html>

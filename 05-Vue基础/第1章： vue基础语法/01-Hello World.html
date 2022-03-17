@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        1. 引入Vue.js
+        2. 创建Vue对象
+           el : 指定根element(选择器)
+           data : 初始化数据(页面可以访问)
+        3.双向数据绑定 : v-model
+        4.显示数据 ：{{xxx}}
+        5.理解vue的mvvm的实现
+        6.大括号表达式：读取data中数据显示
+        7.数据绑定与双向数据绑定
+            数据绑定：数据在页面与内存中的变量的自动转移
+            双向数据绑定： 如果两个方向的数据都可以自由移动
+     -->
+    <div id="app"><!-- view -->
+         <input type="text" v-model="username">  <!--element.value='xxxx'-->
+         <p>Hello {{username}}</p>
+         <p v-text="username"></p><!--element.textContent='xxxx'-->
+     </div>
+     <p>{{username}}</p>
+
+     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+     <script type="text/javascript">
+         //创建vue实例 Vue是一个vue.js库提供的构建函数
+         const vm = new Vue({  //配置对象(属性名必须是一些指定的名称)
+            el: '#app',  //element:选择器字符串 表明将表面那个元素交给vue管理
+            data:{  //数据(model)
+                 username:'atuguigu'
+            }
+
+         })
+         vm.name = 'guoxiaopang'
+    </script>
+    <!-- MVVM 
+      model:模型 数据对象(data)
+      view；视图，模板页面
+      viewModel:视图模型(Vue的实例 vm)
+
+    -->
+</body>
+</html>

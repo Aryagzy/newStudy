@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // class Person {
+      // 原始方法存在问题this指向问题
+      // eat() {
+      //   console.log(this);
+      //   this.get()
+      // }
+
+      // 第一种方法，箭头函数，改变this指向
+      // eat = () =>{
+      //   console.log(this);//Perosn
+      //   this.get()
+      // }
+
+      // 第二种方法，通过bind改变this指向
+      //   constructor() {
+      //     this.eat = this.eat.bind(this)
+      //   }
+      //   eat = function(){
+      //     console.log(this);//Person
+      //     this.get();
+      //   }
+
+      //   //第三种方法 proxy
+      //   get() {
+      //     console.log('this is a dog');
+      //   }
+      // }
+      // let person = new Person()
+      // //person.eat()
+
+      // let {eat} = person //let eat = peson.eat
+      // eat() //eat里面的this指向的是undefined
+
+      // class Person{
+
+      // }
+
+      // Person.prototype.get = function() {
+      //   console.log('this is a cat');
+      // }
+      // Person.prototype.eat = function() {
+      //   console.log(this);
+      //   this.get()
+      // }
+
+      // let person = new Person()
+      // let {eat} = person
+      // eat() //此时eat里面的this指向了window
+
+    </script>
+  </body>
+</html>

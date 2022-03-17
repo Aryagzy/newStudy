@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //合并对象
+      // var obj1 = { name: "郭小胖" };
+      // var obj2 = { age: "20" };
+      // var obj3 = { job: "学生" };
+      // //第一种方式-Object.assign({}，对象1，对象2，对象3)
+      // //var obj = Object.assign({},obj1,obj2,obj3)
+
+      // //第二种方式，扩展运算符
+      // var obj = { ...obj1, ...obj2, ...obj3 };
+      // console.log(obj);
+
+      // 同步：一步一步走，阻塞了要等待，一步一步执行
+      // 异步：不用等待，可以继续执行下一步
+      // Ajax  异步
+      // Ajax请求5步
+      // 1.创建xmlHttpRequest对象
+      // 2.创建一个http请求，与服务器发生连接
+      // 3.设置请求头
+      // 4.发送请求
+      // 5.响应http请求状态变化的函数
+
+      //1.创建xml对象
+      var xhr = new XMLHttpRequest();
+
+      //2.创建http 请求，连接服务器
+      // xhr.open(method,url,flag) flag:true-异步
+      // method: post get head delete put
+      //get请求 -参数放在url后面  post请求 -参数要做处理
+      xhr.open("get", "http://localhost:3000/info?name=lany&age=40", true);
+      // {
+      //   name:'lany',
+      //   age:'29'
+      // }
+
+      //3.设置请求头部的方法，必须在open  和 send之间
+      xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      xhr.setRequestHeader("token", "eteggrgggggggg");
+
+      // 4.发送请求
+      xhr.send(null);
+
+      //post方式 post有参数发送请求
+      // var parm = {
+      //   name: "lany",
+      //   age: "20",
+      // };
+      // xhr.send(JSON.stringify(parm));
+      //post 没有参数
+      // xhr.send(null);
+
+      //readyState-XMLHttpRequest对象请求的5种状态
+      //0-表示没有初始化
+      //1-表示读取中
+      //2-表示已读取
+      //3-交互中。接收中
+      //4-完成
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+          if (xhr.status == 200) {
+            xhr.responseText;//获取数据
+          } else {
+            switch (xhr.status) {
+              case 400:
+                console.log("错误请求");
+                break;
+              case 401:
+                console.log("未授权，请重新登录");
+                break;
+              case 403:
+                console.log("拒绝访问");
+                break;
+              case 404:
+                console.log("请求错误，未找到该资源");
+                break;
+              case 405:
+                console.log("请求方法未允许");
+                break;
+              case 408:
+                console.log("请求超时");
+                break;
+              case 500:
+                console.log("服务器内部错误");
+                break;
+              case 501:
+                console.log("网络未实现");
+                break;
+              case 502:
+                console.log("网络错误");
+                break;
+              case 503:
+                console.log("服务不可用");
+                break;
+              case 504:
+                console.log("网络超时");
+                break;
+              case 505:
+                console.log("http版本不支持该请求");
+                break;
+              default:
+                console.log("连接错误");
+            }
+          }
+        }
+      };
+    </script>
+  </body>
+</html>

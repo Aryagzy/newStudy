@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 案例∶猜数字游戏
+        // 程序随机生成一个1~10之间的数字，
+        //1让程序生成1~10之间的数字，生成1~10之间的随机整数
+        function getRandom(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;//它里面有两个参数，所以，我们需要传入两个值
+        }
+        //用一个变量接受这个随机生成的数字
+        var num1 = getRandom(1, 10);
+        //2并让用户输入一个数字
+        while (true) {//死循环，如果不加循环，每次猜数，随机数都要改变一次，猜中的概率太小了
+            //这样把用户的输入当做循环，先产生一个随机数，然后用户一直输入，然后直到遇到break退出循环
+            var num2 = parseInt(prompt('请你输入一个数字'));
+            // 3.如果大于该数字，就提示，数字大了，继续猜;
+            if (num2 > num1) {
+                alert('数字大了，继续猜;');
+            } else if (num2 < num1) {// 4.如果小于该数字，就提示数字小了，继续猜;
+                alert('数字小了，继续猜');
+            } else {
+                alert('猜对了，结束程序。');// 5.如果等于该数字，就提示猜对了，结束程序。
+                break;//退出整个程序，结束循环
+            }
+        }
+
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

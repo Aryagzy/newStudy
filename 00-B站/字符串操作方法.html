@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //字符串操作方法
+        //1.concat('字符串1','字符串2')，连接字符串
+        var str = 'andy';
+        console.log(str.concat('girl'));
+
+        //2.substr('截取的起始位置','截取几个字符串');
+         var str1='我家宝宝最可爱';
+         console.log(str1.substr(2,5));//第一个2 是索引号，第二个2是 取几个字符
+
+         //3替换字符 replace('被替换的字符','替换为的字符')  他只会替换第一个字符
+         var str2 = 'andyandy';
+         console.log(str2.replace('a','b'));
+         //有一个字符串''abcoefoxyozzopp' 要求把里面的o替换成*
+         var str3='abcoefoxyozzopp';
+         while(str3.indexOf('o')!==-1){//****思路挺重要的，用indexOf来查找o这个字符，indexOf本身的作用就是查找字符
+             str3=str3.replace('o','*');
+
+         }
+         console.log(str3);
+
+         //4.字符转换为数组split('分隔符')    前面学过join 把数组转换为字符
+         var str4='red,blue,pink';
+         console.log(str4.split(','));
+         var str5='red$blue$pink';
+         console.log(str5.split('$'));
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

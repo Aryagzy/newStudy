@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //利用构造函数创建对象
+        //构造函数的语法格式：类似于用function关键字定义一个函数一样的
+        // function 构造函数名() {
+        //     this.属性 = 值;
+        //     this.方法 = function () { }
+        // }
+        // new 构造函数名();
+        //1类似于java中的类，创建了模板
+        function Star(name, age, sex) {//构造函数名字，首字母大写
+            this.name = name;
+            this.age = age;
+            this.sex = sex;
+            this.sing = function (sang) {
+                console.log(sang);
+            }
+
+        }
+        //调用函数，返回一个对象
+        var ldh = new Star('刘德华', 18, 'man');
+        console.log(typeof ldh);
+        console.log(ldh.name);
+        console.log(ldh['sex']);
+        ldh.sing('冰雨');
+
+        var zxy = new Star('张学友', 45, 'man');
+        console.log(zxy.age);
+        console.log(zxy.name);
+        zxy.sing('回家');
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

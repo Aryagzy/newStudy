@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" id="testDom">
+    <script>
+        //事件绑定
+        //1.在dom元素上绑定，不推荐
+        //2.js代码中绑定
+        //3.绑定事件监听
+        //B会把A覆盖掉
+        testDom.onclick = function() {
+            console.log('A');
+        }
+        testDom.onclick = function() {
+            console.log('B');
+        }
+     
+        var fun1 = function() {
+            console.log('1');
+        }
+        var fun2 = function() {
+            console.log('2');
+        }
+
+        //事件监听 ,不会覆盖掉
+        //addEventListener不兼容
+        testDom.addEventListener('click',fun1);
+        testDom.addEventListener('click',fun2);
+         //移除监听
+        testDom.removeEventListener('click',fun1);
+
+        //ie8 attchEvent
+        testDom.attchEvent('onclick',function() {
+
+        })
+
+
+    </script>
+</body>
+</html>

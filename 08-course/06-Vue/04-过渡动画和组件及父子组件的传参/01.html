@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>过渡，动画</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <style>
+      p {
+        width: 300px;
+        height: 300px;
+        background-color: aquamarine;
+      }
+      /* 如果我们不添加这个name="test" 这个属性，默认开头是v- */
+      .test-enter-active,
+      .test-leave-active {
+        transition: all 2s ease;
+      }
+      .test-enter-active {
+        opacity: 1;
+        width: 300px;
+        height: 300px;
+      }
+      .test-leave-active{
+        opacity: 0;
+        width: 300px;
+        height: 300px;
+      }
+      /* .test-enter需要放在 .test-enter-active的后面 */
+      .test-enter {
+        opacity: 0;
+        width: 10px;
+        height: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="flag = !flag">切换</button>
+      <transition
+        name="test"
+        @before-enter="beforeEnter"
+        @enter="enter"
+        @after-enter="afterEnter"
+        @before-leave="beforeLeave"
+        @leave="leave"
+        @after-leave="afterLeave"
+      >
+        <!-- 运动的元素 -->
+        <!-- 实现元素的显示和隐藏 -->
+        <p v-show="flag">郭小胖爱编程</p>
+      </transition>
+    </div>
+    <script>
+      let vm = new Vue({
+        el: "#app",
+        data() {
+          return {
+            flag: false,
+          };
+        },
+        methods: {
+          beforeEnter() {
+            console.log("动画进入之前");
+          },
+          enter() {
+            console.log("动画进入");
+          },
+          afterEnter(el) {
+            console.log("动画进入之后");
+            el.style.background = 'blue'
+            
+          },
+          beforeLeave() {
+            console.log("动画离开之前");
+          },
+          leave() {
+            console.log("动画离开");
+          },
+          afterLeave() {
+            console.log("动画离开以后");
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

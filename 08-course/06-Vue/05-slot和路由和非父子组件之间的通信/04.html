@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>嵌套路由</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="./vue-router.js"></script>
+    <style lang="">
+      /* .router-link-active {
+        font-size: 20px;
+        color: lightsalmon;
+        text-decoration: none;
+      } */
+      .active {
+        font-size: 20px;
+        color: lightsalmon;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- a标签 -->
+      <div style="position: fixed; top: 200px">
+        <router-link to="/home">主页</router-link>
+        <router-link to="/user">用户</router-link>
+      </div>
+      <hr />
+      <!-- 组件显示 -->
+      <router-view></router-view>
+      <hr />
+      <button type="button" @click="push">添加路由</button>
+      <button type="button" @click="replace">替换路由</button>
+    </div>
+
+    <!-- 在User组件中再添加两个路由链接 -->
+    <template id="user">
+      <div style="height: 2000px">
+        <h3>用户信息</h3>
+        <!-- 子路由的使用:需要在上一级路由页面中加上router-view -->
+        <router-link to="/user/login">登录页面</router-link>
+        <router-link to="/user/register/alcike/456">注册页面</router-link>
+        <hr />
+        <router-view></router-view>
+        <hr />
+      </div>
+    </template>
+    <script>
+      var Home = {
+        template: "<h3>主页信息 {{$route.params}}</h3>",
+      };
+      var User = {
+        template: "#user",
+      };
+      var Login = {
+        template:
+          "<div>我是login---获得的参数: {{$route.path}} {{$route.query}}</div>",
+      };
+      var Register = {
+        template:
+          "<div>我是register获得的参数: {{$route.path}} {{$route.params}}</div>",
+      };
+      //2.配置路由
+      var routes = [
+        { path: "/home", name: "home", component: Home },
+        {
+          path: "/user",
+          name: "user",
+          component: User,
+          // 路由拦截
+          //导航首位，路由跳转前，需要做什么事情
+          beforeEnter: (to, from, next) => {
+            console.log(`from${from.fullPath},to${to.fullPath}`);
+            setTimeout(() => {
+              next();
+            }, 500);
+          },
+
+          children: [
+            // 子路由path不加/
+            //使用children属性实现路由嵌套，子
+            //路由path前不要加/,否则永远以根目录开始请求
+            { path: "login", name: "login", component: Login },
+            {
+              path: "register/:username/:password",
+              name: "register",
+              component: Register,
+            },
+          ],
+        },
+        { path: "*", redirect: "/home" },
+      ];
+      //3.创建路由实例
+      var router = new VueRouter({
+        routes,
+        mode: "hash", //默认
+        // 样式名字重命名
+        linkActiveClass: "active",
+        //页面跳转后，页面是否滚动
+        //对hash不起作用，对history起作用
+        scrollBehavior(to, from, savedPosition) {
+          if (savedPosition) {
+            return savedPosition;
+          } else {
+            //每次切换页面都是滚动到页面的顶部
+            return { x: 0, y: 0 };
+          }
+        },
+      });
+      //4.将router挂载到路由实例上
+      var vm = new Vue({
+        el: "#app",
+        //router:router
+        router, //注册路由
+        methods: {
+          push() {
+            /*  作用：this.$router.push() 可以通过修改url实现路由跳转。
+            push 后面可以是对象，也可以是字符串 */
+            //1.字符串的形式
+            //this.$router.push("/home");
+            //2.对象
+            // this.$router.push({
+            //   path:'/home',
+            // })
+            //3.对象的形式带查询参数
+            // this.$router.push({
+            //   path: "/home",
+            // 获取参数$route.query 相当于get
+            //   query:{//query形式的参数会拼接在url后面
+            //     plan:'private'
+            //   }
+            // });
+            //4.命令路由
+            /**
+             * 由于动态路由也是传递params的，
+             * 所以在 this.$router.push() 方法中path不能和params一起使用，
+             * 否则params将无效。需要用name来指定页面。
+             * 及通过路由配置的name属性访问在路由配置文件中定义参数：通过name获取页面，传递params：
+             * 在目标页面通过this.$route.params获取参数
+             */
+            //有历史记录
+            this.$router.push({
+              name: "home",
+              // 获取里面的参数$route.params
+              params: {
+                userid: "123",
+              },
+            });
+          },
+          replace() {
+            //替换路由，没有历史记录
+            router.replace({ path: "/user" });
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

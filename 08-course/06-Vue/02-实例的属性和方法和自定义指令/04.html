@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>监视数据的变化 $watch</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" v-model="name">
+      <h3>{{name}}</h3>
+      <hr>
+
+      <input type="text" v-model="age">
+      <h3>{{age}}</h3>
+      <hr>
+
+      <input type="text" v-model="user.name">
+      <h3>{{user.name}}</h3>
+      <hr>
+
+      <!-- <input type="text" v-model="user.links.link">
+      <h3>{{user.links.link}}</h3>
+      <hr> -->
+    </div>
+    <script>
+      let vm = new Vue({
+        el: "#app",
+       data() {
+         return {
+          name:"song",
+           age:'22',
+           user:{
+               name:'Yiyi'
+             }
+         }
+       },
+       //vue实例的watch选型，就是监视数据的更新
+       watch:{
+        //  name:function(newVal,oldVal) {
+        //    console.log(`name被修改了:新值为${newVal},旧值为${oldVal}`);
+        //  }
+        //es6的写法
+        // name(newVal,oldVal){
+        //   console.log(`name被修改了:新值为${newVal},旧值为${oldVal}`);
+        // }
+        name:(newVal,oldVal) => {
+          console.log(`name被修改了:新值为${newVal},旧值为${oldVal}`);
+
+        },
+        // 'user.name':function(newVal,oldVal) {
+        //   console.log(`user.name被修改了:新值为${newVal},旧值为${oldVal}`);
+        // }
+        //对user对象进行深度监听
+        user:{
+          handler(newVal,oldVal) {
+            console.log(newVal);
+            console.log(oldVal);
+           console.log('------------');
+          },
+          //深度监听，当对象中的属性发生变化的时候会监视
+          //但是这里的newVal和oldVal会一样，这是因为是引用对象，指针指向问题
+          deep:true
+        }
+       },
+
+        methods: {
+        },
+        beforeCreate() {
+        
+          
+        },
+        created() {
+         
+          
+        },
+        beforeMount() {
+          
+        },
+        mounted() {
+        
+        },
+  
+      });
+      //vue实例提供的$watch方法
+      // vm.$watch('age',function(newVal,oldVal){
+      //   console.log(`age被修改了：新值为${newVal},旧值为${oldVal}`);
+      // })
+    </script>
+  </body>
+</html>
+
+  
+</body>
+</html>

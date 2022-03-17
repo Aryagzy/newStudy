@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        事件修饰符
+         1.在事件处理函数中调用
+                     event.preventDefalut()  阻止默认事件 
+                     event.stopPropagation()  阻止冒泡
+         2.Vue提供了事件修饰符，对事件的触发进行控制
+           .prevent 阻止默认行为 如：a链接的跳转，阻止表单的提交
+           .stop     阻止事件的冒泡
+       
+     -->
+    <!-- 希望Vue能够控制下面的这个div,帮助我们把数据填充到div内部 -->
+    <div id="app">
+        <!-- 阻止直接跳转页面  .prevent-->
+        <a href="http://www.baidu.com" @click.prevent="show">跳转百度页面</a>
+        <hr>
+        <div style="height: 130px; width:300px; background-color: aquamarine; padding-left: 100px; line-height: 130px; " @click="divHandler" >
+            <button @click.stop="btnHandler">button</button>
+        </div>
+    </div>
+
+    <!-- 1.导入Vue的库文件，在window全局中就有了Vue这个构造函数 -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        //2.创建Vue的实例对象
+        const vm = new Vue({
+            //el属性是固定的写法，表示当前的vm实例要控制页面上的那个区域，接受的值是一个选择器
+            el: '#app',
+            //data对象就是要渲染到页面上的数据
+            data: {
+                username:'郭小胖'
+
+            },
+            methods: {
+                show() {
+                    console.log('点击了a链接');
+                },
+                btnHandler() {
+                    
+                    console.log('btnHandler');
+                },
+                divHandler() {
+                    console.log('divHandler');
+                }
+            }
+
+        })
+    </script>
+
+</body>
+</html>

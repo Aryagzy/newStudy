@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //年终发奖金
+    //需求：分为ABCD等级
+    //方法1
+    function salaryBone(level,salary) {
+      var mybonus = '';
+      switch(level) {
+        case 'A' :
+          mybonus = salary*2;
+        break;
+        case 'B' :
+          mybonus = salary*1.5;
+        break;
+        case 'C' :
+          mybonus = salary*1;
+        break;
+        case 'D' :
+          mybonus = salary*0.8;
+        break;
+        default:
+          mybonus = salary*0.5;
+        break;
+      }
+      return Number(mybonus);
+    }
+    var p1 = salaryBone('A',3000);
+    
+    //方法2--策略模式
+    var strategies = {
+      'A':function(salary) {
+        return salary*2;
+      },
+      'B':function(salary) {
+        return salary*1.5;
+      },
+      'C':function(salary) {
+        return salary*1;
+      },
+      'D':function(salary) {
+        return salary*0.8;
+      }
+    }
+     var calBouns = function(level,salary) {
+       return strategies[level](salary);
+     }
+     var b1 = calBouns('A',3000);
+  </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>添加和删除属性  $set $delete</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+     
+      {{user.name}}
+      {{user.age}}
+      {{country}}
+    </div>
+    <script>
+      let vm = new Vue({
+        el: "#app",
+       data() {
+         return {
+           user:{
+             name:"song"
+           }
+         }
+       },
+        methods: {
+        },
+        beforeCreate() {
+          //创建前状态：组件实例刚刚创建，还未进行数据观测和事件配置
+          //this.$el---undefined
+          //this.$data---undefined
+          //this.message--undefined
+
+          
+        },
+        created() {
+          //创建完毕状态：实例已经创建完成，并且已经进行了数据观测和事件配置
+          //this.$el---undefined
+          //this.$data---已被初始化
+          //this.message--已被初始化
+          
+        },
+        beforeMount() {
+          //挂载前的状态，模板编译之前，还没有挂载
+           //this.$el---已被初始化
+          //this.$data---已被初始化
+          //this.message--已被初始化
+         this.country = 'china'
+
+          
+        },
+        mounted() {
+          //挂载结束状态，模板编译之后，已经挂载，此时才会渲染页面
+           //this.$el---已被初始化
+          //this.$data---已被初始化
+          //this.message--已被初始化
+          //这个this.country不能被渲染，
+          //但是country已经是存在了但是因为已经渲染完毕了，
+          //所以this.country='中国'没有办法被显示
+          this.country='中国';
+         //this.$set(this,'country','中国');//不可以
+          this.$forceUpdate();//迫使vue实例重新渲染  
+        },
+
+      });
+    </script>
+  </body>
+</html>
+
+  
+</body>
+</html>

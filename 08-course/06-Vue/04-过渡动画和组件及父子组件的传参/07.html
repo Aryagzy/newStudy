@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>引用模板</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 组件显示 -->
+      <my-world></my-world>
+    </div>
+
+    <template id="tpl">
+      <div>
+        <h3>{{msg}}</h3>
+        <ul>
+          <li v-for="(item,index) in arr" :key="index">{{index}}-----{{item}}</li>
+        </ul>
+      </div>
+    </template>
+    <script>
+      let vm = new Vue({
+        //这里的vm也是一个组件，称为根组件Root
+        el: "#app",
+        data() {
+          return {
+            flag: false,
+          };
+        },
+        components: {
+          "my-world": {
+            //组件的默认名字就是myworld
+            //如果想要给组件命名，name属性就可以
+            name:'Mw',
+            //引用模板的意思就是说，把template模板内容放到了外面
+            //引入到组件中
+            template: "#tpl",
+            data() {
+              return {
+                age: 23,
+                msg:'world--',
+                arr:['tom','jack','laney']
+              };
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

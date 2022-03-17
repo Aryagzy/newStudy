@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="button" value="按钮" id="btn1" />
+
+    <script>
+        function myAddEvent(obj,ev,fn){
+            if (obj.attachEvent) {
+                obj.attachEvent('on'+ev,fn);
+           } else {
+               obj.addEventListener(ev,fn,false);
+           }
+        }
+      var oBtn = document.getElementById("btn1");
+      myAddEvent(oBtn,'click',function() {
+          alert('a');
+      });
+      myAddEvent(oBtn,'click',function(){
+        alert('b')
+      })
+      
+
+    //   if (oBtn.attachEvent) {
+    //     //IE
+    //     oBtn.attachEvent("onclick", function () {
+    //       alert("a");
+    //     });
+    //     oBtn.attachEvent("onclick", function () {
+    //       alert("b");
+    //     });
+    //   } else {
+    //     //FF Chrome
+    //     oBtn.addEventListener("click",function () {
+    //         alert("1");
+    //       },false);
+    //     oBtn.addEventListener("click",function () {
+    //         alert("2");
+    //       },false);
+    //   }
+      // oBtn.onclick = function() {
+      //     alert('1');
+      // }
+      // oBtn.onclick = function() {
+      //     alert('2');
+      // }
+
+      //attachEvent(事件名，函数)-----可以同时弹出1 2
+      //IE
+      // oBtn.attachEvent('onclick',function() {
+      //     alert('1');
+      // })
+      // oBtn.attachEvent('onclick',function() {
+      //     alert('2');
+      // })
+
+      //FF Chrome
+      //addEventListener(事件名, 函数,false)-----可以同时弹出1 2
+      // oBtn.addEventListener('click',function(){
+      //     alert('1');
+      // },false)
+      // oBtn.addEventListener('click',function(){
+      //     alert('2');
+      // },false)
+    </script>
+  </body>
+</html>

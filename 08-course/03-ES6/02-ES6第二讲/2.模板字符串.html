@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //模板字符串``
+    //1.简便换行
+    let s1 = '我爱我的祖国\n和我的母亲'
+    console.log(s1);
+    let s2 = `我爱我的祖国
+和我的母亲`
+    console.log(s2);
+    
+    //2.拼接
+    let a = '和我的母亲'
+    let b = '我爱我的祖国'+a+'还有我的孩子'
+    console.log(b);
+    let b1 = `我爱我的祖国${a}还有我的孩子`
+    console.log(b1);
+
+    //3.调用函数
+    function fn() {
+      return '祖国'
+    }
+    console.log(`亲爱的${fn()}你好`);
+
+    //4.支持嵌套
+    let arr = [1,2,3]
+    const str = (arr) => `
+    我是一级字符串
+    ${arr.map(v=>`${v}`)}
+    `
+    console.log(str(arr));
+    //5.支持转义
+     `\``
+  </script>
+</body>
+</html>

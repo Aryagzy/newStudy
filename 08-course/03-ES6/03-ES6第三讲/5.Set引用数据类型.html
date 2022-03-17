@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 1.Set是es6新提出来的一个新的引用数据类型，类似于数组，但是成员是唯一的，没有重复的值
+    // 和对象里面的get set 不一样
+    
+    // 2.基本用法
+    // const set = new Set([1,2,3,4,5,6,5])
+    // console.log(set);
+
+    // let arr = [1,2,3,4]
+    // let obj = {name:'丽丽'}
+    // let nu = null//历史遗留问题
+    // console.log(typeof arr); //object
+    // console.log(typeof obj); // object
+    // console.log(typeof nu);// object
+    
+    // 3证明arr是数组，obj是对象的方法
+    // instance of
+    // Object.prototype.toString.call(arr)
+    // let arr = [1,2,3,4]
+    // let obj = {
+    //   name:'lili'
+    // }
+    // console.log(arr instanceof Array); //ture
+    // console.log(obj instanceof Object); //true
+    // console.log(Object.prototype.toString.call(arr)); //[object Array] string
+    // console.log(Object.prototype.toString.call(obj));//[object Object] string
+
+    // set数据类型的判断
+    // const set = new Set([1,2,3,4,5,6,5,4])
+    // console.log(set instanceof Set);//true
+    // console.log(Object.prototype.toString.call(set) === '[object Set]');//true
+
+    // 4.Set数据类型转化成数组,同时还可以去重
+    // const set = new Set([1,2,3,4,5,6,5,4])
+    // console.log([...set]);
+    // console.log(Array.from(set));
+
+    // 5.Set数据内部判断值的机制 类似于===
+    // let newSet = new Set()
+    // let a = 5;
+    // let b = '5'
+    // newSet.add(a)
+    // newSet.add(b)
+    // //里面有几项
+    // console.log(newSet); //两项的数据类型不一样，所以不会去重
+    // //特殊情况 NaN === Nan
+    // newSet.add(NaN)
+    // newSet.add(NaN)
+    // console.log(newSet); //只有一个NaN
+
+    // 5.Set实例的属性和方法
+    // Set的属性--去重
+    // let lastSet = new Set()
+    // lastSet.add(1).add(2).add(2).add('2').add(NaN).add(NaN)
+    // console.log(lastSet.size);
+
+    // add delete has clear forEach
+    // let lastSet = new Set()
+    // lastSet.add(1).add(2).add(2).add('2').add(NaN).add(NaN)
+    // console.log(lastSet.size);//4
+    // //has 判断是否有这一项
+    // console.log(lastSet.has(2));//true
+    // //delete 删除某一项
+    // console.log(lastSet.delete(NaN));//true
+    // console.log(lastSet);
+    // //clear 清空
+    // console.log(lastSet.clear());
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //3.
+  </script>
+</body>
+</html>

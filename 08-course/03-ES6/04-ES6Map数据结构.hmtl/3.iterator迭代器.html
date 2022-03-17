@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1.Map Set等数据结构 需要一个统一的接口去处理 iterator就是提供了这么一个接口
+      // 数据部署了iterator接口，就可以用for...of循环遍历
+
+      // 2.for..of循环遍历的过程 [1,2,3,4,5]
+      // 1)创建一个指针对象，指向数据的初始位置，iterator就是一个指针对象
+      // 2)第一次调用指针对象的next(),可以将指针指向第一个成员
+      // ....
+      // 直到结束
+      // 每一次调用指针对象的时候，会返回value指的是值  done是布尔值  用来标识遍历是否完成
+
+      // 3.模仿for...of循环遍历的本质
+      // const arr = [1,2,3]
+      // function makeIterator(arr) {
+      //   let nextIndex = 0;
+      //   return { //指针对象
+      //     next:function() {
+      //       return nextIndex<arr.length? {
+      //         value:arr[nextIndex++],
+      //         done:false
+      //       }: {
+      //         value:undefined,
+      //         done:true
+      //       }
+      //     }
+      //   }
+      // }
+      // let res = makeIterator(arr);
+      // console.log(res.next());
+      // console.log(res.next());
+      // console.log(res.next());
+      // console.log(res.next());
+
+      // 4.Iterator接口部署在数据结构的Symbol.iterator属性上
+      // {name:'张三'}
+      // 一个数据只有具有Symbol.iterator属性，就类似于对象的name属性
+      // 就可以认为可以用for..of循环遍历
+      // Symbol.iterator 属性本质上是一个函数
+      // 执行这个函数，就会返回一个指针对象
+      // 下面的代码就是指针对象
+      //  /*
+      //    return { //指针对象
+      //      next:function() {
+      //        return nextIndex<arr.length? {
+      //          value:arr[nextIndex++],
+      //          done:false
+      //        }: {
+      //          value:undefined,
+      //          done:true
+      //        }
+      //      }
+      //    }
+      //   */
+
+      // 5.天生就可以被for...of循环遍历的，具有iterator接口有 Array Map Set String
+      // let arr = [1,2,3,4]
+      // let iter = arr[Symbol.iterator]();//返回的是一个指针对象
+      // console.log(iter.next()); //指针对象中有next()方法可调用
+
+      // 6.对象不具有iterator接口，不能被for..of循环遍历
+      //  let obj = {
+      //    data:[1,2,3,4]
+      //  }
+      //  for(let i of obj) {
+      //    console.log(i);
+      //  }
+
+      // 7.想让对象也可以通过for...of循环遍历，添加Symbol.iterator属性
+      //  let obj = {
+      //    data:[1,2,3,4],
+      //    [Symbol.iterator]() {
+      //      let that = this //objthis保存在that中
+      //      let nextIndex =0
+      //      return { //指针对象
+      //       next() {
+      //        return nextIndex<that.data.length? { //that就是指obj.data
+      //          value:that.data[nextIndex++],
+      //          done:false
+      //        }: {
+      //          value:undefined,
+      //          done:true
+      //        }
+      //      }
+      //      }
+
+      //    }
+      // }
+      //  for(let i of obj){
+      //    console.log(i);
+      //  }
+
+      //8.参考别人的建议
+      let obj = {
+         data:[1,2,3,4],
+         [Symbol.iterator](index=0,that = this) {
+           return { //指针对象
+            next() {
+             return nextIndex<that.data.length? { //that就是指obj.data
+               value:that.data[nextIndex++],
+               done:false
+             }: {
+               value:undefined,
+               done:true
+             }
+           }
+           }
+
+         }
+      }
+       for(let i of obj){
+         console.log(i);
+       }
+      
+    </script>
+  </body>
+</html>

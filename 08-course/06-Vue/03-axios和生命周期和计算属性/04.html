@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="sendJSON">发送ajax请求</button>
+      <hr />
+      <button @click="sendGet">Get方式发送ajax请求</button>
+      <hr />
+      <button @click="sendPost">Post方式发送ajax请求</button>
+      <hr />
+      <button @click="sendPostFormData">
+        Post方式发送ajax请求，---FormData
+        <hr />
+
+        <hr />
+
+        GitHub ID : <input type="text" v-model="uid" />
+        <button @click="getUserById(uid)">
+          获取指定的github上的信息并且显示
+        </button>
+        <br />
+        姓名：{{loginMsg.login}} 
+        <br>
+        头像：<img
+          :src="loginMsg.avater_url"
+          alt=""
+          style="width: 200px"
+        />
+      </button>
+    </div>
+    <script>
+      let vm = new Vue({
+        el: "#app",
+        data: {
+          user: {
+            name: "alick",
+            age: 13,
+          },
+          uid: "",
+          loginMsg: {},
+        },
+        methods: {
+          getUserById(uid) {
+            axios.get(`https://api.github.com/users/${uid}`).then((res) => {
+              this.loginMsg = res.data;
+            });
+          },
+          //把数据以Form Data格式发送出去
+          sendPostFormData() {
+            axios
+              // .post("user.json", "name=alice&age=23")//方式1
+              .post("user.json", this.user, {
+                transformRequest: [
+                  //方式2
+                  function (data) {
+                    //data ==this.user
+                    //对data进行任意类型的处理
+                    // {
+                    // name: "alick",
+                    // age: 13,
+                    //  }
+                    //把json数据转化成formData
+                    var params = "";
+                    for (var index in data) {
+                      params += index + "=" + data[index] + "&";
+                    }
+                    console.log(params);
+                    return params;
+                  },
+                ],
+              })
+              .then((res) => {
+                console.log(res);
+              })
+              .catch((resp) => {
+                console.log("请求失败" + resp.status + resp.statusText);
+              });
+
+            //方式3 qs.stringfy
+          },
+          sendJSON() {
+            axios({
+              method: "get",
+              url: "user.json",
+            })
+              .then((res) => {
+                //axios是基于Promise的HTTP请求客户端
+                console.log(res);
+              })
+              .catch((resp) => {
+                console.log("请求失败" + resp.status + resp.statusText);
+              });
+          },
+          sendGet() {
+            // axios.get('url'[,options])
+            axios
+              .get("user.json", {
+                params: {
+                  //get方法参数
+                  name: "get",
+                  age: 11,
+                  id: 1,
+                },
+              })
+              .then((res) => {
+                console.log(res);
+              })
+              .catch((resp) => {
+                console.log("请求失败" + resp.status + resp.statusText);
+              });
+          },
+          sendPost() {
+            // axios.post('url',{})
+            // post参数类型包括Request Payload 和 Form Data
+            //  axios默认发送数据时，数据格式是Request Payload，并非我们常用的Form Data格式，
+            // 所以参数必须要以键值对形式传递，不能以json形式传参
+            axios
+              .post("user.json", {
+                //post方法参数
+                name: "get",
+                age: 112,
+                id: 12,
+              })
+              .then((res) => {
+                console.log(res);
+              })
+              .catch((resp) => {
+                console.log("请求失败" + resp.status + resp.statusText);
+              });
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

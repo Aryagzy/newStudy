@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+  //   let person = {
+  //     name: 'guo',
+  //     age: 20
+  //   }
+  //   let {name,age} = person;
+  //   1.对象的解构和数组不一样，和顺序无关
+  //   let {age:age,name:name} = person;
+  //   console.log(name);
+  //   console.log(age); 
+
+  //  2.解构不成功会返回undeined
+  //   let {sex} = person
+  //   console.log(sex);
+
+  //   3.解构赋值的实质
+  //   真正被赋值的是后者，对象解构赋值的实质
+  //   会先找到同名的属性，赋值给后者的变量
+  //   let {name:name1} = person
+  //   console.log(name1);
+
+  //   4.可以取到继承的属性
+  //   const obj1 = {};
+  //   const obj2 = {name:'lili'};
+  //   Object.setPrototypeOf(obj1,obj2);//相当于 obj1.__proto__ = obj2 obj1的原型指向了obj2
+  //   const {name} = obj1;
+  //   console.log((name));
+
+  //   5.指定默认值
+  //   默认值的生效条件。对象属性的值，严格 === undefined
+  //   const {x = 1} = {x:undefined}
+  //   const {y = 3} = {y:null}
+  //   console.log(x);
+  //   console.log(y);
+    
+
+  </script>
+</body>
+</html>

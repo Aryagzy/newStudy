@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //利用new Object 创建对象
+        var obj = new Object();//创建了一个空的对象 var obj = {};
+        //相当于追加
+        obj.uname = '张三丰';
+        obj.age = 18;
+        obj.sex = 'man';
+        obj.sayHi = function () {//有点像 定义函数表达式
+            console.log('hi~');
+        }
+        //1我们是利用等号赋值的方法，添加对象的属性和方法
+        //2每个属性和方法之间用分号结束
+        console.log(obj.uname);//对象I调用属性的那种方式吧
+        console.log(obj['sex']);
+        obj.sayHi();
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

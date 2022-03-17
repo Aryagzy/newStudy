@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <style>
+    /* 必须配置css样式,不然v-cloak不生效 */
+    [v-cloak]{
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <input type="text" v-model="msg">
+    <!-- v-cloak用来解决可能会出现闪烁的问题 -->
+    <h3>标题：<span v-cloak>{{msg}}</span></h3>
+    <hr>
+    <!-- v-text和{{msg}}效果一样的 -->
+    <h3 v-text="msg"></h3>
+    {{msg}}
+    <hr>
+    <!-- v-html可以解析一些代码 -->
+    <p v-html="msg2"></p>
+    <hr>
+    <!-- v-once数据只绑定一次 -->
+    <p v-once>{{msg}}</p>
+    <hr>
+    <!-- v-pre不编译，直接原样显示 -->
+    <p v-pre>{{msg2}}</p>
+  </div>
+  <script>
+    /* 
+      
+     */
+    let vm = new Vue({
+      el:'#app',
+      data:{
+           msg:'welcome to Beijing',    
+           msg2:'<b>ggggggg</b>'
+      },
+      created:function(){
+      
+      },
+      methods: {
+        // change(){
+        //   this.msg = '测试'
+        // }
+        
+      },
+      mounted() {
+        this.msg = '哈哈哈'
+       
+        
+      },
+    })
+  </script>
+</body>
+</html>

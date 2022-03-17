@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" id="form1">
+         用户名：<input type="text" name="user"><br>
+         密码： <input type="password" name="pass"><br>
+         <input type="submit" value="登录">
+    </form>
+
+    <script>
+        var oForm = document.getElementById('form1');
+        var oUser = document.getElementsByName('user')[0];
+
+        oForm.onsubmit = function() {
+            setCookie('user',oUser.value,12);//提交表单时，将用户名字保存在cookie 中
+        };
+
+        oUser.value = getCookie('user'); //读取用户中cookie的值
+
+
+
+        //设置cookie
+        function setCookie(name,value,iDay) {
+            var oDate = new Date();
+            oDate.setDate(oDate.getDate()+iDay);
+
+            document.cookie = name+'='+value+';expires='+oDate;
+
+        }
+        //获取cookie
+        function getCookie(name) {
+            var arr = document.cookie.split(';');//把cookie用分号分开
+
+            for(var i=0;i<arr.length;i++) {
+                var arr2 = arr[i].split('=');//把名字和值用=分开
+
+                if(arr2[0]==name) {
+                    return arr2[1];
+                }
+
+            }
+            return '';
+        }
+
+        function removeCookie(name) {
+            setCookie(name,1,-1);
+        }
+
+    </script>
+</body>
+</html>

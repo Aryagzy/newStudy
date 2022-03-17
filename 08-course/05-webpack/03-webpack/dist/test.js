@@ -1,0 +1,2 @@
+/*! For license information please see test.js.LICENSE.txt */
+(function(){var __webpack_modules__={"./src/assets/js/test.js":function(){eval('console.log("test");\n\n//# sourceURL=webpack://01-webpack/./src/assets/js/test.js?')}},__webpack_exports__={};__webpack_modules__["./src/assets/js/test.js"]()})();

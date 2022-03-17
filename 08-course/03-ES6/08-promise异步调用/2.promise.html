@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 1.promise是什么？
+    // 是一种异步解决的方案，比es5传统的解决异步的方案（回调函数） es6提供了promise对象
+
+    // 2.promise形式
+    // const promise = new Promise(function(resolve,reject){
+    //   setTimeout(() => {
+    //     var flag = false;
+    //     flag?resolve('成功'):reject('失败')
+    //   },1000)
+    // })
+    // promise.then(
+    //   (res) => {console.log(res);}, //resolve 成功
+    //   (res) => {console.log(res);} //reject 失败
+    // )
+
+    // 3.会立即执行的面试题
+    // 猜测一下执行顺序  promise hello resolve
+    // 原因：promise新建后会立即执行
+    // hi promise hello resolve
+    // console.log('hi');
+    // const promise = new Promise(function(resolve,reject) {
+    //   console.log('promise');
+    //   resolve()
+    // })
+    // promise.then(function() {
+    //   console.log('resolve');
+    // })
+    // console.log('hello');
+
+    // 4.promise返回的对象还是promise
+    // const promise = new Promise(function(resolve,reject) {
+    //   resolve()
+    // })
+    // const promise1 = promise.then(() => {
+    //   console.log('resolve');
+    // })
+    // console.log(promise1 == promise);//false
+
+    // 5.Promise.then() 
+    // .then方法是定义在原型上的Promise.prototye .then之后会返回一个新的promise对象
+    
+
+  </script>
+</body>
+</html>

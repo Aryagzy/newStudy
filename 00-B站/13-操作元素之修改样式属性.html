@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 60px;
+            height: 50px;
+            background-color: cadetblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <script>
+        //1获取元素
+        var div = document.querySelector('div');
+        //2注册事件，处理程序
+        div.onclick = function () {
+            this.style.backgroundColor = 'purple';//；里面的属性采用驼峰命名法
+        }
+    </script>
+</body>
+
+</html>

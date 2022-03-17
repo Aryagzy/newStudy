@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <h3>{{ 3 | addZero }}</h3>
+      <hr>
+      <!-- toFiexed()实现四舍五入的功能 -->
+      <!-- toFixed天生就有bug,不稳定 -->
+      <h3>{{12.3455 | Number(2)}}</h3>
+      <hr>
+      {{currentTime}}
+      {{currentTime | DateFormat}}
+    </div>
+    <script>
+      /**
+       * 自定义全局过滤器
+       * 对于小于10的数字，前面要补0
+       */
+      Vue.filter("addZero", function (data) {
+        // console.log(data);//3
+        return data < 10 ? "0" + data : data;
+      });
+      // 自定义过滤器，截取小数点后几位
+      // Vue.filter('Number',function(data,n){
+      //   //data是指12.3455 n指传入进来的参数
+      //   return data.toFixed(n);
+      // })
+      //自定义一个过滤器，可以对时间格式进行转化
+      //2022-01-01 21：09：34
+      // Vue.filter('DateFormat',function(data){
+      //   let d = new Date(data);
+      //   return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()+ '  '+d.getHours()+':'+d.getMinutes()+':'+d.getSeconds();
+
+      // })
+    
+
+      let vm = new Vue({
+        el: "#app",
+        data: {
+          currentTime:Date.now()
+        },
+        //局部过滤器
+        filters:{
+          Number:(data,n) => {
+            return data.toFixed(n);
+          },
+          DateFormat:(data) => {
+            let d = new Date(data);
+             return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()+ '  '+d.getHours()+':'+d.getMinutes()+':'+d.getSeconds();
+
+            
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

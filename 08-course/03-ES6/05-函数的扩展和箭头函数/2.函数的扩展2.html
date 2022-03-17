@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1.写一个方法计算1,2,3 相加的结果，用到f {or..of循环
+      // 1)第一种方法 arguments
+      // function add() {
+      //   // console.log(arguments);
+      //   //arguments转成真的数组方法：... 或者 Array.from
+      //   //argumetns可以直接使用for...of
+      //   let sum = 0;
+      //   for (let i of arguments) {
+      //     //console.log(i);
+      //     sum += i;
+      //   }
+      //   return sum;
+      // }
+      // console.log(add(1, 2, 3));
+
+      // 2)第二种方法 打包
+      // function add(...values) {
+      //   //打包成数组 [1,2,]
+      //   console.log(values);
+      //   let sum = 0;
+      //   for (let i of values) {
+      //     //console.log(i);
+      //     sum += i;
+      //   }
+      //   return sum;
+      // }
+      // console.log(add(1, 2, 3));
+
+      // 2.es6函数参数指定默认值， 结构赋值  扩展运算符... 内部就不能使用严格模式
+      // 为什么
+      // 我们参数会形成一个独立的作用域
+      // function get(a,b =a) {
+      //   'use strict'
+      // }
+      // get()
+
+      // 3.怎么解决严格模式问题
+      // 1）方法1
+      // 'use strict'
+      // function get(a,b=a) {
+
+      // }
+      // get()
+
+      // //2)方法2--使用闭包
+      // const doSOme = (function(){
+      //   'use strict'
+      //   return function(a,b=a){
+
+      //   }
+      // })()
+      
+
+    </script>
+  </body>
+</html>

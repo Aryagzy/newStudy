@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      {{msg}}
+      <h2 ref="hello">nihao</h2>
+      <p ref="world">shijie</p>
+      <hr />
+      <h1 ref="title">标题 {{nameK}}</h1>
+      <!-- {{user.name}} -->
+    </div>
+    <script>
+      let vm = new Vue({
+        // el:'#app',
+        data: {
+          msg: "welcome to item",
+          nameK: "ceshi",
+        },
+        name: "tem",
+        age: 23,
+        show: function () {
+          console.log("show");
+        },
+        methods: {},
+        mounted() {},
+      });
+      vm.$mount("#app");
+      //属性： vm.属性名 ---获取data中的某个属性
+      // console.log(vm.msg);
+
+      //vm.$el获取vm关联的元素
+      // console.log(vm.$el);
+      // vm.$el.style.color = 'red';
+
+      // vm.$data 获取数据对象data
+      // console.log(vm.$data);
+
+      //vm.$options 获取自定义属性，就是vm中的一些自定义属性
+      // console.log(vm.$options);
+      // console.log(vm.$options.name);
+      // console.log(vm.$options.age);
+      //执行自定义方法
+      //vm.$options.show()
+
+      //不使用el:'#app',用ref这个属性
+      // document.getElementById("#app");
+      //vm.$refs: 获取所有添加ref属性的元素
+      // console.log(vm.$refs);
+      // console.log(vm.$refs.hello);//获取某一个
+      // vm.$refs.hello.style.color = 'blue'
+
+      //方法
+      //vm.$mount('#app');手动挂载vue实例
+      //vm.$destory()//销毁实例
+      //vm.$nextTick(callback) //在dom更新完后再执行回调函数
+      // console.log(vm.$refs.title.textContent);
+
+      //dom没有更新完，vue实现响应式并不是数据发生变化之后，dom马上变化，需要时间
+      // console.log(vm.msg);
+      // vm.nameK = "测试";
+      // console.log(vm.$refs.title.textContent); //ceshi
+      // vm.$nextTick(function () {
+      //   console.log(vm.$refs.title.textContent); //测试
+      // });
+
+      //宏任务
+      setTimeout(() => {
+        console.log("setTimeout");
+        console.log(vm.$refs.title.innerHTML); //测试
+      }, 0);
+
+      //微任务
+      vm.$nextTick(function () {
+        console.log("nextTick");
+        console.log(vm.$refs.title.innerHTML); //测试
+      });
+
+      //$nextTick: 推荐
+
+      //练习
+      //先执行同步任务，再执行异步任务
+      //异步任务中先执行微任务再执行宏任务
+      //结果是: script start  script end promise1 promise2 setTimeout
+      console.log("script start");
+      setTimeout(function () {
+        console.log("setTimeout");
+      }, 0);
+      Promise.resolve()
+        .then(function () {
+          console.log("promise1");
+        })
+        .then(function () {
+          console.log("promsie2");
+        });
+      console.log("script end");
+    </script>
+    <script></script>
+  </body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-on 事件 </title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- 事件简写@ 和事件对象$event -->
+    <!-- 正常我们应该这样写点击事件 -->
+    <!-- <button onclick="show()">点击</button> -->
+    <!-- <button v-on:click="show">点击使用v-on</button> -->
+    <!-- v-on简写@ -->
+    <!-- <button @click="show">点击使用@</button>
+    <button @click="add">点击使用add</button>
+    <hr>
+    <button @mouseover="show">鼠标经过</button>
+    <button @dbclick="show">双击</button> --> -->
+    <hr>
+    <!-- 获取到按钮上面的文字 Click Me -->
+    <button @click="print($event)">Click Me</button>
+
+  </div>
+  <script>
+    // 配置是否允许vue-devtools检查代码，方便调试，生产环境中设置为false
+    Vue.config.devtool = true;
+    Vue.config.productionTip = false;//阻止vue启动时生成生产消息
+    
+    var vm = new Vue({
+      el:'#app', // 指定关联的元素
+      data:{ // 存储数据
+        msg:'hello vue js',
+        arr:[1,2,3,4]
+      },
+      methods: {//存储方法
+        show:function(){
+          console.log('show方法')
+        },
+        add(){
+           console.log(this);//this表示当前vue实例
+           console.log(this===vm);//true
+          this.arr.push(6);//使用this访问当前实例中的成员
+          this.show();
+        },
+        print(e){
+          //e是指当前的事件，e.target是指当前的DOM结点元素
+           //console.log(e); 获取DOM元素的另一种方式
+           var target = e.target;
+           //console.log(e.target.innerHTML);//DOM对象
+           console.log(target.innerHTML);
+          // console.log(this);
+        }
+
+      },
+    })
+  </script>
+</body>
+</html>

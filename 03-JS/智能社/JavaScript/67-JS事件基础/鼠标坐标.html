@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #div1 {
+        width: 200px;
+        height: 200px;
+        background-color: blue;
+        position: absolute;
+      }
+    </style>
+  </head>
+  <body style="height: 2000px">
+    <div id="div1"></div>
+
+    <script>
+      function getPos(ev) {
+        var scrollTop =
+          document.documentElement.scrollTop || document.body.scrollTop;
+        var scrollLeft =
+          document.documentElement.scrollLeft || document.body.scrollLeft;
+        return { x: ev.clientX + scrollLeft, y: ev.clientY + scrollTop };//json形式
+      }
+      document.onmousemove = function (ev) {
+        var oEvent = ev || event;
+        var oDiv = document.getElementById("div1");
+        var pos = getPos(oEvent);
+        //body有滚动条时候，就会出现问题
+        //鼠标的位置是相对于可视区的
+        //div 是相对于body的 加入scrollTop
+
+        oDiv.style.left = pos.x + "px";
+        oDiv.style.top =  pos.y + "px";
+      };
+    </script>
+  </body>
+</html>

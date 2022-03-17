@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 1.内层的变量会覆盖外层的变量
+    // var a = '全局'
+    // function fn() {
+    //   // 预编译 var a
+    //   console.log(a); //undefined预编译var a 提升
+    //   if(false){
+    //     var a ='局部'
+    //   }
+    // }
+    // fn()
+    // 2.复习预编译的东西
+    // 3.全局 函数的作用 块级作用域（在各自的快干自己的事情，不影响）
+    // var a = '全局';
+    // (function() {
+    //   var a = '局部'
+    //   console.log(a);//局部
+    // })()
+    // console.log(a);//全局
+
+    // let a = '全局'
+    // {
+    //   let a = '局部'
+    //   console.log(a);
+    // }
+    // console.log(a);
+
+    // 4.允许作用域的任意嵌套
+    // {
+    //   {
+    //     let b = '局部'
+    //   }
+    //   console.log(b);// b is not defined
+    // }
+
+    // 5.注意
+    // if(true) {
+    //   let x = 1;
+    // }//不会报错
+    // if(true) let y = 2//会报错---Lexical declaration cannot appear in a single-statement context
+
+  </script>
+</body>
+</html>

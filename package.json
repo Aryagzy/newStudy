@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "axios": "^0.25.0",
+    "express": "^4.17.1",
+    "jquery": "^3.6.0",
+    "math": "^0.0.3",
+    "vue-router": "^3.5.2",
+    "ws": "^8.4.2"
+  },
+  "name": "study",
+  "description": "自学前端项目",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aryagzy/study.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Aryagzy/study/issues"
+  },
+  "homepage": "https://github.com/Aryagzy/study#readme"
+}

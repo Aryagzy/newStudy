@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 作业
+      // 1.分别用includes() find() findIndex()来实现数组的去重
+      // /* let arr = [1,2,3,-1,-2,45]
+      //    //find----返回的是满足条件的元素
+      //    let res = arr.find(function(i){
+      //    return i<0
+      //   })
+      //   console.log(res);
+      //   //findIndex---返回的是满足条件的元素的索引
+      //   let resIndex = arr.findIndex(function(i){
+      //   return i<0
+      //  })
+      //   console.log(resIndex) 
+      // */
+
+      // let arr = [1,2,3,4,5,4,3,2,5,7,8,9]
+      // 1.includs
+      //   function removeOne(arr) {
+      //     // 增加了一条逻辑判断
+      //     if(!Array.isArray(arr)) {
+      //       console.log('这不是数组，请重新输入');
+      //       return;
+      //     }
+      //     let array = [];
+      //     for(let i =0;i<arr.length;i++) {
+      //       if(!array.includes(arr[i])) {
+      //         array.push(arr[i])
+      //       }
+      //     }
+      //     return array;
+      //   }
+      //  console.log(removeOne(arr));
+
+      // 2.find
+      // function removeTwo(arr) {
+      //   let array = [];
+      //   for(let i = 0;i<arr.length;i++) {
+      //     if(!array.find(item => {
+      //        return item == arr[i]
+      //     })) {
+      //       array.push(arr[i])
+      //     }
+      //   }
+      //   return array;
+      // }
+      //  console.log(removeTwo(arr));
+
+      // findIndex
+      //  function removeThree(arr) {
+      //   let array = [];
+      //   for(let i = 0;i<arr.length;i++) {
+      //     if(array.findIndex(item => {
+      //        return item == arr[i]}) == -1) {
+      //       array.push(arr[i])
+      //     }
+      //   }
+      //   return array;
+      // }
+      //  console.log(removeThree(arr));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+      <ul>
+          <li>111</li>
+          <li>222</li>
+          <li>333</li>
+          <li>444</li>
+      </ul>
+    <script>
+      //预解析
+      //变量和函数声明的提升
+          console.log(b);//undefined
+          // console.log(a);
+          var b =1;
+          // a(); //函数会预解析，所以在声明之前调用也可以正常调用
+          // //a1();//a1只会提升var a1 函数不能被调用
+
+         ( function a() {
+              console.log('整体提升1');
+          })();//直接函数调用 相当于a()
+          ( function a() {
+              console.log('整体提升2');
+          }());//直接函数调用 相当于a()
+
+      var a1 = function() {
+          console.log('我是函数表达式');
+      }
+
+      //argumetns 接收实参
+    //   arguments不是数组,不能使用数组里面的方法，是封装的对象，可以转换成数组
+    //   arguments可以转换成数组 Array.from(arguments)
+    //   arguments.callee是什么？指向函数本身，在递归中用的多
+        function add() {
+          console.log(Array.from(arguments));
+          var sum = 0;
+          for (var i = 0; i < arguments.length; i++) {
+            sum += arguments[i];
+          }
+          return sum;
+        }
+        var m = add(1, 3, 5, 7);
+        console.log(m);
+
+      //this指向
+      //1.作为对象方法的调用
+      var obj = {
+        a: 1,
+        fun: function () {
+          console.log(this == obj); //true this指向该对象
+        },
+      };
+      obj.fun();
+
+      //2.作为普通函数的调用
+      window.name = "lili";
+      function getName() {
+        console.log(this.name); //this指向window
+      }
+      getName();
+
+      //3.构造器中调用
+      function MyClass() {
+        console.log(this.name); //lili
+        this.name = "sasa";
+        console.log(this.name); //sasa
+      }
+      //   MyClass();
+      var mc1 = new MyClass();//this指向该对象
+      var mc2 = new MyClass();//this指向该对象
+
+      function foo() {
+          console.log(this);//this指向全局对象
+      }
+      foo();
+
+    //   call和apply都可以改变函数的作用域，用这两个的时候，函数就立即执行
+    //   bind不会立刻执行
+      //obj对象
+      foo.call(obj);   //  foo.call(obj,1,2);call里面的参数都要用逗号分隔
+      foo.apply(obj);   //foo.apply(obj,[1,2,3]);apply是以数组的形式传递的
+      //foo.bind(obj);    //不会立刻执行
+      var foo1 = foo.bind(obj); //bind()
+      foo1();
+
+       //bind()可以用在定时器中，不可以用call 和 apply
+      setTimeout(function() {
+          console.log('延时器1');
+          console.log(this);//this总是指向window
+      }.bind(obj),2000); //改变this指向，指向obj
+      setTimeout(function() {
+          console.log('延时器2');
+          console.log(this);//this总是指向window
+      }.call(obj),2000); //用call(),定时器就不起任何作用了
+
+      function s12() {
+          console.log('你好');
+      }
+      //setTimeout(s12,3000);//3秒以后执行s12()
+      //setTimeout(s12(),3000);//不会停留3秒，会直接调用
+      setTimeout('s12()',3000);//3秒以后执行s12()
+
+    //   call apply 主要用途
+    //   1.改变函数内部指向
+      var obj1 = {
+          name: 'nunu',
+          getName:function() {
+              console.log(this.name);
+          }
+      }
+      obj1.getName();//nunu
+      
+      var obj2 = {name:'mimi'};
+      //obj1里面getName中this改变指向，指向了obj2
+      obj1.getName.call(obj2);//mimi
+
+      //2.function.bind
+      //3.借用其他对象的方法
+      function A1(name) {
+          this.name = 'pop';
+      }
+      function B1(name,age) {
+          this.age = age;
+          //A1中的this指向了B1，B1继承了A1
+          // A1.call(this);
+          A1.apply(this,arguments);
+      }
+      var b1 = new B1('ree','20');
+
+      function Person() {
+          this.name = 'lucy';
+          this.age = '49'
+          console.log(this);
+      }
+      Person();
+      console.log(window.name); //Person中this指向window
+      var obk = {sex:'女'};
+      Person.apply(obk); //改变了this的指向，继承了person属性
+      console.log(obk); 
+
+
+
+    //闭包
+    // 闭包的特点
+    // 1.函数嵌套函数
+    // 2.函数内部可以引用外部的参数和变量
+    // 一般的函数执行完变量会被销毁掉
+    // 闭包参数和变量不会被垃圾回收机制回收，而是保存在内存中
+    function getName() {
+        var count = 0;//不会被立刻销毁
+        function BS() {
+            count++;
+            console.log(count);
+        }
+        return BS;
+    }
+
+    var c1 = getName();
+    c1();
+    c1();
+
+    //闭包的好处
+    // 1.希望变量存在缓存中
+    // 2.避免全局污染
+    // 3.私有成员
+    var a = 1; //全局变量污染----所以使用闭包可以减少全局变量的污染
+    function aa() {
+        a++;
+        console.log(a);
+    }
+    aa();
+    aa();
+
+    var test = (function() { //减少全局污染
+        var a = 10;
+        return function() {
+            a++;
+            console.log(a);
+        }
+    })();
+    test();//return 函数执行
+    test();
+
+    var aLi = document.querySelectorAll('li');
+    for(var i=0;i<aLi.length;i++) {
+        (function(i) {
+           aLi[i].onclick = function() {
+             console.log(i);
+           }
+        })(i)
+    }
+
+    
+
+
+        
+     
+
+
+
+    </script>
+  </body>
+</html>

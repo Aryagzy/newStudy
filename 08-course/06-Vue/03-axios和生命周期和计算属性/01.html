@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <style>
+    .a{
+      color: red;
+    }
+    .b{
+      background-color: aquamarine;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <!-- 方式1：变量的形式 -->
+    <!-- 不可以，vue的属性绑定时不能直接css样式 -->
+    <p :class="aa">郭胖胖</p>
+
+    <!-- 方式2：数组的形式 -->
+    <p :class="[aa,bb]">大家好</p>
+
+    <!-- 方式3：JSON -->
+    <p :class="{a:true,b:false}">真好喝</p>
+
+    <!-- 方式4：条件判断形式 -->
+    <p :class="{a:num>3}">真好看</p>
+    
+    <!-- 正常的style样式是这样写 -->
+    <p style="color: pink; font-size: 40px">hello world</p>
+    <p :style="[x,y]">hello youyou</p>
+    
+  </div>
+  <script>
+    let vm = new Vue({
+      el:'#app',
+      data:{
+           aa:'a',
+           bb:'b',
+           num:5,
+           x:{color:'blue',fontSize:'30px'},
+           y:{backgroundColor:'#ff7300'}
+
+      }
+    })
+  </script>
+</body>
+</html>

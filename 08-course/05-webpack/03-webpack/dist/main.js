@@ -1,0 +1,2 @@
+/*! For license information please see main.js.LICENSE.txt */
+(function(){var __webpack_modules__={"./src/assets/js/main.js":function(){eval("console.log('main-----');\n\n//# sourceURL=webpack://01-webpack/./src/assets/js/main.js?")}},__webpack_exports__={};__webpack_modules__["./src/assets/js/main.js"]()})();

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .table-normal {
+        width: 80%;
+        border: 1px solid #ccc;
+        /*  border-collapse: collapse;相邻边合并 */
+        border-collapse: collapse;
+      }
+      .table-normal th,
+      .table-normal td {
+        padding: 8px;
+        border: 1px solid #ccc;
+        text-align: left;
+      }
+      .outBox .checkbox {
+        width: 20px;
+        height: 20px;
+        border: 1px solid #ccc;
+        display: inline-block;
+        margin-right: 10px;
+        cursor: pointer;
+      }
+      .outBox .checkbox.ok {
+        background: url("./images/ok.jpg") center center no-repeat;
+        background-size: 80%;
+      }
+      .outBox .checkbox.no {
+        background: url("./images/no.jpg") center center no-repeat;
+        background-size: 80%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="outBox">
+      <table class="table-normal" id="outBoxTab">
+        <thead>
+          <tr>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>年龄</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+      <button type="button" id="btnSend">发送</button>
+    </div>
+
+    <script>
+      var outBoxTab = document.getElementById("outBoxTab");
+      var testDataList = [
+        {
+          name: "小明",
+          sex: "男",
+          age: "9",
+          id: 10,
+        },
+        {
+          name: "小刚",
+          sex: "男",
+          age: "6",
+          id: 11,
+        },
+        {
+          name: "小杨",
+          sex: "男",
+          age: "12",
+          id: 12,
+        },
+        {
+          name: "小松",
+          sex: "男",
+          age: "34",
+          id: 13,
+        },
+      ];
+
+      //数据渲染表格
+      var tableTr = [];
+      //用forEach循环testDataList数组
+      testDataList.forEach(function (item, index, array) {
+        //模板字符串
+        //数组push,往数组里面添加内容
+        tableTr.push(`<tr>
+                <td>${item.name}</td>
+                <td>${item.sex}</td>
+                <td>${item.age}</td>
+                <td><span class="checkbox" tag="${item.id}"></span></td>
+               </tr> `);
+
+        //    //字符串拼接 '+'
+        //    tableTr.push('<tr>')
+        //    tableTr.push( '<td>'+item.name+'</td>')
+        //    tableTr.push( '<td>'+item.sex+'</td>')
+        //    tableTr.push( '<td>'+item.age+'</td>')
+        //    tableTr.push('<td><span class = "checkbox" tag = "'+item.id+'"></span></td>')
+        //     tableTr.push('<tr>')
+      });
+      //jion 将数组连成字符串
+      outBoxTab.querySelector("tbody").innerHTML = tableTr.join("");
+      //点击发送 向后台发送数据   0:没选 1：打钩  2:打叉
+      //最后的需要的数据
+      var clickNum = {
+        //  10:0,
+        //  11:1,
+        //  12:0,
+        //  13:2,
+        //  14:1
+      };
+      // 通过Object.values(clickNum); -----得到[0,1,0,2,1];
+
+      // var allcheckbox = outBoxTab.querySelectorAll(".checkbox");
+      // for (var i = 0, len = allcheckbox.length; i < len; i++) {
+      //   //获取checkbox的tag属性，就是id
+      //   var tagid = allcheckbox[i].getAttribute("tag");
+      //   //初始化所有id 状态为0 ，就是处于未点击状态
+      //   clickNum[tagid] = 0;
+      //   (function (k, tagid) {
+      //     //闭包
+      //     //console.log(k);
+      //     allcheckbox[k].onclick = function (ev) {
+             
+      //       //知道我们要点击的是哪一个
+      //       var target = ev.target;
+      //       clickNum[tagid] += 1; //id状态 加 1  0-1-2
+      //       if (clickNum[tagid] == 3) {
+      //         clickNum[tagid] = 0;
+      //       }
+      //       //添加样式 有一个默认的公共checkbox
+      //       target.className = "checkbox";
+
+      //      //1.根据状态添加类的样式
+      //       //0 样式 none ；1 样式 Ok ；2 样式 no
+      //       var statusCls = {
+      //         0: "none",
+      //         1: "ok",
+      //         2: "no",
+      //       };
+      //        target.classList.add(statusCls[clickNum[tagid]]);  //tagid -- id
+            
+            
+      //        //2.根据状态添加类的样式
+      //       // switch (clickNum[tagid]) {
+      //       //   //classList属性
+      //       //   case 0:
+      //       //     target.classList.add("none");
+      //       //     break;
+      //       //   case 1:
+      //       //     target.classList.add("ok");
+      //       //     break;
+      //       //   case 2:
+      //       //     target.classList.add("no");
+      //       //     break;
+      //       // }
+      //     };
+      //   })(i, tagid);
+      // }
+     //不用闭包
+      var allcheckbox = outBoxTab.querySelectorAll(".checkbox");
+      for (var i = 0, len = allcheckbox.length; i < len; i++) {
+        //tag也会取到最后一个tag
+        var tagid = allcheckbox[i].getAttribute("tag");
+        clickNum[tagid] = 0;
+
+        allcheckbox[i].onclick = function (ev) {
+          var target = ev.target;
+         //解决只能取到最后一个tag
+          tagid = target.getAttribute("tag");
+          clickNum[tagid] += 1;
+          if (clickNum[tagid] == 3) {
+            clickNum[tagid] = 0;
+          }
+
+          target.className = "checkbox";
+          var statusCls = {
+            0: "none",
+            1: "ok",
+            2: "no",
+          };
+          target.classList.add(statusCls[clickNum[tagid]]);
+        };
+      }
+      document.getElementById("btnSend").onclick = function () {
+        console.log(clickNum); //对象形式
+        var values = Object.values(clickNum); //数组形式
+      };
+    </script>
+  </body>
+</html>

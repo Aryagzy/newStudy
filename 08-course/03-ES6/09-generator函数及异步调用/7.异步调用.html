@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      // 1.用generator函数来处理异步调用，核心思想就是next传参
+      // function request(url) {
+      //   axios.get(url).then((res) => {
+      //     result.next(res);
+      //   });
+      // }
+      // function* get() {
+      //   let res1 = yield request("http://127.0.0.1:2000/name.json");
+      //   console.log(res1);//第二次next参数
+      //   let id = res1.data.data[0].id
+      //   let res2 = yield request(`http://127.0.0.1:2000/wepon.json?id=${id}`)
+      //   console.log(res2);//第三次next参数
+      // }
+      // let result = get();
+      // result.next();
+
+      // 2.用async和 await---ES7
+      // async function get() {
+      //   let res1 = await axios.get("http://127.0.0.1:2000/name.json")
+      //   console.log(res1);
+      //   let id = res1.data.data[0].id
+      //   let res2 = await axios.get(`http://127.0.0.1:2000/wepon.json?id=${id}`)
+      //   console.log(res2);
+      //   return 123
+      // }
+      // let res = get() //promise
+      // res.then(res => {
+      //   console.log(res);
+      // })
+
+      // 3.asyn几种写法
+      // const as = async function(){}
+      // const obj = {async get(){}}
+      // obj.get()
+      // const as = async () => {}
+
+      // 4.两次请求同时发送，两者之间没有关系的-Promise.all([p1,p2])-返回的是一个数组
+      // async function get() {
+      //   let res = await Promise.all([ await axios.get("http://127.0.0.1:2000/name.json"),await axios.get(`http://127.0.0.1:2000/wepon.json?id=2`)])
+      //   console.log(res);
+      // }
+      // get().catch(res=>{// catch捕获异常
+      //   console.log(res);
+      // })
+    </script>
+  </body>
+</html>

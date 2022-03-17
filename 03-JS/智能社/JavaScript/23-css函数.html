@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      //css(oDiv, 'width')	获取样式
+      //css(oDiv, 'width', '200px')  设置样式
+    
+      function css(obj,name,value){
+          if(arguments.length==2){ //两个参数，获取样式
+            return  obj.style[name];//返回 oDiv.style.width
+        }else{ //三个参数，设置样式
+             obj.style[name]=value;//返回 oDiv.style.width=200px
+        }
+      }
+      window.onload=function (){
+          var oDiv=document.getElementById('div1');
+          alert(css(oDiv,'width'));  //获取元素
+          css(oDiv,'background','green');  //设置样式
+      }
+
+    </script>
+  </head>
+  <body>
+      <div id="div1" style="width: 200px; height: 200px; background:red;"></div>
+  </body>
+</html>

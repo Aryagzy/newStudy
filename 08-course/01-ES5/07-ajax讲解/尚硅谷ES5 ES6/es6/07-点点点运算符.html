@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        点点点运算符又叫三点运算符
+        *用途
+        1.rest(可变)参数
+          *用来取代arguments 但是比arguments灵活，只能是最后部分形参参数
+          function fun(...values) {
+              console.log(arguments);
+              arguments.foreach(function (item,index) {
+                  console.log(item,index);
+              });
+              console.log(values);
+              values.forEach(function (item,index) {
+                  console.log(item,index);
+              })
+          }
+          fun(1,2,3);
+        2.扩展运算符
+          let arr = [1,3,5];
+          let arr2 = [2,...arr1,6];
+          arr2.push(...arr1);
+
+     -->
+     <script>
+         //...value用来取代arguments
+         function foo(a,...value) {//加了一个参数后，会去掉第一个数
+             console.log(arguments);//伪数组.不可以调用数组中的方法
+             //arguments.callee();//指向函数本身 ，递归时候调用比较多
+            // arguments.forEach(function (item,index) {
+            //     console.log(item,index);
+            // })
+             console.log(value);//数组,可以调用数组中的方法
+             console.log(...value);//取出数组里面的数
+             value.forEach(function (item,index) {
+                 console.log(item,index);
+             })
+
+         }
+         foo(2,4,6,7,8,9,0);
+
+        // 2.扩展运算符
+        let arr  = [1,5];
+        let arr1 = [2,3,4];
+        arr = [1,...arr1,6];
+        console.log(arr);//数组
+        console.log(...arr);//数
+     </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         div {
+             width: 100px;
+             height: 100px;
+             background-color: red;
+             margin: 10px;
+         }
+    </style>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+
+    <script>
+        var aDiv=document.getElementsByTagName('div');
+        
+        for(var i=0;i<aDiv.length;i++){
+            aDiv[i].timer=null; //为每一个div都加上一个定时器
+
+            aDiv[i].onmouseover=function(){
+                startMove(this,400); 
+            }
+            aDiv[i].onmouseout=function(){
+                startMove(this,100);
+            }
+        }
+        //var timer=null;
+        function startMove(obj,iTarget){
+            
+            clearInterval(obj.timer);
+            obj.timer=setInterval(function(){
+                var speed=(iTarget-obj.offsetWidth)/6;
+                speed=speed>0?Math.ceil(speed):Math.floor(speed);
+
+                if(obj.offsetWidth==iTarget){
+                    clearInterval(obj.timer);
+                }else{
+                    obj.style.width=obj.offsetWidth+speed+'px';
+                }
+            },50);
+        }
+    </script>
+</body>
+</html>

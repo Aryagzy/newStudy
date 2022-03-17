@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>权限控制- filters</title>
+    <style>
+      .active {
+        font-size: 20px;
+        color: #ff7300;
+        text-decoration: none;
+      }
+      .main-menu a {
+        display: inline-block;
+        margin-right: 10px;
+      }
+    </style>
+    <script src="js/vue.js"></script>
+    <script src="js/vue-router.js"></script>
+  </head>
+  <body>
+    <div id="itapp">
+      <div class="main-menu">
+        <!-- <router-link to="/home">主页</router-link>
+            <router-link to="/user">用户</router-link>
+            <router-link to="/finance">财务信息</router-link> -->
+
+        <!-- 写成动态的 -->
+        <!-- $router.options.routes  可以从计算器属性-->
+        <!-- {{$router.options.routes}} -->
+        <router-link
+          v-for="(item,index) in $router.options.routes"
+          :key="index"
+          :to="item.path"
+          >{{item.meta.title}}</router-link
+        >
+        <!-- <router-link v-for="(item,index) in getMyRoutes" :key="index" :to="item.path">{{item.meta.title}}</router-link> -->
+      </div>
+      <div>
+        <transition
+          enter-active-class="animated bounceInLeft"
+          leave-active-class="animated bounceOutRight"
+        >
+          <router-view></router-view>
+        </transition>
+      </div>
+
+      <hr />
+      <button @click="push">添加路由</button>
+      <button @click="replace">替换路由</button>
+    </div>
+
+    <template id="user">
+      <div>
+        <h3>用户信息</h3>
+        <ul>
+          <router-link to="/user/login?name=tom&pwd=123" tag="li"
+            >用户登陆</router-link
+          >
+          <router-link to="/user/regist/alice/456" tag="li"
+            >用户注册</router-link
+          >
+          <router-link to="/user/info" tag="li">用户注册</router-link>
+        </ul>
+        <router-view></router-view>
+      </div>
+    </template>
+
+    <script>
+      var Home = {
+        template: "<h3>我是主页</h3>",
+      };
+      var User = {
+        template: "#user",
+      };
+      var Login = {
+        template:
+          "<h4>用户登陆。。。获取参数：{{$route.query}},{{$route.path}}</h4>",
+      };
+      var Regist = {
+        template:
+          "<h4>用户注册。。。获取参数：{{$route.params}},{{$route.path}}</h4>",
+      };
+      var Finance = {
+        template: "<h4>财务信息</h4>",
+      };
+
+      var routes = [
+        {
+          path: "/home",
+          component: Home,
+          meta: {
+            title: "首页",
+            roles: ["admin", "guest"],
+          },
+        },
+        {
+          path: "/user",
+          component: User,
+          meta: {
+            title: "用户",
+            roles: ["admin", "guest"],
+          },
+          children: [
+            {
+              path: "login",
+              component: Login,
+            },
+            {
+              //动态路由匹配  // 动态路径参数 以冒号开头
+              path: "regist/:username/:password",
+              component: Regist,
+            },
+          ],
+        },
+        {
+          path: "/finance",
+          component: Finance,
+          meta: {
+            title: "财务信息",
+            roles: ["admin"],
+          },
+        },
+        {
+          path: "*",
+          redirect: "/home",
+          hidden: true,
+        },
+      ];
+
+      //过滤需要显示的路由 , 权限控制
+      //第一种方式， 通过设置 是否有权限 roles参数来过滤 guest为游客
+      //假设登录成功， 你知道用户的角色，权限
+      routes = routes.filter((option, index) => {
+        return (
+          !option.hidden && option.meta && option.meta.roles.includes("guest")
+        );
+      });
+
+      const routerAll = new VueRouter({
+        routes, //简写，相当于routes:routes
+        linkActiveClass: "active", //更新活动链接的class类名,默认的激活的 class
+        linkExactActiveClass: "active-extact", //精确激活的 class
+        mode: "hash", //默认
+      });
+
+      new Vue({
+        el: "#itapp",
+        router: routerAll, //注入路由
+        // test:routerAll,   //this.$options.test
+        computed: {
+          getMyRoutes() {
+            var thisData = this.$router.options.routes;
+            var test1 = thisData.filter((option) => {
+              return option.meta;
+            });
+            return test1;
+          },
+        },
+        methods: {
+          push() {
+            // this.$options.test.push({path:'home'})
+            this.$router.push({ path: "home" }); //添加路由，切换路由
+            // routerAll.push({path:'home'}); //添加路由，切换路由
+
+            // 获取参数
+            // this.$route.query
+          },
+          replace() {
+            routerAll.replace({ path: "user" }); //替换路由，没有历史记录
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

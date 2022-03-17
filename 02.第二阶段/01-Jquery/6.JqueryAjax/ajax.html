@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+  <body>
+    <div id="result">before ajax</div>
+    <button>click</button>
+    <a href="./api.html">nihao</a>
+
+    <script>
+      $(function () {
+        /*     1.JQuery AJAX
+               load( url, [data], [callback] ) ：载入远程 HTML 文件代码并插入至 DOM 中。
+                   url (String) : 请求的HTML页的URL地址。
+                   data (Map) : (可选参数) 发送至服务器的 key/value 数据。
+                   callback (Callback) : (可选参数) 请求完成时(不需要是success的)的回调函数
+            */
+        
+            // $('button').click(function() {
+            //    var ajax_load = "<img src='loading.gif' alt='loading..'/>";
+            //    //alert(ajax_load);
+            //    var loadUrl = "./api.html";
+            //    $('#result').html(ajax_load).load(loadUrl);
+            // });
+
+        //    $('button').click(function() {
+        //        var ajax_load = "<img src='loading.gif' alt='loading..'/>";
+        //       // alert(ajax_load);
+        //        var loadUrl = "./api.html";
+        //        $('#result').html(ajax_load).load(loadUrl + ' #item2');
+        //    })
+          
+
+        //    $('button').click(function() {
+        //        var ajax_load = "<img src='loading.gif' alt='loading..'/>";
+        //       // alert(ajax_load);
+        //        var loadUrl = "./api.html";
+        //        $('#result').html(ajax_load).load(loadUrl ,null,function() {
+        //            alert($('#result').html());
+        //        });
+        //    })
+
+
+
+
+        /*
+             2. $.get( url, [data], [callback] )：使用GET方式来进行异步请求 
+                    url (String) :  发送请求的URL地址.
+                    data (Map) : (可选) 要发送给服务器的数据，以 Key/value 的键值对形式表示，会做为QueryString附加到请求URL中。
+                    callback (Function) : (可选) 载入成功时回调函数(只有当Response的返回状态是success才是调用该方法)。
+            */
+        // $('button').click(function() {
+        //     $.get("./api.html",{action:'get',name:'Ryan'},function(data,textStatus){
+        //           alert(data);
+
+        //     })
+        // })
+        // $('button').click(function() {
+        //     $.get("file:///C:/Users/DELL/Desktop/Study/02.%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5/01-Jquery/6.JqueryAjax/api.html?action=get&name=Ryan",null,function(data,textStatus){
+        //           alert(data);
+
+        //       })
+        
+        /*
+             $.post( url, [data], [callback], [type] ) ：使用POST方式来进行异步请求
+
+                url (String) : 发送请求的URL地址.
+
+                data (Map) : (可选) 要发送给服务器的数据，以 Key/value 的键值对形式表示。
+
+                callback (Function) : (可选) 载入成功时回调函数(只有当Response的返回状态是success才是调用该方法)。
+
+                type (String) : (可选)官方的说明是：Type of data to be sent。其实应该为客户端请求的类型(JSON,XML,等等)
+        */
+          
+           $.post('./app.js',null,function(data,textStatus) {
+             alert(data);
+           }) 
+           
+
+
+
+
+        /*
+             $.getScript( url, [callback] ) : 通过 GET 方式请求载入并执行一个 JavaScript 文件（获取远端的js文件在本地执行）。
+
+                  url (String) : 待载入 JS 文件地址。
+
+                  callback (Function) : (可选) 成功载入后回调函数。
+        */
+           
+        $.getScript('test.js',function(data,textStatus) {
+          alert(data);
+        })
+
+
+       /*
+         $.ajax 事件
+       */
+
+
+              
+      });
+    </script>
+  </body>
+</html>

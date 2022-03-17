@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>单例模式</title>
+  </head>
+  <body>
+    <button type="button" id="btnpop">弹出</button>
+    <button type="button" id="btnframe">弹出</button>
+
+    <script>
+      //单例模式--这个类中只有一个实例，全局变量，闭包
+      //弹层
+      var createEl = function() {
+        var div = document.createElement("div");
+        div.innerHTML = '郭小胖最棒啦';
+        div.style.display = 'none';
+        document.body.appendChild(div);
+        return div;
+      }
+      document.getElementById('btnpop').onclick = function() {
+        var el = createEl();
+        el.style.display = 'block';
+      }
+
+      //单例的目的
+      //1.补足-全局变量被污染
+      var div;
+      var createEl = function () {
+        if (!div) {
+          div = document.createElement("div");
+          div.innerHTML = "郭小胖最棒啦";
+          div.style.display = "none";
+          document.body.appendChild(div);
+        }
+        return div;
+      };
+      document.getElementById("btnpop").onclick = function () {
+        var el = createEl();
+        el.style.display = "block";
+      };
+
+      //2.闭包
+      function createEl() {
+        var div;
+        return function() {
+          if(!div) {
+            div = document.createElement("div");
+            div.innerHTML = "郭小胖最棒啦";
+            div.style.display = "none";
+            document.body.appendChild(div);
+          }
+          return div
+        }
+      }
+      var fun01 = createEl();//function
+      document.getElementById("btnpop").onclick = function () {
+        var el = fun01();
+        el.style.display = "block";
+      };
+
+      //3.把变的部分封装，不变的部分隔离，开发封闭原则
+      function createEl(fn) {
+        var result;
+        return function() {
+          if(!result) {
+             result = fn.apply(this,arguments)//传参数
+            //  result = fn()
+          }
+          return result
+        }
+      }
+      function createWindow() {
+           //创建div
+           var div = document.createElement("div");
+            div.innerHTML = "郭小胖最棒啦";
+            div.style.display = "none";
+            document.body.appendChild(div);
+            return div
+      }
+      function createIframe() {
+           //创建iframe
+           var iframe = document.createElement("iframe");
+            iframe.innerHTML = "郭小胖最棒啦";
+            iframe.style.display = "none";
+            document.body.appendChild(iframe);
+            return iframe;
+      }
+      var fun01 = createEl(createWindow);//function
+      var fun02 = createEl(createIframe);
+
+      document.getElementById("btnpop").onclick = function () {
+       // var el = fun01();
+        var el = fun01('laney','woba')
+        debugger
+        el.style.display = "block";
+      };
+      document.getElementById("btnframe").onclick = function() {
+        var el = fun02();
+        el.style.display = "block";
+      }
+    </script>
+  </body>
+</html>

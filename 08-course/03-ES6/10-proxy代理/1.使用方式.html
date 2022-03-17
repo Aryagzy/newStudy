@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 1.定义
+    // /* 
+    // let p = new Proxy(target,handle)
+    // target:用Proxy包装的目标对象
+    // handle:一个对象proxy代理操作的对象 
+    // */
+
+    // 2.get用于对对象属性读取的拦截，可以接受三个目标参数， 目标对象 属性名  proxy实例本身（可选）
+    // 判断一个对象的属性是否存在
+    // let person = {
+    //   name:'tony'
+    // }
+    // let proxy = new Proxy(person,{
+    //   get:function(target,property) {
+    //     // console.log(target);
+    //     // console.log(property);
+    //     return target[property]
+    //   }
+    // })
+    // console.log(proxy.name);
+
+    // 3.set拦截对象赋值的操作，目标对象 属性名 属性值 proxy实例本身
+    // 对对象赋值的年龄进行一个判断
+    // let obj = {}
+    // let setVid = {
+    //   set:function(object,prop,value) {
+    //     // console.log(object);
+    //     // console.log(prop);
+    //     // console.log(value);
+    //     if(prop === 'age') {
+    //       if(!Number.isInteger(value)){
+    //         console.log('年龄必须是数值');
+    //       }
+    //     }
+    //     if(value>150){
+    //       console.log('超过了最大年龄');
+    //     }
+    //     object[prop] = value
+        
+        
+    //   }
+    // }
+    // let p = new Proxy(obj,setVid)
+    // p.age = '100'
+    // p.age = 100
+    // p.age = 200
+    // console.log(p.age);
+
+    // 4.get set结合做一个案例
+    // let handle = {
+    //   get(target,key) {
+    //      //提示 _属性是内部属性禁止外部访问
+    //      if(key[0] === '_') {
+    //       throw new Error('内部属性禁止外部访问！')
+    //     }
+    //     return target[key]
+    //   },
+    //   set(target,key,value){
+    //     target[key] = value
+    //     return true  
+    //   }
+    // }
+    // let target = {}
+    // let proxy = new Proxy(target,handle)
+    // proxy._prop = 'ab'
+    // console.log(proxy._prop);
+
+    // 5.proxy设置删除操作
+    // let person = {name:'丽丽'}
+    // let handle = {
+    //   deleteProperty(target,key) {
+    //     // console.log('不允许删除属性');
+    //     //这里面删除才是真正的删除
+    //     delete target[key]
+    //   }
+    // }
+    // let proxy = new Proxy(person,handle)
+    // delete proxy.name
+    // console.log(proxy.name);
+
+    // //6.apply拦截的是函数的调用
+    // let target = function(){
+    //   return '我是目标函数'
+    // }
+    // let hanle = {
+    //   apply:function(){
+    //     return '我是拦截你的'
+    //   }
+    // }
+    // let p = new Proxy(target,hanle)
+    // console.log(p());
+
+    // 6.has拦截是否有某个属性
+    // in hasOwnProperty
+    // in是可以原型的
+    // function Person() {
+    //   this.name = 'opop'
+    // }
+    // Person.prototype.do = function(){
+    //   console.log('我是父类的方法');
+    // }
+    // let person = new Person()
+    // console.log(person.name);
+    // person.do()
+    // console.log('name' in person); //true
+    // console.log('do' in person);  //true
+    // console.log(person.hasOwnProperty('name')); //true
+    // console.log(person.hasOwnProperty('do'));//false
+
+    // 7.has是否可以拦截原型上面的属性呢
+    // 可以隐藏我们的属性
+    // let father = {
+    //   name:'father'
+    // }
+    // let handle = {
+    //   has(target,key){
+    //     if(key[0] === '_') {
+    //       return false
+    //     }
+    //     return key in target
+    //   }
+    // }
+    // let target = {_prop:'a',prop:'b'}
+    // target.__proto__ = father
+    // let proxy = new Proxy(target,handle)
+    // console.log('_prop' in proxy);//false
+    // console.log('prop' in proxy); //true
+
+    // 8.construct
+    // function Person(name){
+    //   this.name = name
+    // }
+    // let person = new Person('tony')
+    // let proxy = new Proxy(Person,{
+    //   construct(target,key){
+    //     //这里返回的一定是对象.不是对象就会报错
+    //     return {name:'Kreis'}
+    //   }
+
+    // })
+    // console.log(new proxy('张三').name);
+
+    // 9.reflect定义
+    // 对象的一些操作放到Reflect对象上来，从Reflect对象上去拿object对象内部的一些方法
+    // let obj = {name:'nini'}
+    // console.log('name' in obj);//true
+    // console.log(Reflect.has(obj,'name'));//true
+
+    // 10.Reflect的api和proxy代理的api通用
+    // let obj = {
+    //   name:'Chirs'
+    // }
+    // let result = Reflect.get(obj,'name')
+    // console.log(result);//Chirs
+
+    // let obj = {
+    //   get he(){
+    //     return this.name + this.pro
+    //   }
+    // }
+    // let re = {
+    //   name:'noyi',
+    //   pro:'怕我'
+    // }
+    // let result = Reflect.get(obj,'he',re)
+    // console.log(result);
+
+
+
+
+
+
+  </script>
+</body>
+</html>

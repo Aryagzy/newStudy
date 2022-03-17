@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div1 {
+            width: 400px;
+            height: 400px;
+            background: #ccc;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <input type="button" value="显示" id="btn1">
+    <div id="div1"></div>
+
+    <script>
+        //1.div隐藏  2.点击btn,div显示 3.点击其他部分div 隐藏
+        var oBtn = document.getElementById('btn1');
+        var oDiv = document.getElementById('div1');
+         //引起了事件冒泡oBtn 点击，同时也触发了document事件
+        oBtn.onclick = function(ev) {
+            // alert('1')
+            var oEvent = ev || event; //获取事件对象
+
+            oDiv.style.display='block';
+            //取消事件冒泡
+            oEvent.cancelBubble=true;
+
+           
+        }
+
+        document.onclick = function() {
+            // alert('2');
+            oDiv.style.display='none';
+            
+        }
+    </script>
+</body>
+</html>

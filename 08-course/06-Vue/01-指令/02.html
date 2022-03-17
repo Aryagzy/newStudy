@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-model</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- {{}}双大括号称为模板，用来进行数据的绑定显示在页面中 -->
+    {{msg}}
+    <hr>
+    {{arr}}
+    <hr>
+    {{users}}
+    <hr>
+    <input type="text" v-model="name">
+    {{name}}
+    <hr>
+    <input type="checkbox"  id="01" value="01" v-model="text">
+    <input type="checkbox"  id="02" value="02" v-model="text">
+    {{text}}
+    <hr>
+    <select v-model="tag">
+      <option value="01">01</option>
+      <option value="02">02</option>
+    </select>
+    {{tag}}
+  </div>
+  <script>
+    // 配置是否允许vue-devtools检查代码，方便调试，生产环境中设置为false
+    Vue.config.devtool = true;
+    Vue.config.productionTip = false;//阻止vue启动时生成生产消息
+    
+    var vm = new Vue({
+      el:'#app', // 指定关联的元素
+      data:{ // 存储数据
+        msg:'hello vue js',
+        arr:[1,2,3],
+        age:21,
+        users:{
+          id:12,name:'秋香'
+        },
+        name:'',
+        text:'',
+        tag:'01'
+      }
+    })
+  </script>
+</body>
+</html>

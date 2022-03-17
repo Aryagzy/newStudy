@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        1.通过class定义类/实现类的继承
+        2.在类中通过constructor定义构造方法
+        3.通过new来创建类的实例
+        4.通过extends来实现类的继承
+        5,通过super调用父类的构造方法
+        6,重写从父类中继承的一般方法
+     -->
+     <script>
+         //构造函数
+        //  function Person(name,age) {
+        //      this.name = name;
+        //      this.age = age;
+        //  }
+        //  let person = new Person('lili',20);
+        //  console.log(person);
+
+        //定义一个人物的类
+        class Person {
+            //类的构造方法,原型上
+            constructor(name,age) {
+                this.name = name;
+                this.age = age;
+            }
+            //类的一般方法。原型上
+            showName() {
+                console.log('调用父类的方法')
+                console.log(this.name,this.age);
+            }
+        }
+        let person = new Person('lili',20);
+        console.log(person);
+        person.showName();
+
+        //定义一个子类
+        class StartPerson extends Person {
+            constructor(name,age,salary){
+                super(name,age);//调用父类的构造方法
+                this.salary = salary;
+            }
+            //重写父类的方法
+            showName() {
+                console.log('调用子类的方法');
+                console.log(this.name,this.age,this.salary);
+            }
+        }
+        let p1 = new StartPerson('hihi',49,100000);
+        console.log(p1);
+        p1.showName();
+     </script>
+</body>
+</html>

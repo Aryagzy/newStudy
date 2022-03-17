@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+    //   1.calss类是什么？
+    //   es6新提供的一种生成对象实例的写法，*es5构造函数的另一种写法(语法糖)
+    //   作用：无疑是让写法更清晰，更像面向对象的写法
+
+    //   2.es5构造函数
+    //   function Person(name, age) {
+    //     this.name = name;
+    //     this.age = age;
+    //   }
+    //   Person.prototype.say = function () {
+    //     console.log(this.name);
+    //   };
+    //   let person1 = new Person("张三", 50);
+    //   person1.say();
+    //   console.log(person1.constructor === Person.prototype.constructor); //true
+    //   console.log(typeof Person); //function
+    //   console.log(Person === Person.prototype.constructor); //true
+
+    //   //es6类class
+    //   class Person {
+    //     constructor(name,age) {
+    //       this.name = name
+    //       this.age = age
+    //     }
+    //     say() {
+    //       console.log(this.name);
+    //     }
+
+    //   }
+    //   let person2 = new Person('李四',40)
+    //   person2.say()
+    //   console.log(typeof Person);//fuction
+    //   console.log(person2.constructor === Person);//true
+
+    //   3.es6类的方法都是定义在类的prorotype属性上的
+    //   其实调用es6类的方法就是调用原型上的方法
+    //   class Car {
+    //     constructor(){}
+    //   }
+    //   //类似于
+    //   // Car.prototype = {
+    //   //   constructor(){}
+    //   // }
+
+    //   let bm = new Car()
+    //   console.log(bm.constructor === Car.prototype.constructor);//true
+
+    //   4.一次性在类中添加多个方法--使用Object.assgin()
+    //   Object.assign(Car.prototype,{toValue(){}})
+
+    //   5.constructor
+    //   是类默认的方法，只要通过new来生成，就会自动调用这个方法，即使你不写也存在
+    //   一个类必须有constructor方法
+    //   class Car {
+
+    //   } 
+    //   //相当于
+    //   class Car{
+    //     constructor(){
+
+    //     }
+    //   }
+
+    //   class Car {
+    //     constructor() {
+    //       console.log(this);
+    //       return Object.create(null)
+    //     }
+    //   }
+    //   let car = new Car()
+    //   console.log(car instanceof Car); //false
+
+    //   6.共享一个原型对象
+    //   class Person {
+    //     constructor(name) {
+    //       this.name = name
+    //     }
+    //   }
+    //   Person.prototype.get = function() {
+    //     console.log('我是父类');
+    //   }
+    //   let person1 = new Person('fufu')
+    //   let person2 = new Person('byby')
+    //   person1.get()
+    //   person2.get()
+
+    //  7.在类里面可以存值和取值 get和set方法
+    //    class Person {
+    //      //存值
+    //      set name(value) {
+    //        console.log(value);
+    //        name = value
+    //      }
+    //      //取值
+    //      get name() {
+    //        console.log(name);
+    //        return name
+    //      }
+
+    //    }
+    //    let person = new Person()
+    //    person.name = 'tony'
+    //    console.log(person.name);
+      
+    //   这里为什么变量前面要加类名，不加会报错 prop is not defined
+    //    class MyClass {
+    //      set prop(value) {
+    //        console.log(value);
+    //        MyClass.prop = value
+    //      }
+    //      get prop() {
+    //        console.log( MyClass.prop);
+    //        return  MyClass.prop
+    //      }
+    //    }
+    //    let init = new MyClass()
+    //    init.prop = '123'
+    //    console.log(init.prop);
+
+       
+
+
+
+
+
+
+    </script>
+  </body>
+</html>

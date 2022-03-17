@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 1.属性名的简写
+    // const a = 'a'
+    // const obj = {a};// const obj = {a:a}
+    // console.log(obj);
+
+    // function f(a,b) {
+    //   return{a,b} // return {a:a,b:b}
+    // }
+    // console.log(f(1,2));
+
+    // 2.方法的简写
+    // const o = {
+    //   say:function() {
+    //     return '我是郭小胖'
+    //   }
+    // }
+    // const o = {
+    //   say() {
+    //     return '我是郭胖胖'
+    //   }
+    // }
+    // console.log(o.say());
+   
+    // 3.对象中方法调用this指向
+    // const person = {
+    //   name:'郭郭',
+    //   say() {
+    //     console.log(`我的名字是${this.name}`);
+    //   }
+    // }
+    // person.say()//person调用了say这个方法,所以say里面的this指向了person name='郭郭'
+    // let res = person.say;
+    // res();//res调用了这个方法，say里面的this指向了res，但是res里面的name=''
+
+    // 4.在属性里面作文章
+    // let key = 'key1'
+    // let obj1 = {
+    //   [key]:true,
+    //   ['o'+'b']:13,
+    //   ['ok']:456
+    // }
+    // console.log(obj1);
+
+    // this关键字 super关键字 ---会指向当前对象的原型对象
+    // super关键字只能用在对象的方法中
+    // const proto = {
+    //   foo:'土豆'
+    // }
+    // const oProto = {
+    //   foo:'西红柿',
+    //   find() {
+    //     return super.foo
+    //   }
+    // }
+    // 假定proto是oProto的原型
+    // Object.setPrototypeOf(oProto,proto);//对象中有__proto__ 构造函数中有Prortype
+    // console.log(oProto.find());
+    // const oProto = {
+    //   foo:super.foo //super' keyword unexpected here
+    // }
+
+
+
+
+  </script>
+</body>
+</html>

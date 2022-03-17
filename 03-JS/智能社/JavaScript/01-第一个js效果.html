@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>第一个js效果</title>
+    <style>
+      #div1 {
+        width: 200px;
+        height: 100px;
+        background-color: aquamarine;
+        border: 1px solid #00ff00;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 功能：网页中有一个复选框checkbox 和 一个div
+               当鼠标经过复选框时，显示div
+               当鼠标离开复选框时，隐藏div
+     -->
+    <input
+      type="checkbox"
+      onmouseover="document.getElementById('div1').style.display='block';"
+      onmouseout="document.getElementById('div1').style.display='none';"
+    />
+    <div id="div1">为了您的信息安全.....请不要随便登录个人信息</div>
+  </body>
+</html>

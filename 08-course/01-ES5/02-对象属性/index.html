@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //内部对象
+       // Array Object Date Math Number String RegExp....
+       //Error EvalError TypeError
+       //Math: 不需要new实例化对象 Math.floor Math.ceil
+
+       //浏览器对象
+       //window document Screen History Location对象
+
+       //自定义对象
+       //判断图片是否加载完成
+    //       var img = new Image();
+    //       img.src="...";
+    //        img.onload = function() {
+    //          //图片加载完成要发生什么事...
+    //    }
+
+       //formData对象 提交form表单
+       var formData = new FormData();
+       formData.append('username','lucy');
+       formData.append('account','134545324');
+
+       //函数对象
+       //函数表达式
+       var fun = function() {} //函数对象
+       fun.a = 1;//添加属性
+      //    console.log(fun.a);
+       
+       //函数对象和普通对象有什么区别?
+       //函数对象和内部对象都有prototype原型,,普通对象没有
+       //__proto__是每个对象都有的属性
+        var obj1 = {};//普通对象
+
+       
+       //对象的读取 [] .
+       //[] 支持变量和数字作为Key
+       var onePerson = { //字面量创建对象
+           age:'20',
+           sleep:function() {
+               console.log(this.age);
+           },
+           1:'30'
+       }
+    //    //获取属性的两种方式
+    //   console.log( onePerson.age);//20
+    //   console.log(onePerson['age']);//20
+    //    //[]里面可以使用变量
+    //   var test = 'age';
+    //   console.log(onePerson[test]);//20
+    //  // onePerson.1; 不能使用点的方式获取数字变量
+    //  console.log(onePerson[1]);//30 属性命名可以用纯数字
+    //  onePerson.sleep(); 
+
+    //  var objn = {
+    //      1:'书本',
+    //      2:'文具',
+    //      3:'文具盒'
+    //  } //objn[index]
+
+     
+    
+     //设置对象 . []   Object.defineProperty
+     onePerson.weigth='50';
+     onePerson['height']= '1.80';
+     Object.defineProperty(onePerson,'name',{ //对象，属性名
+         value:'郭小胖', //属性值
+         writable:true,  //是否可写，标识当前属性值是否可以修改，true 默认是false
+         enumerable:true, //是否可枚举,用for in循环
+         configurable:true //是否可以被删除
+     }) 
+
+
+     //继承
+     var o2 = {x:1};
+     var p1 = Object.create(o2);
+     var p2 = Object.create(o2);
+     //p1 p2改变的是自己的x,改变不了原型的x
+
+     var mk1 = {};
+     var mk2 = Object.create(Object.prototype);
+     //以指定的对象为原型创建新的对象
+     var mk3 = Object.create({name:'Ana'},{ //原型对象 mk3.__proto__=这个对象
+             foo: {
+                 value:'12',
+             },
+             bar: {
+                 value: 'song',
+                 writable:true, //默认是false
+                 enumerable:true,
+                 configurable:true
+             }
+     })
+
+     //什么是实例属性，什么是继承属性(通过__proto__继承过来的)
+     //先在实例属性里面找，如果没有在继承属性里面找，一直向上追溯__proto__,直到最后找不到
+
+     //属性的删除
+     //delete只能删除实例属性(自有属性)，并不能删除继承属性
+    //  delete mk3.bar //true
+    //  delete mk3.foo //false
+    //  delete mk3.name //false
+
+
+    //hasOwnProperty
+    //判断一个属性是否是对象的实例属性（自有）属性，而不是继承属性
+    // mk3.hasOwnProperty('bar');//true
+    // mk3.hasOwnProperty('foo');//true
+    // mk3.hasOwnProperty('name');//false
+
+
+    //属性的遍历
+    //for in 遍历可枚举的属性  
+    for(var key in mk3) { //key的值不是固定的，key3 key2 
+        //console.log(mk3[key]);//song Ana     key是属性    mk3[key]是值
+        //实例属性和继承属性都可以获取到 
+        //如果只想获取到实例属性
+        // console.log(mk3.hasOwnPropert); //false
+        if(mk3.hasOwnProperty()) {
+            console.log(mk3[key]);
+        }
+    };
+    var keys = Object.keys(mk3); //可枚举的实例属性 key（自有属性） ['bar'] 返回的是数组
+    //console.log(keys);
+    var values = Object.values(mk3); // 可枚举的实例属性value(自有属性) ['song'] 数组
+    // console.log(values);
+
+
+
+  //序列化对象
+  //JSON.stringify  将JSON对象转成字符串
+  //JSON.parse      将JSON字符串转成JSON对象
+  //JSON.stringify JSON.parse 用来序列化和还原js对象
+  var man1 = {
+      name: 'sasa',
+      age:'20',
+      color:'red'
+  };
+  var personal = JSON.stringify(man1,['name','age'],'\t');//参数：对象，要转换的属性，转换的形式
+  //console.log(personal);
+  var personal2 = JSON.stringify(man1);
+  var man2 = JSON.parse(personal2);
+//   console.log(man2)
+//   console.log(man1==man2);//false
+
+
+  
+
+
+
+
+
+   
+
+
+
+
+   //*深拷贝浅拷贝
+
+
+
+
+      
+
+
+       
+
+
+
+
+
+    </script>
+</html>

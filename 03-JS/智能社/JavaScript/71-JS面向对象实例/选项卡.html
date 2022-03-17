@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #div1 input {
+        background-color: aliceblue;
+      }
+      #div1 input.active {
+        background-color: yellowgreen;
+      }
+      #div1 div {
+        width: 200px;
+        height: 200px;
+        background-color: aquamarine;
+        display: none;
+      }
+    </style>
+
+    <script>
+      window.onload = function () {
+        new TabSwitch("div1");
+      };
+      //变量---属性   函数----方法
+      function TabSwitch(id) {
+        
+        var _this = this;
+        var oDiv = document.getElementById(id);
+        this.aBtn = oDiv.getElementsByTagName("input");
+        this.aDiv = oDiv.getElementsByTagName("div");
+
+        for (var i = 0; i < this.aBtn.length; i++) {
+          this.aBtn[i].index = i;
+          this.aBtn[i].onclick = function () {
+            _this.fnClick(this);
+          };
+        }
+      }
+
+      TabSwitch.prototype.fnClick = function (oBtn) {
+        // alert(this);
+        //类的原型中添加方法
+        for (var i = 0; i < this.aBtn.length; i++) {
+          this.aBtn[i].className = "";
+          this.aDiv[i].style.display = "none";
+        }
+        oBtn.className = "active";
+        this.aDiv[oBtn.index].style.display = "block";
+      };
+    </script>
+  </head>
+  <body>
+    <div id="div1">
+      <input type="button" value="aaa" class="active" />
+      <input type="button" value="bbb" />
+      <input type="button" value="ccc" />
+
+      <div style="display: block">ivnifv</div>
+      <div>adfvdn</div>
+      <div>minbni</div>
+    </div>
+  </body>
+</html>

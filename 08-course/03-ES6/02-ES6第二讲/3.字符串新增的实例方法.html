@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //1.includes()返回布尔值 startWith() endsWitch()
+    let s = 'hello world'
+    console.log(s.includes('o')); //true
+    console.log(s.includes('p')); //false
+    console.log(s.startsWith('hello')); //true
+    console.log(s.endsWith('world'));//true
+
+    //2.支持第二个参数，表示开始搜索的位置，从0开始
+    console.log(s.startsWith('world',6));//true
+    console.log(s.startsWith('world',7));//false
+
+    //3.repeat()
+    console.log('a'.repeat(3));
+    // console.log('a'.repeat(0));
+    // console.log('a'.repeat(-1));
+    // console.log('a'.repeat(Infinity));
+    console.log('hello'.repeat(3));
+
+    //4.padStart padEnd 补全字符串的长度 padStart从前到后填充，padEnd从后向前填充
+    console.log('1'.padStart(5,'2345'));//总的长度，从开始的位置填充的东西
+    console.log('1'.padEnd(5,'2345'));
+
+    //5.提示字符串的长度
+    console.log('17'.padStart(10,'YYYY-MM-DD'));
+    console.log('12-17'.padStart(10,'YYYY-MM-DD'));
+
+   
+
+
+
+  </script>
+</body>
+</html>

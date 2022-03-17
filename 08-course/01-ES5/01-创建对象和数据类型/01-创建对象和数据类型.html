@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //基础类型(栈内存)
+        var str = '123';//String
+        var num = 1 ;//number
+        var bol = true;//boolean
+        var nul  = null;//undefined
+        var sym = Symbol('name');//Symbol,唯一的
+
+        //引用类型(堆内存)
+        var arr = []; //array
+        var obj = {};  //object
+        var fun = function() { //function
+
+        };
+        //栈中存放 person1 指针
+        var person1 = {
+            name: 'ggg'
+        };
+        person1.age= 20;
+        console.log(person1.age);
+
+
+        var person2 = {
+            name:'kkk'
+        };
+
+
+        
+        var a = 10;
+        var b = a;//在栈中开辟新的内存空间存放 b 10
+        a++;
+        console.log(a);//11
+        console.log(b);//10
+
+        
+        var  a1 = {};
+        var  b1 = a1;//a1 的指针指向b1 b1和a1指针相同，指向同一块堆内存空间
+        a1.name = 'fdinb';
+        console.log(a1); 
+        console.log(b1);
+        b1.age = 20;
+        console.log(a1);
+        console.log(b1);
+
+
+
+        //const表示常量
+        const kk = {//指针不变，可以向里面添加内容
+            name:'efi'
+        }
+        kk.color = 'red'; //不变指的是指针不变，里面的内容可以改变
+
+
+        const name1 = 'Ryan';//常量
+        var s1 = new String('123');
+        var s2 = String('123')
+        var s3 = '123';
+        console.log(s1===s2);
+        console.log(s1===s3);
+        var obj1 = new Object();
+        var obj2 = new Object();
+
+         //引用和基本类型的区别
+         //1.值是否可变：基本数据类型的值是不可变的，但是引用类型的值可以改变
+         //基本数据类型可以重新赋值
+         var str3 = 'abc';
+         str3[0] = 'A';
+         str3.toLocaleLowerCase();
+         console.log(str3);
+         str3 = 'nink';
+         
+         //引用数据类型的值可以改变，也可以实现重新赋值
+         var person1 = {
+             name1:'nihao'
+         };
+         person1.age = '20'; //改变值
+         //person1 = {}; //重新赋值
+
+
+         //2.比较，是否两个值相等
+         // 基本数据类型比较的是值，引用数据类型比较的是引用
+         var a =1 ;
+         var b = true;
+         console.log(a==b);//true 值
+         console.log(a===b);// false 值和类型
+
+         var p1 = {};
+         var p2 = {};
+         console.log(p1==p2); //false
+         console.log(p1===p2); //false
+
+         //3.值存放的位置
+         //基础数据类型存放在栈区，引用数据类型的值同时保存在栈和堆内存中的对象
+
+         //4.复制的情况
+         var m1 = 10;
+         var m2 = m1; //m1 和m2之间没有关系
+
+         var b1 = {}; //b1保存了一个空对象
+         var c1 = b1;//两个对象指向同一个指针
+
+
+         //引用(指针)传递，函数内部的更改会影响外部
+         //函数执行，返回一个引用数据类型的值，并且在函数外部被别人接受了
+         //那么当前函数形成得私有作用域就不在销毁了
+         var arr1 = [10,39,54];
+         function add() {
+             arr1[0] = 77;
+             console.log(arr1);
+         }
+         add();
+         console.log(arr1);//[77,39,54]数组是引用类型，值可以发生改变
+         
+        //关于值传递(函数内部的更改不会影响外部)
+          var num = 40; 
+          function add2(num) {
+               num = 88;
+              console.log(num); //88
+          }
+          add2();
+          console.log(num);//40
+
+
+          //声明变量类型
+          var car = new String();
+          var num = new Number();
+          var arr = new Array();
+          var obj = new Object();
+
+          //基础数据类型的检测 ：第一种  typeof
+          typeof 2;//number
+          typeof '123';//string
+          typeof {};//object
+          typeof [];//object 这里对象和数组都检测为object
+          typeof true;//boolean
+
+        //第二种数据类型检测方式
+        Object.prototype.toString.call({}); //object
+        Object.prototype.toString.call([]); //array
+        Object.prototype.toString.call('123'); //string
+        Object.prototype.toString.call(2); //number
+        Object.prototype.toString.call(true); //boolean
+        Object.prototype.toString.call(null); //undefined
+         //debugger; 断点
+
+
+
+
+         //对象的创建
+         //1.Object类型的构造函数
+         var obj = new Object();
+         var arr = new Array();
+         obj.name = '郭小胖';
+         obj.sleep = function () {
+             console.log(this.name + 'is sleeping');
+         };
+
+         //2.字面量的定义
+         var obj2 = {};
+         obj2.name = '胖胖'; //obj2.['name'] = '胖胖';
+        //  var obj3 = {
+        //      name : '胖',
+        //      age: '20',
+        //      action:function(){}
+        //  };
+        // //会有很多obj3 obj4
+        //  var obj4 = {
+        //      name : '胖',
+        //      age: '20',
+        //      action:function(){}
+        //  };
+
+         //3.工厂方式 ,在函数内部new了对象
+         function createObj(name,age){
+             var obj = new Object();
+             obj.name = name;
+             obj.age = age;
+             obj.action = function() {
+                 console.log(obj.name+obj.age);
+             }
+             return obj;
+         }
+         //这里就不需要new 了
+         var obj3 = createObj('wenwen','19');
+         var obj4 = createObj('ciaopang','20');
+
+         //4.构造函数
+         function Person(name,age) {
+             this.name = name;
+             this.age = age;
+         }
+         //原型上添加方法
+         Person.prototype.action = function () {
+             console.log(this.name+this.age);
+         }
+
+         var p1 = new Person('lucy','45');
+         var p2 = new Person('lili','48');
+
+         //5.Object.create
+         //p2.prototype指向p1
+         var p1 = {name:'dali'};
+         var p2 = Object.create(p1)
+         console.log(p2.__proto__===p1); //true
+         console.log(p2.name);//dali
+
+
+         //过程式开发---站在一个执行者的角度
+         //面向对象的开发模式--站在一个指挥者的角度，开发思想
+         //面向对象的特点
+         /*
+          * 1.封装
+          * 2.继承，提高代码的复用性
+          * 3.多态
+          */
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

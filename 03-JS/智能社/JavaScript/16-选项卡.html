@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #div1 .active {
+        background-color: aquamarine;
+      }
+      #div1 div {
+        width: 200px;
+        height: 200px;
+        background-color: burlywood;
+        border: 1px solid rgb(194, 142, 142);
+        display: none;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        var oDiv = document.getElementById("div1");
+        var aBtn = oDiv.getElementsByTagName("input");
+        var aDiv = oDiv.getElementsByTagName("div");
+
+        for (var i = 0; i < aBtn.length; i++) {
+          aBtn[i].index = i;
+          aBtn[i].onclick = function () {
+            //清空所有被选择的样式
+            for (var i = 0; i < aBtn.length; i++) {
+              aBtn[i].className = "";
+              aDiv[i].style.display = "none";
+            }
+            //重新再进行赋值
+            this.className = "active";
+            aDiv[this.index].style.display = "block";
+          };
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <div id="div1">
+      <input type="button" value="教育" class="active" />
+      <input type="button" value="培训" />
+      <input type="button" value="招生" />
+      <input type="button" value="出国" />
+      <div style="display: block">1111</div>
+      <div>222</div>
+      <div>333</div>
+      <div>444</div>
+    </div>
+  </body>
+</html>

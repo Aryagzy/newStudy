@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>验证封装的ajax</title>
+    <script src="main.js"></script>
+</head>
+<body>
+    <script>
+        xmlAjax({
+           method: 'get',
+           url:'http://localhost:3000/info',
+           data: {
+               name:'lucy',
+               age:90
+           },
+           done:function(res) {
+                 console.log(res);
+           }
+        });
+        
+        //先打印111 再打印222
+        //Promise  
+        var p1 = new Promise(function(resolve,reject){
+            setTimeout(function() {
+               resolve('111');
+            },3000);
+        }) 
+
+        var p2=  new Promise(function(resolve,reject){
+            setTimeout(function(){
+                resolve('222');
+            },1000);
+        })
+
+        p1.then(function(data) {
+            console.log(data);
+            return p2;
+        }).then(function(res){
+            console.log(res);
+        })
+    </script>
+</body>
+</html>

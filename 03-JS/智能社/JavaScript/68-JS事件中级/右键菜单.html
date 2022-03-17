@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        #div1 {
+            position: absolute;
+            width: 50px;
+            background-color: antiquewhite;
+            border: 1px solid black;
+            display: none;
+
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">
+        <ul>
+            <li>aa</li>
+            <li>bb</li>
+            <li>cc</li>
+            <li>dd</li>
+        </ul>
+    </div>
+
+    <script>
+        //右击鼠标，显示在鼠标出现的位置
+        document.oncontextmenu = function(ev) {
+            var oEvent = ev || event;
+            var oDiv = document.getElementById('div1');
+
+            oDiv.style.display = 'block';
+            //没有滚动条可以，有滚动条按照之前的写法
+            oDiv.style.left = oEvent.clientX + 'px';
+            oDiv.style.top = oEvent.clientY + 'px';
+
+            return false;//阻止默认事件
+               
+        }
+
+        document.onclick = function() {
+            var oDiv = document.getElementById('div1');
+            oDiv.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

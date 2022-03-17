@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // //继承
+      //   function Animal(category) {
+      //     this.category = category;
+      //     this.testr = ["cat", "bird"];
+      //     this.sleep = function () {
+      //       console.log("sleep it");
+      //     };
+      //   }
+
+      //   function DogA(category, name) {
+      //     Animal.call(this, category); //call里面参数用逗号传参
+      //     //Animal.apply(this,[category]);//apply里面参数用数组
+      //     this.name = name;
+      //     this.type = "dog";
+      //   }
+      //   //第一种方式,DogA.prototype发生了改变，Animal,prototype也会发生改变
+      //   //DogA.prototype = Animal.prototype;
+
+      //   //第二种方式  DoA.__proto__ == Animal.prototype
+      //   DogA.prototype = Object.create(Animal.prototype); //原型继承
+
+      //   //     var ob1 = { name: "innvg" };
+      //   //     var obj2 = Object.create(ob1); //obj2.__proto__== ob1.prototype
+
+      //   //   //第三种方式 浅拷贝
+      //   //   //   DogA.prototype = Object.assign({},Animal.prototype);
+      //   //   DogA.prototype.constructor = DogA;
+      //   //   DogA.prototype.testFun = function () {
+      //   //     console.log("test is fun!");
+      //   //   };
+
+      //   DogA.prototype.constuctor = DogA;
+      //   DogA.prototype.category = '1';//用第二种方式不会改变Aniaml，就是在DogA中添加了属性
+      //   var dog1 = new DogA("动物", "puppy");
+
+      //   //第一种方式 在DogA原型中加属性和方法测试是否Animal发生了改变(Animal发生了改变)
+      //   //var dog2 = new DogA('动物','bigger');
+      //   function DogB(category, name) {
+      //     Animal.call(this, category); //call里面参数用逗号传参
+      //     //Animal.apply(this,[category]);//apply里面参数用数组
+      //     this.name = name;
+      //     this.type = "dog";
+      //   }
+      //   DogB.prototype = Animal.prototype;
+      //   var dog2 = new DogB("动物", "pigger");
+
+      //   console.log(dog1);
+      //   console.log(dog2);
+
+      //多继承
+        function Animal1() {
+          this.testr = ["cat", "bird"];
+        }
+        Animal1.prototype.sleep = function () {
+          console.log("sleep now");
+        };
+
+        function Animal2(category, kind) {
+          this.category = category;
+          this.kind = kind;
+        }
+        Animal2.prototype.run = function () {
+          console.log("run quikly");
+        };
+        function Animal3(color) {
+          this.color = color;
+        }
+        Animal3.prototype.eat = function () {
+          console.log("eat little");
+        };
+
+        function DogB(category, name, kind,color) {
+          //this-b1
+          //改变Animal1 this指向，继承Aniaml1实例属性和方法，不能继承原型的属性和方法
+          Animal1.call(this);
+          Animal2.apply(this, [category, kind]);
+          Animal3.call(this, color);
+          //DogB实例属性
+          this.name = name;
+          this.type = "animal";
+        }
+        //DogB.prototype.__proto__ == Aniaml.prototype
+        //继承Animal原型属性和方法
+        // DogB.prototype = Object.create(Animal1.prototype);
+        //合并Aniaml1.prototype Animal2.prototype
+        // var obj2 = Object.assign({},Animal1.prototype,Animal2.prototype);
+        // //DogB.prototype.__proto__ == obj2
+        // DogB.prototype = Object.create(obj2);
+
+        //方式1
+        //多个合并
+        //var obj1 = Object.assign({},Animal1,prototype,Animal2.prototype,Animal3.prototype)
+
+        var obj2 = Object.assign({}, Animal1.prototype, Animal2.prototype);
+        var obj3 = Object.assign({}, obj2,Animal3.prototype);
+        DogB.prototype = Object.create(obj3);
+        DogB.prototype.constructor = DogB;
+
+      //   //方式2
+      //   DogB.prototype = Object.create(Animal1.prototype);
+      //   Object.assign(DogB.prototype, Animal2, prototype);
+
+        var b1 = new DogB("动物", "白白", "cat",'pink');
+        console.log(b1);
+        //console.log(b1.testr);
+        //console.log(b1.sleep());//不能继承原型上的方法
+
+      //ES5新增 forEach 遍历数组
+      //array.forEach(function(currentValue,index,arr))
+      //currentValue:数组当前的项的值，
+      //index:数组当前项的索引
+      //arr : 数组对象本身
+      var arr = [1, 2, 3, 4, 5];
+      arr.forEach(function (value, index, array) {
+        console.log(index + ":" + value + "from" + array);
+      });
+
+      //模板字符串  支持换行
+      const Person = {
+        name: "老毕",
+        hometown: "青岛",
+        hobby: "王者",
+        age: 23,
+      };
+      //正常字符串拼接
+      // const intro = 'My name is'+Person.name+
+      //    'old is'+Person.age+
+      //    'I am from'+Person.hometown+
+      //    'My hobby is'+Person.hobby;
+      //    console.log(intro);
+
+      //模板字符串拼接 ,支持自己换行
+      const intro2 = `My name is${Person.name}
+                           old is${Person.age + 1}
+                           I am a ${Person.age > 19 ? "adult" : "young man"}
+                           I am from${Person.hometown}
+                           My hobby is${Person.hobby};
+             `;
+
+      console.log(intro2);
+
+      //classList
+      //var a = document.getElementBy("DIV");
+      // 1.使用classList返回所选元素的类名，是一个数组，一个类名占一个长度(a.classList.length)。
+      // 2.a.classList.add("classname1") ; 添加一个类名
+      // 3.a.classList.remove("classname2") ; 去掉一个类名
+      // 4.a.classLis.toggle("classname3"); 引号中的类名，有就删除，没有就添加。
+      // 5.a.contains("classname4"); 判断一个类型是不是存在，返回true和false
+      // classList兼容性：除了IE，其他浏览器兼容性都可以
+
+      //target
+    </script>
+  </body>
+</html>

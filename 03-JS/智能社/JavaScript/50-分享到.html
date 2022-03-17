@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #div1 {
+        width: 150px;
+        height: 200px;
+        background-color: rgb(22, 122, 89);
+        position: absolute;
+        left: -150px;
+      }
+      #div1 span {
+        position: absolute;
+        width: 20px;
+        height: 60px;
+        line-height: 20px;
+        background-color: burlywood;
+        right: -20px;
+        top: 70px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="div1">
+      <span>分享</span>
+    </div>
+
+    <script>
+      var oDiv = document.getElementById("div1");
+      //var oSpan=oDiv.getElementsByTagName('span')[0];
+      var timer = null;
+      oDiv.onmouseover = function () {
+        startMove(0);  //鼠标移入    left=0
+      };
+      oDiv.onmouseout = function () {
+        startMove(-150); //鼠标移出  left=-150
+      };
+      function startMove(iTarget) {  //运动函数，参数是最后到达的地方
+        var oDiv = document.getElementById("div1");
+        clearInterval(timer);        //首先要清空定时器
+        timer = setInterval(function () {  //再设置定时器
+            var speed=0;
+            if(oDiv.offsetLeft>iTarget){ //用来判断速度方向
+                speed=-10;
+            }else{
+                speed=10;
+            }
+
+           if (oDiv.offsetLeft == iTarget) {  //用来判断什么时候停止运动
+            clearInterval(timer);              //停止运动，清空定时器，否则继续运动
+           } else {
+            oDiv.style.left = oDiv.offsetLeft + speed+ "px"; //运动改变left
+           }
+        },50);
+      }
+    </script>
+  </body>
+</html>

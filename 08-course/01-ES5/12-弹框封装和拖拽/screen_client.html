@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>clientX，screenY</title>
+    <style>
+    .test-dom {
+        position: absolute;
+        left:200px;
+        top:200px;
+        height:200px;
+        width:100px;
+        background: red;
+    }
+    
+    </style>
+</head>
+<body>
+    
+    <div id="testDom" class="test-dom"></div>
+    <script>
+        var testDom = document.getElementById('testDom');
+        testDom.onclick  = function(ev){
+
+            //clientX  clientY
+            // 点击位置距离当前body可视区域的x，y坐标
+            // 标准事件和IE事件都定义了这个属性
+           console.log('clientX',ev.clientX)
+           console.log('clientY',ev.clientY)
+
+            //screenX  screenY 
+            // 点击位置距离当前电脑屏幕的x，y坐标
+           console.log('screenX',ev.screenX)
+           console.log('screenY',ev.screenY)
+
+           //pageX, pageY
+            //非标准事件，但是也得到一些浏览器的支持， IE 不支持
+           console.log('pageX',ev.pageX)
+           console.log('pageY',ev.pageY)
+
+           //offsetX,offsetY 
+           //相对于带有定位的父盒子的x，y坐标
+           console.log('offsetX',ev.offsetX)
+           console.log('offsetY',ev.offsetY)
+
+            
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=\, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery
+    /jquery-1.4.min.js"></script> -->
+    <script
+      src="http://libs.baidu.com/jquery/1.9.0/jquery.js"
+      type="text/javascript"
+    ></script> 
+    <body>
+        <!-- Basics -->
+        <!-- <h1>iQuery Selector</h1>
+        <div class="test">jQuery Selector</div>
+         <div id="text">jQuery Selector</div> -->
+
+         <!-- Hierarchy -->
+         <!-- <div class="text"></div>
+         <div class="A">
+           <div class="list">
+             <div class="test" id="first">1</div>
+             <div class="even">2</div>
+             <div>3</div>
+             <div class="even">4</div>
+             <div>5</div>
+           </div>
+         </div> -->
+
+         <!-- Basic Filter -->
+         <!-- <ul>
+            <li>0</li>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+            <li>9</li>
+          </ul>
+          <li>Es</li> -->
+
+
+        <!-- Content Filter -->
+       <!-- <div>Hello World</div>
+      <div>Mahieedu
+          <span>is awsome</span>
+      </div>
+      <div style="height: 30px; width: 39px; background-color:blue;"></div> -->
+
+
+         <!-- Visibility Filters -->
+      <!-- <div style="display: none;">Hello</div>
+      <div>world</div> -->
+
+      <!-- Attribute Filters -->
+      <!-- <div data-id="Hello">Hello</div>
+      <div data-id="world">world</div> -->
+
+       <!-- Child Filter -->
+      <!-- <div><li>0</li></div>
+      
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+      </ul> -->
+
+      <!-- Forms -->
+      <!-- <input type="text"> -->
+
+      <!-- Form Filters -->
+      <input type="text" disabled value="hello">
+      <input type="text" value="world">
+
+    <button>CLick</button>
+    <script>
+        $(document).ready(function () {
+          $("button").on("click", function () {
+               //Basics
+             //   $('div').css('background','yellow');
+            //   $('#text').css('background','red');
+            //   $('.test').css('background','blue');
+            // 全部选中
+            // $('.test,#text,h1').css('background','pink');
+            //全部选中
+           // $('*').css('background','pink');
+
+           //Hierarchy
+            // $("div .test").css("background", "yellow"); //div下面的.test
+        //  $('.list > .test').css('background','red'); // A > B B是A的直接子元素
+        // $('#first + div').css('background','blue'); //只选中第一个兄弟元素
+         // $('#first ~ div').css('background','blue'); //会选中后面所有的兄弟元素
+
+         //Basic Filters
+          //  $('li:first').css('background','green'); 第一个li
+          //$('li:last').css('background','green'); 最后一个Li
+          //$('li:not(li:first)').css('background','green');//不是第一个li
+          // $('li:even').css('background','green'); //偶数li
+          //$('li:odd').css('background','green'); //奇数li
+         // $("li:eq(2)").css("background", "green"); //等于2
+          // $("li:gt(3)").css("background", "green");  //大于3
+        //   $("li:lt(3)").css("background", "green");  //小于3
+
+          
+             
+              //Content Filter
+             // $('div:contains(some)').css('background','blue'); 包含的内容相同
+             //$('div:empty').css('background','green');  空内容
+            // $('div:has(span)').css('background'','blue); //拥有sapn的div
+            // $('div:parent').css('background','pink');
+   
+            //Visibility Filters
+            //$('div:hidden').css('display','block');
+           // $('div:visible').css('display','none');
+
+
+             //Attribute  Filters
+           //$('div[data-id^="wo"]').css('border','1px solid red');
+           //$('div[data-id$="lo"]').css('border','1px solid red');
+           //$('div[data-id*="o"]').css('border','1px solid red');
+           //$('div[data-id="world"]').css('border','1px solid red');
+
+           //Child Filter
+           // $('li:first').css('background','green');
+          // $('li:first-child').css('background','green');
+           //$('li:last-child').css('background','green');
+           
+           // $('li:nth-child(even)').css('background','green'); 2n
+           
+           // $('li:nth-child(odd)').css('background','green'); 2n+1 3n+1 3n+2
+           
+             //$('li:only-child').css('background','green');
+
+             //Forms
+             //$(':text').css('background','red');
+             //$(':button').css('background','red');
+             //$(':input').css('background','red');
+
+
+             //Form Filters
+            // $(':input:disabled').css('background','yellow');
+            //$(':input:enabled').css('background','yellow');
+            //$(':input:checked').css('background','yellow');
+           // $(':selected').css('background','yellow');
+           
+           });
+        });
+      </script>
+  </body>
+</html>

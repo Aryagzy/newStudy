@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="result">郭小胖</div>
+    <button id="btn1">CLick 1</button>
+    <button id="btn2">Click 2</button>
+    <button id="btn3">CLick 3</button>
+    <button id="btn4">Click 4</button>
+    <button id="btn5">CLick 5</button>
+    <button id="btn6">Click 6</button>
+    <button id="btn7">Click 7</button>
+
+
+    <div class="block"></div>
+    <div class="block"></div>
+    <div class="block"></div>
+    <div class="block"></div>
+    <div class="block"></div>
+    <div class="block"></div>
+    <div class="block"></div>
+    <script>
+      $(function () {
+        //参数 ： speed(number/string-normal slow fast ) callback(回调函数)
+        //1.基本动画 show hide toggle
+        // $('#btn1').on('click',function() {
+        //     $('.result').hide(1000,function() {
+        //         $('.result').show('fast');
+        //     });
+        // })
+        // $('#btn2').on('click',function() {
+        //     $('.result').show(2000);
+        // });
+        // $('#btn3').on('click',function() {
+        //     $('.result').toggle('normal');
+        // })
+        /*
+            基本动画     show hide toggle
+                         show( speed, [callback])
+                         hide( speed, [callback])
+                         toggle( speed, [callback])
+                         Speed: //number: 毫秒
+                        ("solw", "normal", or "fast")
+            */
+
+        //2.预制动画 slideDown slideUp slideToggle fadeIn fadeOut fadeTo
+        // $("#btn1").on("click", function () {
+        //   $(".result").slideUp("1000", function () {
+        //     $(".result").slideDown("fast");
+        //   });
+        // });
+        // $("#btn2").on("click", function () {
+        //   $(".result").slideToggle("2000");
+        // });
+        // $("#btn3").on("click", function () {
+        //   $(".result").fadeOut("normal", function () {
+        //     $(".result").fadeIn("slow");
+        //   });
+        // });
+        // $("#btn4").on("click", function () {
+        //   //参数： speed opacity
+        //   $(".result").fadeTo("normal", 0.5);
+        // });
+        /*
+            预制动画
+                slideDown(speed, [callback])
+                slideUp(speed, [callback])
+                slideToggle(speed, [callback])
+                fadeIn( speed, [callback] )
+                fadeOut( speed, [callback] )
+                fadeTo(speed, opacity, [callback])
+
+        */
+
+        //3.自定义动画
+        /*
+            自定义动画
+            animate( params, [duration], [easing], [callback])
+            animate( params, options)
+            stop([clearQueue], [gotoEnd])
+        */
+
+        $('#btn5').click(function() {
+            $('.result').animate({
+                // width: '400px',
+                // height: '600px',
+                // fontSize: '10em',
+                // borderWidth:10
+
+                width: '+=10px',
+                height: '-=10px'
+            },1000,'linear'); //swing(先快后慢再快) linear(匀速)
+        })
+        $('#btn6').click(function() {
+            $('.block:first').animate({
+                left:100
+            },{
+                duration:1000,
+                step:function(now,fx) {
+                    $('.block:gt(0)').css('left',now);
+                }
+            },
+            )
+        } 
+
+      )
+
+      $('#btn7').click(function() {
+          $('.result').animate({
+              width:400,
+              height:500,
+              fontSize:'10em',
+              borderWidth:10
+          },10000,'swing').hide(5000); //2秒停止，5秒隐藏
+          setTimeout(function() {
+              $('.result').stop(true,true);//第一个true[clearQueue],第二个true [gotoEnd]
+          },2000); //2秒以后停止
+      })
+
+
+
+      });
+    </script>
+  </body>
+</html>

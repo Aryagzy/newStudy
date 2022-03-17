@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input {
+            width: 494px;
+            height: 50px;
+            border: 2px solid dodgerblue;
+            color: #999999;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" value="手机" name="">
+    <script>
+        //要求：当鼠标点击文本框时，里面的默认文字隐藏，当鼠标离开文本框时，里面的文字显示
+        //1获取元素
+        var input = document.querySelector('input');
+        //2注册事件 处理程序
+        //(1)自己的方法：error****这样写鼠标必须每次都点击才能进行显示和隐藏******
+        // var flag=0;
+        // input.onclick=function() {
+        //    if(flag==0){
+        //     this.value='';
+        //     flag=1;
+        //    }else{
+        //      this.value='手机';
+        //      flag=0;
+        //    }
+        // }
+        //(2)首先表单需要两个新事件，获得焦点onfocus 失去焦点onblur
+        //如果获得焦点，判断表单里面的内容是否为默认字，如果是默认字，就清空表单元素
+        //如果失去焦点，判断表单内容是否为空，如果为空，则将表单内容改为默认文字
+        input.onfocus = function () {
+            if (this.value === '手机') {
+                this.value = '';
+            }
+            this.style.color = '#333333';
+
+        }
+        input.onblur = function () {
+            if (this.value === '') {//value也可以表示文本框中的内容
+                this.value = '手机';
+            }
+            this.style.color = '#999999';
+        }
+    </script>
+</body>
+
+</html>

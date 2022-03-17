@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        thead tr {
+            height: 30px;
+            width: 200px;
+            background-color: aqua;
+            /* text-align: center; */
+          
+        }
+        thead td{
+            border-bottom: 1px solid dimgrey;
+            font-size: 14px;
+            font-weight: normal;
+            padding: 10px;
+            text-align: center;
+        }
+
+        tbody tr {
+          
+            height: 30px;
+            width: 200px;
+            border: 0;
+           
+            /* padding: 5px; */
+        }
+
+        tbody td {
+            border-bottom: 1px solid dimgrey;
+            font-size: 12px;
+            color: dodgerblue;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+
+</head>
+
+<body>
+    <table border="0" cellspacing="0"  align="center">
+        <thead>
+            <tr>
+                <td>代码</td>
+                <td>名称</td>
+                <td>最新公布净值</td>
+                <td>累计净值</td>
+                <td>单位净值</td>
+            </tr>
+
+        </thead>
+        <tbody>
+
+            <tr>
+                <td>003526</td>
+                <td>定期开放券</td>
+                <td>1.075</td>
+                <td>1.079</td>
+                <td>1.074</td>
+            </tr>
+            <tr>
+                <td>003526</td>
+                <td>定期开放券</td>
+                <td>1.075</td>
+                <td>1.079</td>
+                <td>1.074</td>
+            </tr>
+            <tr>
+                <td>003526</td>
+                <td>定期开放券</td>
+                <td>1.075</td>
+                <td>1.079</td>
+                <td>1.074</td>
+            </tr>
+            <tr>
+                <td>003526</td>
+                <td>定期开放券</td>
+                <td>1.075</td>
+                <td>1.079</td>
+                <td>1.074</td>
+            </tr>
+            <tr>
+                <td>003526</td>
+                <td>定期开放券</td>
+                <td>1.075</td>
+                <td>1.079</td>
+                <td>1.074</td>
+            </tr>
+
+
+        </tbody>
+    </table>
+    <script>
+        //要求：当鼠标经过一行时候，背景颜色变为蓝色（这一行的背景颜色）
+        //案例分析
+        //(1)用到新的鼠标事件  鼠标经过onmouseover  鼠标离开onmouseout
+        //(2)核心思路：鼠标经过tr行，当前的行变背景颜色，鼠标离开去掉当前的背景颜色
+        //(3)注意：第一行（thead里面的行），不需要变换颜色，因此我们获取的是tbody里面的tr
+        //1.获取元素
+        var trs = document.querySelector('tbody').querySelectorAll('tr');
+        //console.log(trs);
+        //循环遍历每一行
+        for (var i = 0; i < trs.length; i++) {
+            trs[i].onmouseover=function(){
+                this.style.backgroundColor='aqua';
+
+            }
+            trs[i].onmouseout=function(){
+                this.style.backgroundColor='';
+            }
+
+        }
+    </script>
+</body>
+
+</html>

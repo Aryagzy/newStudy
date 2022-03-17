@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>10_过渡&动画</title>
+    <style>
+      /* 显示隐藏的过滤效果*/
+      .xxx-enter-active,
+      .xxx-leave-active {
+        transition: opacity 5s;
+      }
+      /* 隐藏时的样式 */
+      .xxx-enter,
+      .xxx-leave-to {
+        opacity: 0;
+      }
+
+      /* 显示的过滤效果 */
+      .move-enter-active {
+        transition: all 0.3s ease;
+      }
+      /* 隐藏的过滤效果 */
+      .move-leave-active {
+        transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+      }
+      /* 隐藏时候的样式 */
+      .move-enter,
+      .move-leave-to {
+        opacity: 0;
+        transform: translateX(60px);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 
+        1.vue动画的理解
+         操作的css的transition或animation
+         vue会给目标元素添加或者移除特定的class
+        2.基本过渡动画的编码
+         1)在目标元素外面包裹<transition name="xxxx">
+         2)定义class样式
+           1>.指定过渡样式：transition
+           2>.指定隐藏时的样式：opacity/其他
+        3.过渡的类名
+         xxx-enter-active:指定显示的transition
+         xxx-leave-active: 指定隐藏的trasition
+         xxx-enter:指定隐藏时的样式
+     -->
+
+    <div id="test1">
+      <button @click="isShow=!isShow">toggle</button>
+      <transition name="xxx">
+        <p v-show="isShow">hello</p>
+      </transition>
+    </div>
+
+    <div id="test2">
+      <button @click="isShow=!isShow">toggle</button>
+      <transition name="move">
+        <p v-show="isShow">hello</p>
+      </transition>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      new Vue({
+        el: "#test1",
+        data() {
+          return {
+            isShow: true,
+          };
+        },
+      });
+
+      new Vue({
+        el: "#test2",
+        data() {
+          return {
+            isShow: true,
+          };
+        },
+      });
+    </script>
+  </body>
+</html>

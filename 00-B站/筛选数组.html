@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="gbk">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //要求：将数组【2,0,6,1,77,0.52,0,25,7,】中大于等于10的元素选出来，放入新数组
+        //方法1
+        //1定义一个原数组
+        var arr = [2,0,6,1,77,0,52,0,25,7];
+        //2遍历这个数组
+        //3定义一个新的数组
+        var arr1 =[];
+        var j = 0;
+        for(var i = 0;i<arr.length;i++){
+            if(arr[i]>=10){//4找出大于等于10的元素出来
+               //5放入新的数组
+                arr1[j]=arr[i];//新增索引号应该从0开始，依次递增
+                j++;
+            
+            }
+        }
+        console.log(arr1);
+        //方法2
+        //1定义一个原数组
+        var arr = [2,0,6,1,77,0,52,0,25,7];
+        //2遍历这个数组
+        //3定义一个新的数组
+        var  newArr =[];
+        //刚开始 newArr.length的值为0
+        //var j = 0;
+        for(var i = 0;i<arr.length;i++){
+            if(arr[i]>=10){//4找出大于等于10的元素出来
+               //5放入新的数组
+               //刚开始数组长度为0，所以下标为0，然后存储一个元素之后，长度加1，此时再存入元素时，此时下标为1，然后数组中有两个元素
+
+                newArr[newArr.length]=arr[i];//新增索引号应该从0开始，依次递增
+                //j++;
+                
+            }
+        }
+        console.log(newArr);
+
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

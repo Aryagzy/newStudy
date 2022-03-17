@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>路由的基本用法</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="./vue-router.js"></script>
+    <style lang="">
+      /* .router-link-active {
+        font-size: 20px;
+        color: lightsalmon;
+        text-decoration: none;
+      } */
+      .active {
+        font-size: 20px;
+        color: lightsalmon;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- a标签 -->
+      <!-- <router-link to="/home" tag="li">Home组件</router-link> -->
+      <router-link to="/home">Home组件</router-link>
+      <router-link to="/news">News组件</router-link>
+      <hr />
+      <!-- 组件显示 -->
+      <router-view></router-view>
+    </div>
+    <script>
+      //1.定义组件
+      var Home = {
+        template: "<h3>Home</h3>",
+      };
+      var News = {
+        template: "<h3>News</h3>",
+      };
+      //2.配置路由
+      var routesAll = [
+        { path: "/home", component: Home },
+        { path: "/news", component: News },
+      ];
+      //3.创建路由实例
+      var router = new VueRouter({
+        routes: routesAll,
+        mode: "hash", //history
+        // 当前所处的链接的class
+        linkActiveClass: "active",
+      });
+      //4.将router挂载到路由实例上
+      var vm = new Vue({
+        el: "#app",
+        //router:router
+        router, //注入路由
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <title>父组件访问子组件数据，子组件访问父组件的数据</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 父组件通过props向下传递数据给子组件 -->
+      <!-- 通过这种方式子组件中就可使用父组件中的数据了 -->
+      <!-- 这样啊我就能使用父组件中的数据了 -->
+      <my-world
+        :msg="msg"
+        :name="name"
+        :age="age"
+        :user="user"
+        v-on:e-world="getData"
+      ></my-world>
+      <!-- 想要在父组件中使用子组件中的数据 -->
+      <h2>访问到子组件的数据：{{nameK}}</h2>
+    </div>
+
+    <template id="world">
+      <!-- 子组件的template -->
+      <div>
+        <h3>我是world子组件</h3>
+        <!-- 子组件访问自己的数据 -->
+        <p>访问我自己的数据sex:{{sex}}</p>
+        <!-- 子组件访问父组件中的数据， -->
+        <p>访问父组件中的数据 {{msg}}---{{age}}--{{name}}----{{user}}</p>
+        <button @click="send">将子组件中的数据向上传递给父组件</button>
+      </div>
+    </template>
+    <script>
+      var childWorld = {
+        // props: ["msg", "name", "age", "user"],
+        //props也可以是对象的形式，允许配置高级设置，类型判断，数据检测，设置默认值
+        props: {
+          msg: String,
+          name: {
+            type: String,
+            required: true,
+          },
+          age: {
+            type: Number,
+            default: 100, // 带有默认值的数字
+            // 自定义验证函数
+            validator: function (value) {
+              return value > 0;
+            },
+          },
+          user: {
+            type: Object, //这里是对象
+            // default: {
+            //   id: 100,
+            //   username: "秋香",
+            // },
+            //对象或者数组的默认值必须使用函数进行返回
+            default: function () {
+              return {
+                id: 100,
+                username: "秋香",
+              };
+            },
+          },
+        },
+        data() {
+          return {
+            //子组件中的数据
+            sex: "male",
+            height: "190",
+            testName: "二胖",
+          };
+        },
+        template: "#world",
+        methods: {
+          send() {
+            //发布数据给父组件
+            //this.$emit(自定义事件，数据)
+            //发布订阅模式
+            this.$emit("e-world", {
+              testName: this.testName,
+              sex: this.sex,
+            });
+          },
+        },
+      };
+
+      let vm = new Vue({
+        //vm当作父组件
+        el: "#app",
+        data() {
+          //父组件中的数据
+          return {
+            msg: "郭",
+            name: "kimi",
+            age: 23,
+            user: { id: 989, username: "唐薄荷" },
+            height: "",
+            nameK: {},
+          };
+        },
+        components: {
+          //子组件
+          "my-world": childWorld,
+        },
+        methods: {
+          getData(data) {
+            this.nameK = data;
+            console.log("得到了子组件中的数据");
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        button {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px greenyellow dashed;
+            color: darkslategray;
+            background: pink;
+            font-size: medium;
+        }
+    </style>
+</head>
+<body>
+    <!-- 模仿洗衣机功能 -->
+    <div id="btnGroup">
+        <button type="button" tag="beginBtn">开始洗衣服</button>
+        <button type="button" tag="checkBtn">查看洗完没</button>
+        <button type="button" tag="stopBtn">停止洗衣服</button>
+    </div>
+
+    <script>
+        //定义一个洗衣机
+        //封装功能
+        var washMachine = {
+            //定义洗衣机是否在工作
+            //定义洗衣机状态   0-未开始 1-进行中 2-已经完成
+            status:0,
+
+            beginAction: function(obj) {//obj可以传入一些可以自己设定的变量
+                this.status = 1; //正在使用中
+                //定义初始状态
+                var objInit = {
+                    el:'#test',
+                    clothes:10, //衣物
+                    powder:10,//洗的衣物
+                    Itime:1000 //洗衣物的时间
+                }
+                //合并对象
+                var lastObj = Object.assign({},objInit,obj); 
+                console.log('正在洗衣服');
+           
+
+                //定时器，衣服在指定的时间内洗完
+                //关于this指向的改变三种方式
+                //1.定义变量that
+                // var that = this;
+                // setTimeout(function(){
+                //     that.status=2; //2表示完成了
+                // },lastObj.Itime);
+
+                //2.增加bind(this)
+                setTimeout(function() {
+                    this.status=2; //已经洗完
+
+                }.bind(this),lastObj.Itime);
+                // //3.使用箭头函数
+                // setTimeout(()=>{
+                //     this.status =2;
+                // },lastObj.Itime);
+
+            },
+
+           
+            ViewResult:function() {
+                var temp = 1;
+                this.timer = setInterval(function() {
+                    if(this.status == 1) {
+                        console.log('洗衣机正在工作');
+                        ++temp;
+                        console.log('截止到现在工作时长'+temp);
+                    }else if(this.status == 2) {
+                        console.log('已经完成洗衣服');
+                        clearInterval(this.timer); //清除当前的定时器
+                    }
+                }.bind(this),1000); //改变this的指向1秒钟执行一次直到结束
+
+            },
+
+            
+            stopWashing:function() {
+                if(this.timer) {
+                    clearInterval(this.timer);  
+                }
+            }
+        }
+
+        //事件委托，就是利用冒泡原理 ，把事件加到父元素上，触发执行结果
+        document.getElementById('btnGroup').addEventListener('click',function(ev) {
+            var target = ev.target; //指的就是div这个盒子
+            var tag = target.getAttribute('tag'); //获取里面的tag属性
+            switch(tag) {
+                case 'beginBtn' : 
+                  washMachine.beginAction({
+                      Itime:10000
+                  });
+                  break;
+                case 'checkBtn' : 
+                    washMachine.ViewResult();
+                    break;
+                case 'stopBtn': 
+                 washMachine.stopWashing()
+                 break;
+            }
+        },false)//false：冒泡的行为 true:捕获的行为
+    </script>
+</body>
+</html>

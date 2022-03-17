@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 1.新提出来的一个数据结构，Symbol基本数据类型
+    // Symbol表示独一无二 第七种数据类型
+    // 作用？
+    
+    // 2.对象的属性是字符串，如果属性是对象的话，隐式调用toString转化成字符串
+    // let a = {a:1};
+    // let b = {b:2};
+    // let c = {}
+    // c[a] = 3;//[object object]
+    // c[b] = 4;//[object object]
+    // console.log(c);
+    // 怎么解决
+    // let s = Symbol();
+    // console.log(typeof s); //第七种一般数据类型
+    // let n = Number();
+    // console.log(typeof n);
+    
+    // let s1 = Symbol('a');
+    // let s2 = Symbol('b')
+    // console.log(s1);
+    // console.log(s2);
+    // console.log(s1.toString());
+    // console.log(s2.toString());
+    //  let s3 = Symbol({})
+    //  console.log(s3);//Symbol([object Object])
+     
+    //  3。传入的只是值的描述，即使传入的值是一样的，返回的值也是不相等的
+    //  let s4 = Symbol()
+    //  let s5 = Symbol()
+    //  console.log(s4 === s5);//false
+    //  let s6 = Symbol('a')
+    //  let s7 = Symbol('a')
+    //  console.log(s6 === s7); //fasle
+    
+    //  4.不能与其他类型的值进行计算 ---直接报错
+    //  let sym = Symbol('my Symbol')
+    //  'my symbol is' + sym;
+  
+    // 5.Symbol可以转为布尔值 但是不能转化成数值
+    // let symb = Symbol();
+    // console.log(Boolean(symb));//true
+    // console.log(!Boolean(symb));//false
+
+    // 6.Object.getOwnPropertySymbols() 返回的是一个数组，里面的值是所有用作属性名Symbol的值
+    // let obj = {}
+    // let symb1 = Symbol('a')
+    // let symb2 = Symbol('b')
+    // obj[symb1] = 'hello'
+    // obj[symb2] = 'world'
+    // const arr = Object.getOwnPropertySymbols(obj);
+    // console.log(arr);//[Symbol(a) Symbol(b)]
+
+    // 7.js没有枚举类型(ts有枚举类型) 用到枚举案例的时候可以用到Symbol类型
+    // const CODE_ONE = 1;//汽车的颜色 红色
+    // const CODE_TwO = 1; //蓝色
+    // const CODE_THREE= 3;//绿色
+    //  //Symbol表示独一无二，没有重复的，枚举类型不会重复
+    // const CODE_ONE = Symbol('a');//汽车的颜色 红色
+    // const CODE_TwO =Symbol('b'); //蓝色
+    // const CODE_THREE= Symbol('b');//绿色
+
+    // 8.实现私有属性
+    // const private = Symbol('private')
+    // const obj = {
+    //   //es5私有属性的写法
+    //   _name: '张三',
+    //   [private]:'私有的属性'
+
+    // }
+    // console.log(Object.keys(obj));// 仍然能够访问到name
+    // console.log(Object.getOwnPropertySymbols(obj)); //能够访问到private
+    // //到底怎么才能实现私有的属性呢？ class
+
+    
+
+
+
+
+
+
+
+  </script>
+</body>
+</html>

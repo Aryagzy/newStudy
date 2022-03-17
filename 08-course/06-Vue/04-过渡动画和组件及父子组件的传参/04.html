@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>定义组件的方式</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <hello></hello>
+      <my-world></my-world>
+    </div>
+    <script>
+      //方式1：先创建组件构造器，然后由组件构造器创建组件
+      //1.Vue.extend创建组件构造器
+      var mycom = Vue.extend({
+        template: "<h3> 你好 我的世界 </h3>",
+      });
+      //2.Vue.component(组件名，组件构造器)
+      Vue.component('hello',mycom)
+
+      //方式2：直接创建组件（推荐）
+      Vue.component('my-world',{
+        template: "<h3> hello my world </h3>",
+
+      })
+      let vm = new Vue({
+        //这里的vm也是一个组件，称为根组件Root
+        el: "#app",
+        data() {
+          return {
+            flag: false,
+          };
+        },
+      });
+    </script>
+  </body>
+</html>

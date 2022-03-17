@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function A (){
+            this.abc = 12; //属性
+        }
+        A.prototype.show = function () {
+            alert(this.abc);//方法
+        }
+
+        //继承
+        function B() {
+            //this---new B()
+            A.call(this);
+        }
+        
+        //B.prototype = A.prototype;
+        for(var i in A.prototype){
+            B.prototype[i] = A.prototype[i];
+        }
+        B.prototype.fn = function() {
+            alert('你好');
+        }
+
+        var objB = new B();
+        var objA = new A();
+        objA.fn(); //为什么给B添加的方法，A也可以调用----内存指向
+        // alert(obj.abc);
+    </script>
+</body>
+</html>

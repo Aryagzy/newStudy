@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        async函数（源自ES2017)
+        概念：真正意义上去解决异步回调的问题，同步流程表达异步操作
+        本质：Generator的语法糖
+        语法：
+          async function foo() {
+              await 异步操作;
+              await 异步操作;
+          }
+        特点：
+          1.不需要像Generator去调用next方法，遇到await等待，当前的异步操作完成就往下执行
+          2.返回的总是promise对象，可以用then方法进行下一步操作
+          3.asyc取代Generator函数的星号* await取代Generator的yield
+          4.语义上更明确，使用简单，暂时没有任何副作用和不良反应
+     -->
+     <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js" type="text/javascript"></script>
+     <script>
+         //async基本使用
+        //  async function foo() {
+        //      return new Promise(resolve => {
+
+        //         setTimeout(resolve,2000);
+                
+        //     })
+        //  }
+
+        //  async function test() {
+        //      console.log('开始执行',new Date().toTimeString());
+        //      await foo();
+        //      console.log('执行完毕',new Date().toTimeString());
+        //  }
+          
+        //  test();
+        //async里面await返回值
+        // function test2 () {
+        //     return '1111';
+        // }
+        // async function asyncPrint() {
+        // //    let result =  await test2();
+        // //    console.log(result);//1111
+
+        // let result = await Promise.resolve('success');
+        // console.log(result);
+        // result = await Promise.reject('fail');
+        // console.log(result);
+        // }
+        // asyncPrint();
+
+
+        //获取新闻内容
+        async function getNews(url) {
+            return new Promise ((resolve,reject) => {
+                $.ajax({
+                    method: 'GET',
+                    url,//url:url;
+                    success: data => resolve(data),
+                    error:error => resolve(false)//第一次传入地址错误时，也能正常返回一个值
+                })
+            })
+        }
+
+        async function sendXML() {
+           let result =  await getNews('http://localhost:3000/news?id=7');
+           //console.log(result); //返回的promise.resolve里面的data 新闻内容
+           if(!result){
+               alert('暂时没有新闻内容推送');
+               return;//终止执行
+           }
+
+          result = await getNews('http://localhost:3000' +result.commentURL);
+          // console.log(result);评论内容
+
+
+        }
+        sendXML();
+
+     </script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,td,th,tr {
+            border: 1px solid red; 
+            border-collapse: collapse;
+            margin: 50px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="app">
+        <!-- 添加品牌的表单区 -->
+        <!-- 点击添加，执行添加事件，阻止表单自动刷新的默认行为 -->
+          <form @submit.prevent = 'add'>
+              <div>品牌名称</div>
+              <input type="text" placeholder="请输入品牌名称" v-model.trim = "brand">
+              <button type="submit">添加</button>
+          </form>
+          <!-- 品牌列表区 -->
+          <table>
+              <thead>
+                  <th>ID</th>
+                  <th>Name</th>
+                   <th>Status</th>
+                  <th>Date</th>
+                  <th>Delete</th>
+              </thead>
+              <tbody>
+                  <tr v-for="item in list" :key="item.id">
+                      <td>{{ item.id }}</td>
+                      <td>{{ item.name }}</td>
+                      <td>
+                          <input type="checkbox"  :id="'ck'+item.id" v-model="item.status">
+                          <label :for="'ck'+item.id" v-if="item.status">Start</label>
+                          <label :for="'ck'+item.id" v-else="item.status">Stop</label>
+                      </td>
+                      <!-- 使用过滤器格式化时间改写成 YYYY-MM-DD  HH:mm:ss -->
+                      <td>{{ item.time | dataFormat }}</td>
+                      <td>
+                          <!-- 点击delete删除,传进参数是item.id -->
+                          <a href="javascript:;" @click="remove(item.id)">delete</a>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+    </div>
+
+    <!-- 1.导入Vue的库文件，在window全局中就有了Vue这个构造函数 -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/dayjs/1.4.1/dayjs.min.js"></script>
+    <script>
+        //声明格式化时间的全局过滤器
+        Vue.filter('dataFormat',function(time) {
+            //参数time就是传进来的item.time
+           /*  处理过程：
+                 1.把time进行格式化处理，得到YYYY-MM-DD HH:mm:ss 
+                 2.把格式化的结果返回出去
+            */
+           //day.js库函数
+           //直接调用day.js得到的是当前的时间
+           //dayjs(给定的日期时间)  得到的就是指定的日期
+           //format里面传的什么格式的值，time就会被解析成什么值
+           const dtStr = dayjs(time).format('YYYY-MM-DD HH:mm:ss')
+           return dtStr;
+
+
+
+        })
+
+        //2.创建Vue的实例对象
+        const vm = new Vue({
+            //el属性是固定的写法，表示当前的vm实例要控制页面上的那个区域，接受的值是一个选择器
+            el: '#app',
+            //data对象就是要渲染到页面上的数据
+            data: {
+                //用户输入的品牌名称
+                brand:'',
+                //nextId是下一个可用的id
+                nextId:4,
+                //品牌的列表数据
+                list: [
+                    { id: 1, name: '宝马', status: true, time: new Date() },
+                    { id: 2, name: '奔驰', status: false, time: new Date() },
+                    { id: 3, name: '奥迪', status: true, time: new Date() },
+                ]
+
+            },
+            methods: {
+                //点击链接，删除对应的品牌信息
+                remove(id) {
+                   this.list = this.list.filter(item => item.id !== id);
+                },
+                //阻止表单的默认提交行为之后，触发add事件
+                add() {
+                    //如果判断到brand的值为空的字符串，则return出去
+                    if(this.brand === '') {
+                        alert('必须填写品牌的名称！')
+                        return;
+                    }
+                    // console.log(this.brand);
+
+                    //如果没有被return出去，应该执行添加的逻辑
+                    //1.先把要添加的对象整理出来
+                    const obj = {
+                        id: this.nextId,
+                        name: this.brand,
+                        status: true,
+                        time: new Date(),
+                    }
+
+                    //2.往this.list数组中push obj
+                    this.list.push(obj)
+
+                    //3.清空this.brand,让this,nextId自增+1
+                    this.brand = ''
+                    this.nextId++
+                    
+                }
+                
+            },
+
+        })
+    </script>
+
+</body>
+</html>

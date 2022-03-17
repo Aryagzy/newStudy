@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>箭头函数不适用</title>
+</head>
+<body>
+    <div id="div">点我</div>
+    <script>
+        // 添加点击事件，对象不对
+        let div = document.getElementById('div');
+        div.addEventListener('click', function () {
+            this.innerHTML = '我被点击了，普通函数';    // this  div
+        });
+        div.addEventListener('click', () => {
+            this.innerHTML = '我被点击了，箭头函数';    // this  window
+        });
+
+        // 对象上定义函数
+        let obj1 = {
+            name: '测试',
+            printName: () => {
+                console.log(`printName ${this.name}`);   //undefined
+            },
+            printName1: function () {
+                console.log(`printName1  ${this.name}`);  // 测试
+            }
+        }
+        obj1.printName();
+        obj1.printName1();
+        
+        // 原型
+        function Person(name) {
+            this.name = name;
+        }
+        Person.prototype.sayName = () => {
+            console.log(`sayName ${this.name}`);
+        }
+        Person.prototype.sayName1 = function () {
+            console.log(`sayName1 ${this.name}`);   // 有输出
+        }
+
+        let person = new Person('人');
+        person.sayName();
+        person.sayName1();
+    </script>
+</body>
+</html>

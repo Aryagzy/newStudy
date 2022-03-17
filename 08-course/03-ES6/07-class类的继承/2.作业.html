@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>作业</title>
+  </head>
+  <body>
+    <script>
+    //   1. 严格模式下 this 指向的是undefined
+    //      "use strict";
+    //     function f1() {
+    //       console.log(this); //undefined
+    //     }
+    //     f1();
+
+    //   2.非严格模式
+    //     function f1() {
+    //       console.log(this); // window
+    //     }
+    //     f1();
+
+    //   3.es6class类的内部就是严格模式 内部默认就有"use strict"
+    //     class Person{
+    //         // constructor(){
+    //         //     this.eat = this.eat.bind(this)
+    //         // }
+    //         eat(){
+    //             console.log(this) //undefined
+    //             // 调用get
+    //             this.get()
+    //         }
+
+    //         // eat = ()=>{
+    //         //     this.get()
+    //         // }
+    //         get(){
+    //             console.log('这是食物');
+    //         }
+
+    //     }
+    //     let person1 = new Person()
+    //     let {eat} = person1 // 按道理来说执行的时候this应该是window
+    //     // let eat = person1.eat
+    //     eat() // ???? 不会输出 ???怎么解决呢？？？
+
+    //   4.只要加了严格模式，this就会指向undefined
+    //     'use strict' //不加严格模式，this指向window
+    //     class Person{
+
+    //     }
+    //     Person.prototype.get = function(){
+    //         console.log('这是食物');
+
+    //     }
+
+    //     Person.prototype.eat = function(){
+    //         console.log(this);
+    //         this.get()
+    //     }
+
+    //     let person1 = new Person()
+
+    //     let {eat} = person1
+    //     // let eat = person1.eat
+    //     eat() // ???? 不会输出
+    </script>
+  </body>
+</html>

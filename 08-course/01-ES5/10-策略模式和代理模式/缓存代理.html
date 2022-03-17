@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //主体
+    function add() {
+      //将伪数组变为真数组方法--3种
+      //1.Object.prototype.toString.call([])
+      //2.var arg = Array.prototype.slice.call(arguments)
+      var arg = Array.from(arguments);//3.es6
+      return arg.reduce(function(a,b) {
+        return a+b;
+      })
+    }
+    // var p1 = add(1,2,3,4);
+    // var p2 = add(10,20,30,40);
+    // var p3 = add(10,20,30,40);
+    // var p4 = add(10,20,30,40);
+    //代理缓存--遇到相同的数组缓存起来
+    var proxyAdd = (function() {
+      var cache = [];
+      return function() {
+        // ['1,2,3,4':'10']
+        var arg = Array.from(arguments).join(',');// arg是字符串 '1,2,3,4'
+        if(cache[arg]) {
+          return cache[arg];
+        } else {
+          var ret = add.apply(this,arguments);// 返回的是数组的和
+          cache[arg] = ret;
+          return ret
+
+        }
+        
+      }
+    })()
+    var p1 = proxyAdd(1,2,3,4);
+    var p2 = proxyAdd(10,20,30,40);
+    var p3 = proxyAdd(10,20,30,40);
+    var p4 = proxyAdd(10,20,30,40);
+    
+
+  </script>
+</body>
+</html>

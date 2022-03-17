@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #div1 {
+        width: 20px;
+        height: 20px;
+        background-color: aquamarine;
+        position: absolute;
+        border-radius: 20%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="div1"></div>
+
+    <script>
+
+      function Drag(id) {
+        var _this = this;
+        this.disX = 0;
+        this.disY = 0;
+
+        this.oDiv = document.getElementById(id);
+
+        this.oDiv.onmousedown = function (ev) {
+          _this.fnDown(ev);
+        };
+      }
+
+      Drag.prototype.fnDown = function (ev) {
+        var _this = this;
+        var oEvent = ev || event;
+
+        //鼠标按下，计算距离
+        this.disX = oEvent.clientX - this.oDiv.offsetLeft;
+        this.disY = oEvent.clientY - this.oDiv.offsetTop;
+        //鼠标移动
+        document.onmousemove = function (ev) {
+          _this.fnMove(ev);
+        };
+        //鼠标抬起
+        document.onmouseup = function () {
+          _this.fnUp();
+        };
+      };
+      Drag.prototype.fnMove = function (ev) {
+        var oEvent = ev || event;
+
+        this.oDiv.style.left = oEvent.clientX - this.disX + "px";
+        this.oDiv.style.top = oEvent.clientY - this.disY + "px";
+      };
+      Drag.prototype.fnUp = function () {
+        document.onmousemove = null;
+        document.onmouseup = null;
+      };
+
+      new Drag("div1");
+    </script>
+  </body>
+</html>

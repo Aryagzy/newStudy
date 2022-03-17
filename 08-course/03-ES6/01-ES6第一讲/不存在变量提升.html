@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+  //   1. ES5
+  //   1.全程扫描一下错误 2.预编译环节 3解释性语言，解释一行执行一行
+  //   console.log(a); // undefined 预编译变量声明会提前 var a
+  //   var a = 123;
+   
+  //  2.ES6
+  //  console.log(b); // uncaught ReferenceError: Cannot access 'b' before initialization
+  //  let b = 4565;
+  //  console.log(b);
+
+  // 3.暂时性死区 let 在声明之前是不能用的
+  // var tep = 345;
+  // if(true) {
+  //   tep = 'avc'
+  //   let tep //Uncaught ReferenceError: Cannot access 'tep' before initialization
+  // }
+
+  // 4.typeof不再是完全正确的
+  // console.log(typeof c); // undefined
+  // let c;// Uncaught ReferenceError: Cannot access 'c' before initialization
+
+  // 5.不能重复定义同一个变量
+  // let e =1;//Uncaught SyntaxError: Identifier 'e' has already been declared
+  // let e =2;
+
+  // 6.执行顺序，从右到左
+  // let x =x;
+
+
+
+
+
+  </script>
+</body>
+</html>

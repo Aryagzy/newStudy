@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        条件渲染指令：
+          v-if:  彻底消失不见
+          v-show:  display:none;
+
+          
+          v-if
+          v-else-if
+          v-else
+        
+     -->
+    <!-- 希望Vue能够控制下面的这个div,帮助我们把数据填充到div内部 -->
+    <div id="app">
+        <p v-if="flag" >这是被v-if控制的元素</p>
+        <p v-show="flag" >这是被v-show控制的元素</p>
+        <hr>
+        <div v-if="type === 'A'">优秀</div>
+        <div v-else-if="type === 'B'">良好</div>
+        <div v-else-if="type === 'C'">一般</div>
+        <div v-else>差</div>
+    </div>
+
+    <!-- 1.导入Vue的库文件，在window全局中就有了Vue这个构造函数 -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        //2.创建Vue的实例对象
+        const vm = new Vue({
+            //el属性是固定的写法，表示当前的vm实例要控制页面上的那个区域，接受的值是一个选择器
+            el: '#app',
+            //data对象就是要渲染到页面上的数据
+            data: {
+                flag: false,
+                type:'B'
+
+               
+
+            }
+
+        })
+    </script>
+
+</body>
+</html>

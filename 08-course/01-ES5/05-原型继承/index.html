@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //递归
+      //当一个函数调用了函数自身，就会形成递归
+      //1.求阶乘 2.求斐波那契额数 1 1 2 3 5 8 13 21
+    //   function fn(n){
+    //       if(n<=1) {
+    //           return 1;
+    //       }
+    //      // return n*fn(n-1);
+    //      //arguments.callee是什么？指向函数本身，在递归中用的多
+    //      return n*arguments.callee(n-1);
+    //   }
+    //   var a = fn(5);
+    //   console.log(a);
+
+      //原型
+      //原型的作用就是用来存放公用的属性和方法，继承都是基于prototype
+      //1.prototype就是对象
+      //2.每个函数都有prototype，但是对象没有
+    //    function A() {
+    //        console.log('hihi');
+    //    }
+    //    console.log(A.prototype);// A.prototype指向A的原型对象
+    //    console.log(A.prototype.constructor);//原型对象中 constructor指向函数A
+    //    console.log(A.prototype.constructor===A);//true
+
+    //   function Person() {
+    //       console.log('pp');
+    //   }
+    //   var p1 = new Person();
+    //   console.log(p1.__proto__);//p1.__proto__指向Person.prototype
+    //   console.log(p1.__proto__==Person.prototype);//true
+    //   console.log(p1.constructor);//p1.constructor指向的是Person 函数
+    //   console.log(p1.constructor==Person);//true
+
+    //   var m = {na : '00'};
+    //   //console.log(m);
+    //   m.__proto__.name = 'lulu';
+    //   //console.log(m)
+    //   //console.log(m.name);
+    //   m.name = 'lala'; //这样是添加了实例属性name
+    //   console.log(m);
+
+    //   var arr=[];
+    //   console.log(arr);
+    //   console.log(arr.constructor);//指向Array函数
+    //   console.log(arr.constructor==Array);//true
+    //   var arr = new Array();
+    //   //判断实例是否属于某个类型的
+    //   console.log(arr instanceof Array);//true 判断对象arr是否是Array类型
+
+    //   function Foo(){};
+    //   function Bar(){};
+    //   Bar.prototype = new Foo();//改变了Bar.prototype对象指向,指向了Foo
+    //   var b1 = new Bar();
+    //   console.log(b1 instanceof Bar);//true
+    //   console.log(b1 instanceof Foo);//true
+
+    //   var p1 = new Object({name:'guoguo'});//var p1 = {name:'guoguo'}
+    //   //console.log(Object.prototype.__proto__==null);//true
+    //   function Person() {};
+    //   Person.prototype.name = 'lili';
+    //   var p2 = new Person();
+    //   // console.log(p2);
+    //   p2.sex = 'woman';
+    //   console.log(p2);
+    //   //**hasOwnProperty('属性名')，如果是实例属性true 如果是继承属性false
+    //   console.log(p2.hasOwnProperty('sex'));//true
+    //   console.log(p2.hasOwnProperty('name'));//false
+
+      //原型继承
+    //   缺点：
+    //   1.想为子类添加样式，必须放在new Aniaml()之后
+    //   2.无法实现多继承
+    //   3.原型链被破坏
+    //   4.无法向父级传参
+    //   5.改变继承的属性值，引用类型的属性值会被影响，基本类型不会改变
+    //   function Animal(category){
+    //       this.category = 'Aniaml';
+    //       this.testr = ['cat','bird'];
+    //       this.sleep = function() {
+    //           console.log('sleep it');
+    //       }
+    //   }
+    //   Animal.prototype.run = function() {
+    //       console.log('run it');
+    //   }
+
+    //   function Dog(name){
+    //       this.name = name;
+    //       this.type = 'dog';
+    //   }
+
+    //   Dog.prototype = new Animal();
+    //   Dog.prototype.speak = function() {
+    //       console.log('say it');
+    //   }
+    //   var p1 = new Dog('小白');
+    //   // p1.speak();
+    //   //继承属性不能被重写，相当于添加实例属性，引用类型除外
+    //   p1.category = '蔬菜';//这种写法相当于添加实例属性
+    //   p1.testr.push('puppy');//数组是引用类型数据，发生了改变
+    //   p1.sleep = function() { //添加实例方法
+    //       console.log('quikly sleep');
+    //   }
+    //   // console.log(p1);
+
+    //   var p2 = new Dog('小黑');
+    //   console.log(p2);
+    //   p2.testr.push('little cat');
+    //   var p3 = new Dog('小花');
+    //   // console.log(p3);
+
+    //   Dog.prototype = {
+    //       weigth:'100'
+    //   };//改变了原型指向，此时就无法调用speak方法
+    //   Dog.prototype.constructor ==  Dog
+    //   var p1 = new Dog('胖胖');
+    //   // p1.speak();
+    //   console.log(p1);//此时就没有speak 但是添加了weight
+
+      //构造继承
+      //不能继承原型方法
+    //   function Animal(category){
+    //       this.category = category;
+    //       this.testr = ['cat','bird'];
+    //       this.sleep = function() {
+    //           console.log('sleep it');
+    //       }
+    //   }
+    //   //原型上的属性和方法不会被继承
+    //   Animal.prototype.run = function() {
+    //       console.log('run it');
+    //   }
+
+    //   function Dog(category,name){
+    //       //继承Animal用call 和 apply方法，这样继承到实例属性中
+    //       Animal.call(this,category); //call里面参数用逗号传参
+    //       //Animal.apply(this,[category]);//apply里面参数用数组
+    //       this.name = name;
+    //       this.type = 'dog';
+    //   }
+    //   var dog1 = new Dog('动物','puppy');
+    //   console.log(dog1);
+
+    //   组合继承
+    //   function Animal(category){
+    //       this.category = category;
+    //       this.testr = ['cat','bird'];
+    //       this.sleep = function() {
+    //           console.log('sleep it');
+    //       }
+    //   }
+    //   Animal.prototype.run = function() {
+    //       console.log('run it');
+    //   }
+
+    //   function Dog(category,name){
+    //       //继承Animal用call 和 apply方法，这样继承到实例属性中
+    //       Animal.call(this,category); //call里面参数用逗号传参
+    //       //Animal.apply(this,[category]);//apply里面参数用数组
+    //       this.name = name;
+    //       this.type = 'dog';
+    //   }
+    //   Dog.prototype = new Animal();
+    //   var dog1 = new Dog('动物','puppy');
+    //   console.log(dog1);
+    //   //不推荐
+
+      //create继承
+        //  function Animal(category){
+        //       this.category = category;
+        //       this.testr = ['cat','bird'];
+        //       this.sleep = function() {
+        //           console.log('sleep it');
+        //       }
+        //   }
+        //   //原型上的属性和方法不会被继承
+        //   Animal.prototype.run = function() {
+        //       console.log('run it');
+        //   }
+
+        //   function Dog(category,name){
+        //       //继承Animal用call 和 apply方法，这样继承到实例属性中
+        //       Animal.call(this,category); //call里面参数用逗号传参
+        //       //Animal.apply(this,[category]);//apply里面参数用数组
+        //       this.name = name;
+        //       this.type = 'dog';
+        //   }
+        //  //深拷贝和浅拷贝
+        //  //Dog.prototype = Animal.prototype; //存在隐患，引用类型Animal的prototype覆盖了Dog的prototype
+        //  Dog.prototype = Object.create(Animal.prototype);
+        //  Dog.prototype.constructor = Dog;//形成闭环
+        //   var dog1 = new Dog('动物','puppy');
+        //   //原型上新加的属性和方法
+        //   Animal.prototype.m = 'kit';
+        //   Animal.prototype.walk = function() {
+        //       console.log('quickly');
+        //   }
+        //   console.log(dog1);
+
+      //浅拷贝  深拷贝
+    //   1.浅拷贝只是拷贝一层，更深层次的对象级别只拷贝引用
+    //   2.深拷贝拷贝多层，每一级别的数据都会拷贝，都会是数据的拷贝
+
+      //浅拷贝
+    //   var obj = {
+    //     id: 1,
+    //     name: "Andm",
+    //     msg: {
+    //       age: 20,
+    //     },
+    //   };
+
+    //   var o = {};
+    //   //利用 forin 循环实现拷贝
+    //   //   for (var k in obj) { //k是属性值  obj[k]是属性值
+    //   //     o[k] = obj[k];
+
+    //   //   }
+    //   //   o.msg.age = '49'; //浅拷贝引用类型的数据会发生变化
+    //   //Object.assign(traget,sources) es6新增方法可以浅拷贝
+    //   Object.assign(o, obj);
+    //   o.msg.age = "49";
+    //   console.log(o);
+
+    //   //深拷贝
+    //   var obj = {
+    //     id: 1,
+    //     name: "Andm",
+    //     msg: {
+    //       age: 20,
+    //     },
+    //     color:['pink','red','blue']
+    //   };
+
+    //   var o = {};
+
+    //   //封装函数
+    //   function deeCopy(newobj,oldobj){
+    //       for(var k in oldobj){
+    //           //判断属性值属于那种数据类型，引用数据类型做特殊处理
+    //           //1.获取属性值 oldobj[k]
+    //           var item = oldobj[k];
+             
+    //           if(item instanceof Array){
+    //                //2.判断这个值是否是数组
+    //               newobj[k] = [];
+    //               //递归调用
+    //               deeCopy(newobj[k],item);
+    //           } else if (item instanceof Object) {
+    //               //3.判断这个值是否是对象
+    //               newobj[k] = {};
+    //               deeCopy(newobj[k],item);
+
+    //           }else {
+    //                 //4.是否是简单类型
+    //                 newobj[k] = item;
+    //           }
+              
+    //         }
+           
+    
+    //   }
+    //   deeCopy(o,obj);
+    //   o.msg.age = '50';
+    //   console.log(o)
+     
+      
+
+    </script>
+  </body>
+</html>

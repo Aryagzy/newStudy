@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button>按钮1</button>
+    <button>按钮2</button>
+    <button>按钮3</button>
+    <button>按钮4</button>
+    <button>按钮5</button>
+    <script>
+        //要求：有五个按钮，点击按钮，更换背景颜
+        //排他思想：首先排除其他人，然后设置自己的样式，这种排除其他人的思想我们称为排他思想，将所有的东西都归0，然后再去进行更改，
+        //1获取元素
+        var btns = document.querySelectorAll('button');
+        //console.log(btns);
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].onclick = function(){
+                 //要把按钮背景颜色去掉
+                 //(1)我们也不确定是哪个有颜色，所以清楚所有的，用for循环来表示
+                 for (var j=0;j<btns.length;j++){
+                     btns[j].style.backgroundColor='';
+                 }
+                 // (2)每次点击以后，他的颜色并没有清理掉，还会保留，所以会造成，你没点击一次以后他的颜色不会清掉
+                  this.style.backgroundColor='pink';
+                 // btns[i].style.backgroundColor='pink';******这里有问题*****
+
+            }
+        }
+
+
+    </script>
+
+</body>
+
+</html>

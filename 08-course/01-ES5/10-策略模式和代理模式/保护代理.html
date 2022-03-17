@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //主体 发送信息
+    function sendMsg(msg) {
+      console.log(msg);
+    }
+    //代理-过滤信息-然后发送
+    function proxySend(msg) {
+      msg = msg.replace(/好/,'*');
+      sendMsg(msg);
+    }
+    // sendMsg('你好，大家好，我们好，都很好')
+    proxySend('你好，大家好，我们好，都很好');
+
+  </script>
+</body>
+</html>

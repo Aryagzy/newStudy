@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>什么时候不能用箭头函数?</title>
+	</head>
+	<body>
+		<button type="button"  id="myButton">按钮</button>
+		<script>
+			//定义字面量方法
+			const calculator = {
+			    array: [1, 2, 3],
+			    sum: () => {
+			        console.log(this === window); // => true
+			        return this.array.reduce((result, item) => result + item); //Uncaught TypeError: Cannot read property 'reduce' of undefined
+			    }
+			};
+			console.log(this === window); // => true	
+			calculator.sum();
+			
+			//定义原型方法 
+			function Cat(name) {
+			    this.name = name;
+			}
+			Cat.prototype.sayCatName = () => {
+			    console.log(this === window); // => true
+			    return this.name;
+			};
+			const cat = new Cat('Mew');
+			console.log(cat.sayCatName())
+			
+			//定义事件的回调函数  箭头函数在声明的时候就绑定了执行上下文，要动态改变上下文是不可能的
+			const button = document.getElementById('myButton');
+			button.addEventListener('click', () => {
+			    console.log(this === window); // => true
+			    this.innerHTML = 'Clicked button';
+			});
+			
+			//定义构造函数 箭头函数是不能用来做构造函数
+			const Message = (text) => {
+			    this.text = text;
+			};
+			const helloMessage = new Message('Hello World!'); //Uncaught TypeError: Message is not a constructor
+		</script>
+	</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //回调地狱
+    //后者要等待前者的执行结果， f2 要等待f1执行完成后执行
+    function f1(callback){
+      setTimeout(() => {
+         var res = 'f1'
+         console.log('我从后台先执行，获取到f1');
+         callback(res)
+      },1000)
+    }
+    function f2(value){
+      console.log(value);
+    }
+    f1(f2)
+  </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btnGET">GET</button>
+    <button id="btnPOST">POST</button>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        document.querySelector('#btnGET').addEventListener('click',async function() {
+          /*   aixos.get('url地址',{
+                //GET参数
+                params:{}
+            })
+        */
+     const {data : res } = await  axios.get('http://127.0.0.1:8000/axios',{
+           params: {
+               id: 1
+           }
+       })
+       console.log(res);
+     })
+
+     document.querySelector('#btnPOST').addEventListener('click',async function() {
+        //  axios.post('url地址'，{ Post请求体的数据 })
+        const {data : res} = await axios.post('http://127.0.0.1:8000/axios',{name: 'guo',id: 20})
+        console.log(res);
+     })
+     
+    </script>
+</body>
+</html>

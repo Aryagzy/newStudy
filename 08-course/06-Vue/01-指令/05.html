@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>常用指令:v-show  v-if</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+</head>
+<body>
+  <script>
+    window.onload= function() {
+      let vm = new Vue({
+      el:'#itany',
+      data:{
+        flag:true
+      },
+      methods: {
+        change(){
+          this.flag = !this.flag
+        }
+      },
+    })
+
+    }
+  </script>
+  <div id="itany">
+    <!-- <button v-on:click="change">隐藏</button> -->
+    <button v-on:click="flag=!flag">隐藏</button>
+    <hr>
+     <!-- v-if 和 v-show的区别 
+      这两个主要是应用在是否为true还是false上面-->
+      <div v-show="flag">这个是true还是false</div>
+    
+  </div>
+
+</body>
+</html>

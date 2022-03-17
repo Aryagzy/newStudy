@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div1 {
+            width: 200px;
+            height: 200px;
+            background-color: aqua;
+            position: fixed;
+            right: 0;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body style="height: 2000px;">
+    <div id="div1">1</div>
+
+    <script>
+        //IE6，类似于固定定位
+        //onresize --窗口改变大小的时候发生
+        document.onscroll =document.onresize = function() {
+            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            var oDiv = document.getElementById('div1');
+            oDiv.style.top = document.documentElement.clientHeight - oDiv.offsetHeight+scrollTop+'px';
+        }
+    </script>
+  
+</body>
+</html>

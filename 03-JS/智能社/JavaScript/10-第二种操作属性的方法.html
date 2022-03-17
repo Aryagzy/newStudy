@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    function setText(name){
+        var oTxt=document.getElementById('txt1');
+        //第一种操作属性的方法
+       //oTxt.value = 'avjeinrn';
+        //第二种操作属性的方法
+        oTxt[name]='ninjindvnv'
+    }
+</script>
+<body>
+   <input type="text" name="" id="txt1">
+   <input type="button" value="改变文字" onclick="setText('title')"> 
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>es6class作业</title>
+  </head>
+  <body>
+    <script>
+      //1.this为什么在class中指向undefined , 原型中指向window??
+        // class Person {
+        //   //在class中默认会有严格模式，在严格模式下，this会指向undefined
+        //   eat() {
+        //     console.log(this);
+        //     // undefined
+        //     // this本来指向Person对象重新赋值后被window调用,在class的特性下会返回undefined
+        //     // 在class里面会默认是严格模式
+        //     this.get();
+        //   }
+
+        //   get() {
+        //     console.log("这是食物");
+        //   }
+        // }
+
+        // let person1 = new Person();
+        // let { eat } = person1;
+        // eat();
+
+        // //2.window  此时eat方法是全局对象调用的this指向window
+        // class Person {}
+
+        // Person.prototype.get = function () {
+        //   console.log("这是食物");
+        // };
+        // //从类里面出来了，不受严格模式控制，所以此时this指向的是window
+        // Person.prototype.eat = function () {
+        //   console.log(this);
+        //   this.get();
+        // };
+
+        // let person1 = new Person();
+        // let { eat } = person1;
+        // eat();
+        // console.log(window.eat === this.eat);
+
+        // // 3. 基于闭包的实现私有属性
+        // //通过闭包方式实现了私有属性的隐藏，Person 的实例并不能直接访问_name属性，只能通过特权函数getName获取
+        // function Person(name) {
+        //   var _name = name;
+        //   this.getName = function () {
+        //     return _name;
+        //   };
+        // }
+        // var person = new Person("张三");
+        // console.log(person._name); // undefined
+        // console.log(person.getName()); //'张三'
+    </script>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+       双向数据绑定指令： v- model
+
+     -->
+    <!-- 希望Vue能够控制下面的这个div,帮助我们把数据填充到div内部 -->
+    <div id="app">
+         <p>用户的名字是：{{ username }}</p>
+         <input type="text" v-model="username"> //v-model
+         <input type="text" :value="username">  //v-bind
+         <hr>
+
+         <select v-model="city" >
+             <option value="0">请选择城市</option>
+             <option value="1">北京</option>
+             <option value="2">上海</option>
+             <option value="3">广州</option>
+         </select>
+
+    </div>
+
+    <!-- 1.导入Vue的库文件，在window全局中就有了Vue这个构造函数 -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        //2.创建Vue的实例对象
+        const vm = new Vue({
+            //el属性是固定的写法，表示当前的vm实例要控制页面上的那个区域，接受的值是一个选择器
+            el: '#app',
+            //data对象就是要渲染到页面上的数据
+            data: {
+                username:'郭小胖',
+                city:'0'
+
+            }
+
+        })
+    </script>
+
+</body>
+</html>

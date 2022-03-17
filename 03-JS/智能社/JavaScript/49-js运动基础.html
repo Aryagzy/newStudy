@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div1 {
+            width: 200px;
+            height: 200px;
+            background: rgb(36, 153, 161);
+            position: absolute;
+            top: 50px;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <input type="button" value="开始运动" id="btn" onclick="startMove()" >
+    <div id="div1"></div>
+
+    <script>
+        var timer=null;
+        function startMove(){
+               var oDiv=document.getElementById('div1');
+               clearInterval(timer); //关闭原来的定时器
+               timer=setInterval(function(){
+                   var speed =7;//改变div运动的速度
+
+                   if(oDiv.offsetLeft>=300){
+                       clearInterval(timer);//向右运动300px时，清除定时器
+                   }else{
+                    oDiv.style.left=oDiv.offsetLeft+speed+'px'; //offsetLeft 改变left  div运动
+                   }
+               },50);
+        }
+    </script>
+</body>
+</html>

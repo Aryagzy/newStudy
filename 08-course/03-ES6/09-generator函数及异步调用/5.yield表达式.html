@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //1.yield*表达式
+      function* first() {
+        yield 1;
+        yield 2;
+      }
+      // function* second() {
+      //   yield 3;
+      //   //这里调用first Generator函数
+      //   for (let i of first()) {
+      //     yield i;
+      //   }
+      //   yield 4;
+      // }
+      //for...of循环遍历第二个
+      //上面可以用yield* 来替换
+      function* second() {
+        yield 3;
+        //这里调用first Generator函数
+        yield* first()
+        yield 4;
+      }
+    
+    </script>
+  </body>
+</html>

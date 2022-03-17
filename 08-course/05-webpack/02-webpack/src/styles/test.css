@@ -1,0 +1,11 @@
+body {
+  font-size: 20px;
+}
+body .box {
+  color: #926227;
+  width: 50px;
+  height: 30px;
+  background: url(../images/AB.png);
+  background: url(../images/ABC.jpg) left top no-repeat;
+  transform: rotate(30deg);
+}

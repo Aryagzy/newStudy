@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+         //1.js方式正则表达式
+        // var re = new RegExp('a');//不区分大小写
+        // var str = 'fniba';
+
+        // alert(str.search(re));
+
+        // //2.perl风格
+        // var re =/a/;
+        // var str = 'ningar';
+
+        // alert(str.search(re));
+        
+        //区分大小写
+        // var re = new RegExp('a','i'); i-ignore
+        // var str = 'fnibA';
+
+        // alert(str.search(re));
+
+        //2.perl风格
+        var re =/a/i;
+        var str = 'ningAr';
+
+        alert(str.search(re));
+    </script>
+</body>
+</html>

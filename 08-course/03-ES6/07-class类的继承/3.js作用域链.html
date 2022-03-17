@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1.闭包的原理
+      // 函数里面嵌套函数，内部的函数被保存到了外部，就会形成闭包
+
+      // 2.js的作用域链
+      // /*
+      //   1.对象的有些属性我们是可以直接访问到的
+      //   2.js有些属性是访问不到的 [[scope]]域的意思
+      //   3.js引擎自己去用，我们用不到
+      //   4.[[scope]]存储的就是由这个函数产生而产生的很复杂的结构
+      //   5.执行期上下文的集合
+      //  */
+      // function get() {
+
+      // }
+      // console.log(get.name); //get
+
+      // /*什么是js的作用域
+      //  *往里面存储的是执行期上下文的集合，由我们js引擎自己产生的[[scope]]属性，里面放的就是执行上下文集合（AO GO）
+      //  */
+      //1.4个图--js作用域链
+      //a函数的定义
+      // function a() {
+      //   //b函数的定义
+      //   function b() {
+      //     var b = 123;
+      //   }
+      //   var a = 123;
+      //   //b函数的执行
+      //   b();
+      // }
+      // var global = 1;
+      // //a函数的执行
+      // a();
+
+      //2.证明a函数的执行和 b 函数的定义相同
+      //a函数的定义
+      // function a() {
+      //   //b函数的定义
+      //   function b() {
+      //     var b = 123;
+      //     a = 0;
+      //   }
+      //   var a = 123;
+      //   //b函数的执行
+      //   b();
+      //   console.log(a); //0
+      // }
+      // var global = 1;
+      // //a函数的执行
+      // a();
+
+      //4.证明闭包 --详细见图
+      //a函数的定义
+      // function a() {
+      //   //b函数的定义
+      //   function b() {
+      //     var b = 123;
+      //     console.log(a); //123
+      //   }
+      //   var a = 123;
+      //   //b函数的执行
+      //   return b;
+      // }
+      // var global = 1;
+      // //a函数的执行
+      // var res = a(); //返回的是函数b
+      // res();
+    </script>
+  </body>
+</html>

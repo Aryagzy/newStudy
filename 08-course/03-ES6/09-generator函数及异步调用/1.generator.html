@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1.generator--es6提出的一种异步解决的方案
+      // 执行这个generator函数会返回一个遍历器对象
+      // 形式上的区别之一：function关键字与函数名之间有个*
+      // 形式区别二 函数内部使用yield表达式
+      // function* helloGenerator() {
+      //   yield 'hello'
+      //   yield 'world'
+      //   return 123
+      // }
+      // let res = helloGenerator() //返回的是一个遍历器对象，里面可以调用next()方法
+      // //console.log(res);
+      // console.log(res.next());
+      // console.log(res.next());
+      // console.log(res.next()); //done变为true
+      // console.log(res.next());
+      // console.log(res.next());
+      // console.log(res.next());
+
+      // 2.暂缓执行函数
+      // function* fn() {
+      //   console.log(123);
+      // }
+      // let gen = fn(); //直接调用fn()不会输出
+      // gen.next(); //调用next()才会输出
+
+      // 3.yield表达式只能出现在generator函数里面，出现在其他函数中就会博报错
+      // yield表达式如果在另外的表达式中，必须放在圆括号里面
+      // function* gn(){
+      //   console.log('hello'+(yield));
+      // }
+
+      // 4.立即执行函数
+      // (function(){
+      //   console.log('我是立即执行函数');
+      // })()
+      // +function(){
+      //   console.log('我是立即执行函数');
+      // }()
+      // -function(){
+      //   console.log('我是立即执行函数');
+      // }()
+
+      // function get(){
+      //   console.log(123);
+      // }
+      // ()--执行符号
+      // get()--表达式能执行
+
+      // (123)
+
+      // 5.对象不能进行for..of遍历
+      // let myIterator = {}
+      // myIterator[Symbol.iterator] = function* () { //返回的是一个迭代器对象
+      //   yield 1
+      //   yield 2
+      //   yield 3
+      //   yield 4
+      // }
+      // console.log([...myIterator]);
+
+      // 6.generator函数执行返回一个迭代器对象，这一个对象本身也有Symbol.iterator属性，也是可以执行的，并且执行后会返回自身
+      // function* gn() {
+
+      // }
+      // let res = gn()
+      // console.log(res[Symbol.iterator]()===res); //true
+    </script>
+  </body>
+</html>

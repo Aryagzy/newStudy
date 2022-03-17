@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        ES5给Object扩展了一些静态方法，常用的有两个
+        1.Object.create(prototype,[descriptions])
+            *作用: 以指定对象为原型创建新的对象
+            *为新的对象指定新的属性，并对属性进行描述
+                -value: 指定值
+                -writable:标识当前的属性值是否可以被修改，默认值为false
+                -configurable: 标识当前的属性值是否可以被删除，默认为false
+                -enumerable: 标识当前的属性值是否能用for in 枚举 默认值为false
+        2.Object.defineProperties(object,descrptions)
+           *作用：为指定对象定义扩展多个属性
+             *get: 用来获取当前属性值的回调函数
+             *set: 修改当前属性值时触发的回调函数，参数为修改后的值
+           *存取器属性: setter,getter 一个用来存值，一个用来取值
+     -->
+    <script>
+         //1.Object.create(prototype,[descriptions])---可以通过__proto__实现继承
+        var obj = {
+            username:'pangpang',
+            age:'20'
+        };
+        var obj1 = {};
+        obj1 = Object.create(obj,{
+            sex: {
+                value: 'woman',
+                writable:true,
+                configurable:true,
+                enumerable:true
+            }
+        });
+        
+        console.log(obj1);
+        obj1.sex = 'man';
+        //delete obj1.sex;
+        for(var key in obj1) {
+            console.log(key);
+        }
+        console.log(obj1.sex);
+
+     //2.Object.defineProperties(object,descrptions)
+     var obj2 = {
+         firstName: 'kobe',
+         lastName: 'bryant'
+
+     }
+     Object.defineProperties(obj2,{
+         fullName: {
+             get: function () { //获取扩展属性的值，获取扩展属性值时get方法自动调用
+                console.log('get得到属性值')
+                return this.firstName + ' ' + this.lastName;
+            },
+            set: function (data) { //监听扩展属性，当扩展属性发生变化时会自动调用
+                //自动调用后会将变化的值作为实参  注入到set函数
+                console.log(data+'修改了当前属性值！')
+                var names = data.split(' ');
+                this.firstName = names[0];
+                this.lastName = names[1];
+            }
+         }
+     })
+     console.log(obj2.fullName);//获取扩展属性，get自动调用
+     obj2.fullName = 'tinme duncan';//修改了fullname的值也要去改变firstName和lastName值，否则get值不会该改变
+     console.log(obj2.fullName);
+     console.log(obj2);//惰性求值
+
+
+
+
+
+    </script>
+
+</body>
+</html>

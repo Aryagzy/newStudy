@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        li {
+            display: block;
+            width: 50px;
+            height: 50px;
+            background-color: chocolate;
+            border: 2px greenyellow dashed;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <ul id="list">
+        <li id="item1">11</li>
+        <li id="item2">12</li>
+        <li id="item3">13</li>
+    </ul>
+
+    <script>
+        var item1 = document.getElementById('item1');
+        var item2 = document.getElementById('item2');
+        var item3 = document.getElementById('item3');
+
+        // item1.onclick = function() {
+        //     alert('item1');
+        // }
+        // item2.onclick = function() {
+        //     alert('item2');
+        // }
+        // item3.onclick = function() {
+        //     alert('item3');
+        // }
+          
+
+        //事件委托：就是利用冒泡原理 ，把事件加到父元素上，触发执行结果
+        document.addEventListener('click',function(ev) {
+            var target = ev.target;
+            switch(target.id) {
+                case 'item1': 
+                  console.log('item1');
+                  break;
+                case 'item2': 
+                  console.log('item2');
+                  break;
+                case 'item3': 
+                  console.log('item3');
+                  break;
+            }
+        })
+    </script>
+</body>
+</html>

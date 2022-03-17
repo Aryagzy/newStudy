@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+         //console.log(axios);
+         //1.调用axios方法得到的是Promise对象
+         const result = axios({
+             //请求方式
+             method: 'GET',
+             //请求地址
+             url: 'http://127.0.0.1:8000/axios',
+             //URL中的查询参数
+             params: {//get请求
+                 id: 1
+             },
+             //请求体参数
+             data: {
+                //post请求
+             },
+         }).then((result) => {
+             console.log(result);
+         })
+        //  console.log(result);
+        
+    </script>
+</body>
+</html>

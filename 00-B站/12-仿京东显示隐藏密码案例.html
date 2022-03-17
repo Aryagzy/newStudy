@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            position: relative;
+            width: 400px;
+            border-bottom: 1px solid #cccccc;
+            margin: 100px auto;
+        }
+
+        .box input {
+            width: 370px;
+            height: 30px;
+            border: 0;
+            outline: none;
+        }
+
+        .box img {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            width: 24px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <input type="password" name="" id="psd">
+        <label for="psd">
+            <img src="images/psd.jpg" alt="">
+        </label>
+    </div>
+    <script>
+        //要求：点击按钮可以将密码框转换为文本框，并且显示密码
+        //案例分析
+        //1.核心思路：点击眼睛按钮，把密码框类型改为文本框类型就可以看见里面的密码
+        //2 一个按钮两个状态，点击一个变为文本框，再点击一次变为密码框
+        //3 算法：***利用一个flag变量，来判断flag的值，如果是1就变为文本框，如果是0就变为密码框***
+        //1.获取元素
+        var img = document.querySelector('img');
+        var psd = document.querySelector('input');
+
+        //2注册事件 处理程序
+        var flag = 0;//对于点击同一个按钮的两种不同的状态，用一个变量来判断两种不同状态
+        img.onclick = function () {//点击图片，进行切换了
+            //点击一次以后，flag 一定要发生变化
+            if (flag == 0) {//刚开始时候，一定要把图片切换，也要换成文本框
+                img.src = 'images/text.jpg';
+                psd.type = 'text';
+                flag = 1;
+            } else {
+                img.src = 'images/psd.jpg';
+                psd.type = 'password';
+                flag = 0;
+
+            }
+        }
+
+    </script>
+</body>
+
+</html>

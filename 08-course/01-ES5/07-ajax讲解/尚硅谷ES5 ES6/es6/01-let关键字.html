@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>测试1</button><br>
+    <button>测试2</button><br>
+    <button>测试3</button>
+    <!-- 
+        1.作用：
+          *与var类似，用于声明一个变量
+        2.特点：
+          *在块作用域内有效
+          *不能重复声明
+          *不会预处理，不存在提升
+        3.应用：
+          *循环遍历加监听
+          *使用let取代var是趋势
+     -->
+    <script>
+        //不能重复声明
+        let username = 'guo';
+        //let username = 'guo';
+        console.log(username);
+
+
+        //在块作用域内有效--循环遍历点击
+        let btns = document.getElementsByTagName('button');
+        // for( var i = 0; i < btns.length; i++) {
+        //     btns[i].onclick = function () {
+        //         alert(i);
+        //     }
+
+        // }
+        //解决方法1-使用立即调用函数-闭包
+        // for( var i = 0; i < btns.length; i++) {
+        //     (function (i) {
+        //         btns[i].onclick = function () {
+        //         alert(i);
+        //     }
+        //     })(i)
+
+        // }
+        //解决方法2-利用Let在块作用域内有效
+        for( let i = 0; i < btns.length; i++) {
+            
+                btns[i].onclick = function () {
+                alert(i);
+            }
+
+        }
+
+
+
+    </script>
+</body>
+</html>

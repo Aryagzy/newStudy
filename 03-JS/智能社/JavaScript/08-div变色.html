@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div1 {
+            width: 200px;
+            height: 200px;
+            background-color: rgb(241, 16, 16);
+        }
+    </style>
+    <script>
+        //函数传参：什么时候用传参，函数里定不下来的东西
+        function setColor(color){
+            var oDiv = document.getElementById('div1');//获取被操作的元素
+            oDiv.style.backgroundColor=color;
+        }
+        //setColor('green');//函数调用
+    </script>
+</head>
+<body>
+    <input type="button" value="变绿" onclick="setColor('green')">
+    <input type="button" value="变黄" onclick="setColor('yellow')">
+    <input type="button" value="变黑" onclick="setColor('black')" >
+    <div id="div1"></div>
+</body>
+</html>

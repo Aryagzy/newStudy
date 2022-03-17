@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const getJson = function (url) {
+        return new Promise(function (resolve, reject) {
+          const handler = function () {
+            if (this.readyState !== 4) {
+              return;
+            }
+            if (this.status === 200) {
+              // 成功的结果
+              resolve(this.response);
+            } else {
+              // 失败的结果
+              reject(new Error(this.statusText));
+            }
+          };
+
+          const xhr = new XMLHttpRequest();
+          xhr.open("GET", url);
+          xhr.onreadystatechange = handler;
+          xhr.responseType = "json";
+          xhr.setRequestHeader("Accept", "application/json");
+          xhr.send();
+        });
+      };
+      getJson("http://localhost:2000/name").then(
+        (res) => {
+          //拿到结果后，把第一项的id 传递给后台，后台会根据id返回对应的人物武器的名字
+          console.log(res);
+           const id = res.data[0].id
+           return getJson(`http://127.0.0.1:2000/wepon?id=${id}`) //模板字符串
+        },
+      ).then((res) => {
+        console.log(res);
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="txt1">
+    <input type="button" value="按钮" id="btn1">
+</body>
+<script>
+      var oTxt=document.getElementById('txt1');
+      var oBtn=document.getElementById('btn1');
+
+      //点击按钮btn， 改变 text中value值
+      oBtn.onclick=function(){
+         // oTxt.value='nivnfin';
+         //oTxt['value']='nivnfin';
+         //DOM方式
+         oTxt.setAttribute('value','nividivkn');
+
+      }
+
+</script>
+</html>

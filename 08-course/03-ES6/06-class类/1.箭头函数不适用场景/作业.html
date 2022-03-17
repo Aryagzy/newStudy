@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>作业</title>
+</head>
+<body>
+    <script>
+    
+    // 实现多继承
+    //     Parent.prototype.makeMoney = function(value){
+    // this.money.push(value)
+    //     }
+    Parent.prototype.makeMoney = (value)=>{
+        this.money.push(value)
+    }
+    function Parent(name,age){
+        this.name = name;
+        this.age = age;
+        this.money = [1000];
+        this.sayHi = function(){
+            console.log(`我的名字是${this.name},我今年${this.age}岁了`);
+        }
+    }
+    function Player(){
+        this.game = ['打篮球','踢足球']
+        this.play = function(){
+            console.log(`我可以${this.game}`);
+        }
+    }
+    function Son(name,age){
+        Parent.call(this,name,age)
+        Player.call(this)
+    }
+    for(prop in Parent.prototype){
+        Son.prototype[prop] = Parent.prototype[prop]
+    }
+
+    for(prop in Player.prototype){
+        Son.prototype[prop] = Player.prototype[prop]
+    }
+    let son1 = new Son('张一',10)
+    console.log(son1.name);
+    console.log(son1.age);
+    son1.sayHi()
+    son1.play()
+    son1.makeMoney(2000)
+    console.log(son1.money); // [1000,2000]
+    let son2 = new Son('张二',9)
+    console.log(son2.money); // [1000]
+    console.log(son1 instanceof Son); // true
+    console.log(son1 instanceof Parent); // false
+    console.log(son1 instanceof Player); // false
+
+
+    // 圣杯模式继承
+    Parent.prototype.makeMoney = function(value){
+        this.money.push(value)
+    }
+    function Parent(name,age){
+        this.name = name;
+        this.age = age;
+        this.money = [1000];
+        this.sayHi = function(){
+            console.log(`我的名字是${this.name},我今年${this.age}岁了`);
+        }
+    }
+    function Son(name,age){
+        Parent.call(this,name,age)
+    }
+
+    function inherit(Children,Father){
+        function Medium(){}
+        Medium.prototype = Father.prototype;
+        Children.prototype = new Medium()
+        Children.prototype.constructor = Children
+    }
+    inherit(Son,Parent)
+    var son1 = new Son('张一',10)
+    console.log(son1);
+    console.log(son1.name);
+    console.log(son1.age);
+    son1.sayHi()
+    son1.makeMoney(2000)
+    console.log(son1.money);// [1000,2000]
+    var son2 = new Son('张二',9)
+    console.log(son2.money); // [1000]
+    console.log(son1.constructor); // 此时是Parent
+    console.log(son1 instanceof Son);
+    console.log(son1 instanceof Parent);
+    
+    
+    
+    
+    
+    
+    
+    </script>
+</body>
+</html>

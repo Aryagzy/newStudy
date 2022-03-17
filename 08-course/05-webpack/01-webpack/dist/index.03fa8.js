@@ -1,0 +1,1 @@
+console.log("第一次用webpack"),document.addEventListener("DOMContentLoaded",(()=>{const e=document.createElement("h1");document.body.append(e),e.innerText="Hello Webpack (^_^)",e.style.color="pink"}));
